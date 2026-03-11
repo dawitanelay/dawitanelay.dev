@@ -1,5 +1,9 @@
 name: GitHub Pages - Hugo
 
+permissions:
+  contents: write
+  pages: write
+
 on:
   push:
     branches: [ main ]

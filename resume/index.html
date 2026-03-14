@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dawit Anelay | DevOps Resume</title>
+  <meta name="description" content="Resume of Dawit Anelay - DevOps and Platform Engineer." />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+    :root {
+      --bg: #eef5f3;
+      --bg-strong: #d3ebe4;
+      --panel: #ffffff;
+      --text: #0f1c2a;
+      --muted: #4b5d70;
+      --accent: #0d6d5a;
+      --accent-alt: #dd6b2d;
+      --border: #cbdae6;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: "Space Grotesk", "Avenir Next", "Trebuchet MS", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 8%, #fff0c7 0%, transparent 24%),
+        radial-gradient(circle at 92% 20%, #d6f0ea 0%, transparent 30%),
+        linear-gradient(180deg, var(--bg-strong) 0%, var(--bg) 36%);
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 2.5rem;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.2rem;
+      box-shadow:
+        0 36px 80px rgba(17, 38, 58, 0.14),
+        0 2px 0 rgba(17, 38, 58, 0.06);
+      margin-top: 1rem;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #e7f4ef;
+      color: var(--accent);
+      font-family: "IBM Plex Mono", "Consolas", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+    }
+    .hero {
+      display: grid;
+      gap: 0.95rem;
+      align-items: end;
+    }
+    @media (min-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr auto;
+      }
+    }
+    h1 {
+      margin: 0.45rem 0 0;
+      line-height: 1.08;
+      font-size: clamp(1.8rem, 4vw, 2.9rem);
+    }
+    .subtitle {
+      margin: 0.55rem 0 0;
+      color: var(--muted);
+      max-width: 64ch;
+    }
+    .links {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 0.48rem 0.72rem;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-family: "IBM Plex Mono", "Consolas", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      background: #f4f9ff;
+    }
+    .btn.main {
+      color: #fff;
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+    .grid {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+    @media (min-width: 960px) {
+      .grid {
+        grid-template-columns: 1.35fr 1fr;
+      }
+    }
+    h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.7rem;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 0.55rem;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", "Consolas", monospace;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .xp {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid #e8eef6;
+    }
+    .xp:last-child { border-bottom: 0; padding-bottom: 0.2rem; }
+    .xp h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+    .xp p { margin: 0.35rem 0 0; }
+    .bullets {
+      margin: 0.55rem 0 0;
+      padding-left: 1rem;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .chip {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f3f8fc;
+      padding: 0.2rem 0.52rem;
+      font-size: 0.8rem;
+    }
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.55rem;
+      margin-top: 0.7rem;
+    }
+    .kpi .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.6rem 0.65rem;
+      background: #f7fbff;
+    }
+    .kpi strong {
+      display: block;
+      font-size: 1.15rem;
+    }
+    .kpi span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: "IBM Plex Mono", "Consolas", monospace;
+    }
+    footer {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="panel hero">
+      <div>
+        <span class="tag">Resume + Blog</span>
+        <h1>Dawit Anelay</h1>
+        <p class="subtitle">DevOps and Platform Engineer focused on reliable Kubernetes delivery, secure CI/CD, observability, and scalable cloud operations.</p>
+      </div>
+      <div class="links">
+        <a class="btn main" href="/index.xml">RSS Feed</a>
+        <a class="btn" href="/">Blog Home</a>
+        <a class="btn" href="mailto:hello@dawitanelay.dev">Contact</a>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="panel">
+        <div class="head">
+          <h2>Experience</h2>
+          <span class="mono">Last updated 2026-03</span>
+        </div>
+
+        <article class="xp">
+          <h3>Senior DevOps Engineer | Platform and Reliability</h3>
+          <p class="mono">Cloud-native systems, CI/CD automation, and infrastructure operations</p>
+          <ul class="bullets">
+            <li>Built and operated production Kubernetes clusters with GitOps workflows for consistent, auditable releases.</li>
+            <li>Designed CI/CD pipelines with quality gates, image security checks, and progressive delivery controls.</li>
+            <li>Improved service reliability with SLO-driven monitoring, alert tuning, and incident response playbooks.</li>
+          </ul>
+        </article>
+
+        <article class="xp">
+          <h3>Platform Engineer | Developer Enablement</h3>
+          <p class="mono">Developer experience, observability, and runtime standards</p>
+          <ul class="bullets">
+            <li>Delivered reusable templates and tooling that reduced onboarding friction for application teams.</li>
+            <li>Centralized logging and metrics dashboards across workloads to shorten troubleshooting cycles.</li>
+            <li>Standardized Helm and manifest practices for safer rollouts and rollback consistency.</li>
+          </ul>
+        </article>
+
+        <article class="xp">
+          <h3>Notable Delivery Outcomes</h3>
+          <div class="kpi">
+            <div class="card"><strong>99.9%</strong><span>Service Availability</span></div>
+            <div class="card"><strong>40%+</strong><span>Release Lead Time Reduction</span></div>
+            <div class="card"><strong>60%+</strong><span>Faster Incident Triage</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="head">
+          <h2>Skills and Stack</h2>
+          <span class="mono">Core toolkit</span>
+        </div>
+
+        <div class="chips">
+          <span class="chip">Kubernetes</span>
+          <span class="chip">FluxCD</span>
+          <span class="chip">Helm</span>
+          <span class="chip">Argo Rollouts</span>
+          <span class="chip">Terraform</span>
+          <span class="chip">Ansible</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">Jenkins</span>
+          <span class="chip">Prometheus</span>
+          <span class="chip">Grafana</span>
+          <span class="chip">ELK Stack</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Linux</span>
+          <span class="chip">Bash</span>
+          <span class="chip">Python</span>
+        </div>
+
+        <div class="head" style="margin-top:1rem;">
+          <h2>Projects and Writing</h2>
+          <span class="mono">Public portfolio</span>
+        </div>
+        <ul class="bullets">
+          <li><a href="/">Blog posts</a> on DevOps practices, automation, and platform lessons.</li>
+          <li><a href="/index.xml">RSS feed</a> for technical updates and new articles.</li>
+          <li>GitOps and Kubernetes examples across real-world service domains.</li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>
+      Built as part of dawitanelay.dev. This page is intentionally lightweight and print-friendly.
+    </footer>
+  </div>
+</body>
+</html>

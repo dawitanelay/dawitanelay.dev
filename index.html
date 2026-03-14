@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dawit Anelay | DevOps Blog and Resume</title>
+  <meta name="description" content="Dawit Anelay - DevOps blog, resume, and engineering notes." />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
+
+    :root {
+      --bg: #0c141d;
+      --text: #e7eff8;
+      --muted: #9db1c4;
+      --accent: #2ac390;
+      --accent-2: #ffcd73;
+      --panel: #122031;
+      --border: #263a4d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: "Outfit", "Segoe UI", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(42, 195, 144, 0.24) 0%, transparent 26%),
+        radial-gradient(circle at 90% 16%, rgba(255, 205, 115, 0.2) 0%, transparent 22%),
+        linear-gradient(180deg, #0d1824 0%, var(--bg) 55%);
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+    .card {
+      width: min(860px, 100%);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, #142335 0%, #101d2b 100%);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+      padding: 1.4rem;
+    }
+    .chip {
+      display: inline-block;
+      border: 1px solid #2f495f;
+      border-radius: 999px;
+      padding: 0.18rem 0.56rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8bf6cd;
+      font-size: 0.74rem;
+    }
+    h1 {
+      margin: 0.65rem 0 0;
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+      line-height: 1.1;
+    }
+    p {
+      margin: 0.62rem 0 0;
+      color: var(--muted);
+      max-width: 66ch;
+    }
+    .actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .btn {
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: #16283b;
+      border-radius: 11px;
+      padding: 0.5rem 0.78rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 0.79rem;
+    }
+    .btn.primary {
+      border-color: #3cc495;
+      background: #1c9a70;
+    }
+    .btn.alt {
+      color: var(--accent-2);
+    }
+    .meta {
+      margin-top: 0.95rem;
+      border-top: 1px solid #223648;
+      padding-top: 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      color: #93abc1;
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <span class="chip">Dawit Anelay</span>
+    <h1>DevOps blog with a resume-first portfolio.</h1>
+    <p>
+      Production-focused engineering around Kubernetes, GitOps, CI/CD, and observability.
+      Use the links below to view my resume, technical writing, and RSS feed.
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="/resume/">Open Resume</a>
+      <a class="btn" href="/posts/">Read Posts</a>
+      <a class="btn alt" href="/index.xml">RSS Feed</a>
+      <a class="btn" href="mailto:hello@dawitanelay.dev">Contact</a>
+    </div>
+
+    <div class="meta">Last updated: 2026-03-14</div>
+  </main>
+</body>
+</html>

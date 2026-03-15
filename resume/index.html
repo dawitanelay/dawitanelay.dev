@@ -1,490 +1,1430 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dawit Anelay | DevOps Resume</title>
-  <meta name="description" content="Resume of Dawit Anelay - DevOps and Platform Engineer." />
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dawit Mezemir Anelay | DevOps Engineer</title>
+  <meta name="description" content="Resume and portfolio of Dawit Mezemir Anelay, DevOps Engineer based in Pisa, Tuscany, Italy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
     :root {
-      --bg: #0b1219;
-      --bg-soft: #101a25;
-      --panel: #131f2c;
-      --panel-2: #0f1924;
-      --text: #e8f0f8;
-      --muted: #9db1c4;
-      --accent: #29c18c;
-      --accent-2: #ffc361;
-      --border: #223648;
-      --chip: #172737;
-      --danger: #ff8f8f;
+      --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
+      --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.25) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
+      --bg-gradient-yellow-1: linear-gradient(to bottom right, hsl(45, 100%, 71%) 0%, hsla(36, 100%, 69%, 0) 50%);
+      --bg-gradient-yellow-2: linear-gradient(135deg, hsla(45, 100%, 71%, 0.25) 0%, hsla(35, 100%, 68%, 0) 60%), hsl(240, 2%, 13%);
+      --border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 50%);
+      --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 100%, 68%));
+      --jet: hsl(0, 0%, 22%);
+      --onyx: hsl(240, 1%, 17%);
+      --eerie-black-1: hsl(240, 2%, 13%);
+      --eerie-black-2: hsl(240, 2%, 12%);
+      --smoky-black: hsl(0, 0%, 7%);
+      --white-1: hsl(0, 0%, 100%);
+      --white-2: hsl(0, 0%, 98%);
+      --orange-yellow-crayola: hsl(45, 100%, 72%);
+      --light-gray: hsl(0, 0%, 84%);
+      --light-gray-70: hsla(0, 0%, 84%, 0.7);
+      --accent-blue: hsl(206, 88%, 68%);
+      --ff-poppins: "Poppins", sans-serif;
+      --fs-1: 24px;
+      --fs-2: 18px;
+      --fs-3: 17px;
+      --fs-4: 16px;
+      --fs-5: 15px;
+      --fs-6: 14px;
+      --fs-7: 13px;
+      --fs-8: 11px;
+      --fw-300: 300;
+      --fw-400: 400;
+      --fw-500: 500;
+      --fw-600: 600;
+      --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+      --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
+      --transition-1: 0.25s ease;
+      --transition-2: 0.5s ease-in-out;
     }
 
-    * { box-sizing: border-box; }
-    html, body { margin: 0; }
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: var(--ff-poppins);
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: "Outfit", "Segoe UI", sans-serif;
-      color: var(--text);
       background:
-        radial-gradient(circle at 10% -4%, rgba(41, 193, 140, 0.28) 0%, transparent 26%),
-        radial-gradient(circle at 90% 3%, rgba(255, 195, 97, 0.2) 0%, transparent 25%),
-        linear-gradient(180deg, #0c1621 0%, var(--bg) 40%);
-      line-height: 1.55;
+        radial-gradient(circle at top left, rgba(245, 197, 66, 0.12), transparent 26%),
+        radial-gradient(circle at 82% 12%, rgba(55, 123, 247, 0.12), transparent 20%),
+        var(--smoky-black);
+      color: var(--light-gray);
       min-height: 100vh;
     }
 
-    .layout {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 1rem;
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1fr;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    @media (min-width: 980px) {
-      .layout {
-        grid-template-columns: 310px 1fr;
-        align-items: start;
-      }
+    img, ion-icon, a, button, time, span {
+      display: block;
     }
 
-    .panel {
-      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+    button {
+      font: inherit;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    ::selection {
+      background: var(--orange-yellow-crayola);
+      color: var(--smoky-black);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--orange-yellow-crayola);
+      outline-offset: 2px;
+    }
+
+    .sidebar,
+    article {
+      background: var(--eerie-black-2);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: var(--shadow-1);
+      z-index: 1;
+    }
+
+    .separator {
+      width: 100%;
+      height: 1px;
+      background: var(--jet);
+      margin: 16px 0;
+    }
+
+    .icon-box {
+      position: relative;
+      background: var(--border-gradient-onyx);
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      color: var(--orange-yellow-crayola);
+      box-shadow: var(--shadow-1);
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .icon-box::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background: var(--eerie-black-1);
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    .icon-box ion-icon {
+      --ionicon-stroke-width: 35px;
+    }
+
+    .h2,
+    .h3,
+    .h4 {
+      color: var(--white-2);
+      text-transform: capitalize;
+    }
+
+    .h2 {
+      font-size: var(--fs-1);
+    }
+
+    .h3 {
+      font-size: var(--fs-2);
+    }
+
+    .h4 {
+      font-size: var(--fs-4);
+    }
+
+    .article-title {
+      position: relative;
+      padding-bottom: 7px;
+      margin-bottom: 18px;
+    }
+
+    .article-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30px;
+      height: 3px;
+      background: var(--text-gradient-yellow);
+      border-radius: 3px;
+    }
+
+    .content-card {
+      position: relative;
+      background: var(--border-gradient-onyx);
+      padding: 18px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-2);
+      z-index: 1;
+    }
+
+    .content-card::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background: var(--bg-gradient-jet);
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    main {
+      margin: 15px 12px;
+      margin-bottom: 32px;
+      min-width: 259px;
     }
 
     .sidebar {
-      padding: 1rem;
-      position: sticky;
-      top: 1rem;
+      margin-bottom: 15px;
+      max-height: 128px;
+      overflow: hidden;
+      transition: var(--transition-2);
     }
 
-    .avatar {
-      width: 84px;
-      height: 84px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #1f6d87, #2aa17f);
+    .sidebar.active {
+      max-height: 560px;
+    }
+
+    .sidebar-info {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .avatar-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: var(--bg-gradient-onyx);
       display: grid;
       place-items: center;
-      font-size: 1.65rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.8rem;
-      color: #ecf9f4;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .name {
-      margin: 0;
-      font-size: 1.7rem;
-      line-height: 1.1;
-    }
-
-    .title {
-      margin: 0.35rem 0 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .badge {
-      margin-top: 0.72rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: rgba(41, 193, 140, 0.13);
-      border: 1px solid rgba(41, 193, 140, 0.45);
-      color: #8bf6cd;
-      border-radius: 999px;
-      padding: 0.15rem 0.55rem;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .section-title {
-      margin: 1rem 0 0.6rem;
-      color: #d5e3f1;
-      font-size: 0.84rem;
-      text-transform: uppercase;
+      color: var(--white-2);
+      font-size: 28px;
+      font-weight: var(--fw-600);
       letter-spacing: 0.08em;
-      font-family: "JetBrains Mono", monospace;
+      position: relative;
+      overflow: hidden;
     }
 
-    .contact-list {
+    .avatar-box::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at top left, rgba(255, 215, 102, 0.22), transparent 38%),
+        linear-gradient(135deg, rgba(41, 90, 255, 0.22), rgba(255, 181, 64, 0.12)),
+        var(--eerie-black-1);
+      z-index: -1;
+    }
+
+    .info-content .name {
+      color: var(--white-2);
+      font-size: var(--fs-3);
+      font-weight: var(--fw-500);
+      letter-spacing: -0.25px;
+      margin-bottom: 10px;
+    }
+
+    .info-content .title {
+      color: var(--white-1);
+      background: var(--onyx);
+      font-size: var(--fs-8);
+      font-weight: var(--fw-300);
+      width: max-content;
+      padding: 5px 12px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .info_more-btn {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      border-radius: 0 15px;
+      font-size: 13px;
+      color: var(--orange-yellow-crayola);
+      background: var(--border-gradient-onyx);
+      padding: 10px;
+      box-shadow: var(--shadow-2);
+      transition: var(--transition-1);
+      z-index: 1;
+    }
+
+    .info_more-btn::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background: var(--bg-gradient-jet);
+      transition: var(--transition-1);
+      z-index: -1;
+    }
+
+    .info_more-btn:hover,
+    .info_more-btn:focus-visible {
+      background: var(--bg-gradient-yellow-1);
+    }
+
+    .info_more-btn:hover::before,
+    .info_more-btn:focus-visible::before {
+      background: var(--bg-gradient-yellow-2);
+    }
+
+    .info_more-btn span {
+      display: none;
+    }
+
+    .sidebar-info_more {
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-2);
+    }
+
+    .sidebar.active .sidebar-info_more {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contacts-list {
       display: grid;
-      gap: 0.5rem;
+      gap: 16px;
     }
 
     .contact-item {
-      padding: 0.55rem 0.65rem;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.02);
-      font-size: 0.9rem;
-      word-break: break-word;
-    }
-
-    .contact-item strong {
-      display: block;
-      color: var(--muted);
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-family: "JetBrains Mono", monospace;
-      margin-bottom: 0.2rem;
-    }
-
-    .contact-item a {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .links {
+      min-width: 100%;
       display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-      margin-top: 0.7rem;
-    }
-
-    .btn {
-      display: inline-flex;
       align-items: center;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      padding: 0.38rem 0.62rem;
-      text-decoration: none;
-      color: var(--text);
-      background: #132232;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.78rem;
+      gap: 16px;
+    }
+
+    .contact-info {
+      max-width: calc(100% - 46px);
+      width: calc(100% - 46px);
+    }
+
+    .contact-title {
+      color: var(--light-gray-70);
+      font-size: var(--fs-8);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      margin-bottom: 2px;
     }
 
-    .btn:hover { border-color: #366489; }
-
-    .btn.primary {
-      background: #1f9a70;
-      color: #f4fff9;
-      border-color: #3bc08f;
+    .contact-link,
+    .contact-info time,
+    .contact-info address {
+      color: var(--white-2);
+      font-size: var(--fs-7);
+      overflow-wrap: anywhere;
+      font-style: normal;
+      transition: var(--transition-1);
     }
 
-    .main {
-      padding: 0.9rem;
+    .contact-link:hover {
+      color: var(--orange-yellow-crayola);
     }
 
-    .nav {
+    .social-list {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 4px;
+      padding-left: 8px;
+    }
+
+    .social-item .social-link {
+      color: var(--light-gray-70);
+      font-size: 18px;
+      transition: var(--transition-1);
+    }
+
+    .social-item .social-link:hover {
+      color: var(--light-gray);
+    }
+
+    .main-content {
+      position: relative;
+      width: 100%;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(22, 22, 25, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      box-shadow: var(--shadow-1);
+      z-index: 5;
+      margin-bottom: 15px;
+    }
+
+    .navbar-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-bottom: 0.8rem;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
     }
 
-    .nav a {
-      text-decoration: none;
-      color: #dce8f5;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.84rem;
-      font-family: "JetBrains Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      background: #132130;
-    }
-
-    .nav a:hover,
-    .nav a.active {
-      border-color: #3ca888;
-      color: #9cf6d3;
-    }
-
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1rem;
-      background: rgba(9, 18, 29, 0.55);
-      margin-bottom: 0.8rem;
-    }
-
-    h2 {
-      margin: 0 0 0.5rem;
-      font-size: 1.35rem;
-    }
-
-    h3 {
-      margin: 0;
-      font-size: 1.02rem;
-    }
-
-    p { margin: 0.35rem 0 0; }
-
-    .muted {
-      color: var(--muted);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.8rem;
-    }
-
-    .highlight {
-      color: #99f5d0;
-      font-weight: 600;
-    }
-
-    .metrics {
-      margin-top: 0.65rem;
-      display: grid;
-      gap: 0.6rem;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    }
-
-    .metric {
-      border: 1px solid var(--border);
+    .navbar-link {
+      color: var(--light-gray);
+      font-size: var(--fs-8);
+      padding: 10px 14px;
       border-radius: 12px;
-      padding: 0.62rem;
-      background: #122335;
+      transition: var(--transition-1);
     }
 
-    .metric strong {
-      display: block;
-      font-size: 1.2rem;
-      color: #b7ffe2;
+    .navbar-link:hover,
+    .navbar-link:focus-visible {
+      color: var(--light-gray-70);
+      background: rgba(255, 255, 255, 0.03);
     }
 
-    .metric span {
+    .navbar-link.active {
+      color: var(--orange-yellow-crayola);
+      background: rgba(255, 196, 72, 0.08);
+    }
+
+    article {
+      display: none;
+    }
+
+    article.active {
       display: block;
-      color: #b3c4d4;
-      font-size: 0.74rem;
+      animation: fade 0.5s ease backwards;
+    }
+
+    @keyframes fade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .about-text {
+      color: var(--light-gray);
+      font-size: var(--fs-6);
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .about-text p + p {
+      margin-top: 16px;
+    }
+
+    .hero-grid,
+    .service-list,
+    .project-list,
+    .contact-grid,
+    .skill-groups {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-grid {
+      margin-bottom: 30px;
+    }
+
+    .hero-stat {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-stat strong {
+      color: var(--white-2);
+      font-size: 26px;
+      font-weight: var(--fw-600);
+      margin-bottom: 4px;
+    }
+
+    .hero-stat span {
+      font-size: var(--fs-7);
+      color: var(--light-gray-70);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-family: "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+    }
+
+    .section-title {
+      color: var(--white-2);
+      font-size: var(--fs-2);
+      margin-bottom: 18px;
+    }
+
+    .service-item,
+    .project-card,
+    .contact-card,
+    .skill-group,
+    .callout {
+      position: relative;
+      background: var(--border-gradient-onyx);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow-1);
+      z-index: 1;
+    }
+
+    .service-item::before,
+    .project-card::before,
+    .contact-card::before,
+    .skill-group::before,
+    .callout::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background: var(--bg-gradient-jet);
+      z-index: -1;
+    }
+
+    .service-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .service-item-title,
+    .project-title,
+    .contact-card h3,
+    .skill-group h4,
+    .timeline-item-title {
+      color: var(--white-2);
+      margin-bottom: 8px;
+    }
+
+    .service-item-text,
+    .project-copy,
+    .contact-card p,
+    .callout p,
+    .timeline-text,
+    .cert-list li {
+      color: var(--light-gray);
+      font-size: var(--fs-6);
+      line-height: 1.7;
+    }
+
+    .timeline,
+    .skill {
+      margin-bottom: 30px;
+    }
+
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .timeline-list {
+      font-size: var(--fs-6);
+      margin-left: 16px;
     }
 
     .timeline-item {
-      padding: 0.65rem 0;
-      border-top: 1px dashed rgba(157, 177, 196, 0.24);
+      position: relative;
+      padding-left: 24px;
+      padding-bottom: 22px;
     }
 
-    .timeline-item:first-of-type { border-top: 0; padding-top: 0; }
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
 
-    .chips {
+    .timeline-item:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 0;
+      width: 1px;
+      height: calc(100% + 4px);
+      background: var(--jet);
+    }
+
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: -4px;
+      width: 9px;
+      height: 9px;
+      background: var(--text-gradient-yellow);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--jet);
+    }
+
+    .timeline-item span,
+    .timeline-meta,
+    .project-tag,
+    .eyebrow {
+      color: var(--orange-yellow-crayola);
+      font-size: var(--fs-7);
+      line-height: 1.6;
+    }
+
+    .timeline-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.35rem;
+      gap: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-text ul {
+      margin-top: 10px;
+      padding-left: 18px;
+    }
+
+    .timeline-text li,
+    .cert-list li {
+      list-style: disc;
+      margin-bottom: 6px;
+    }
+
+    .timeline-text li:last-child,
+    .cert-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-group h4 {
+      font-size: var(--fs-5);
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .chip {
-      border: 1px solid var(--border);
+      padding: 8px 12px;
       border-radius: 999px;
-      background: var(--chip);
-      color: #daebfb;
-      padding: 0.2rem 0.54rem;
-      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--white-2);
+      font-size: var(--fs-7);
     }
 
-    .project-grid {
+    .project-card {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .project-tag {
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .contact-card p + p,
+    .callout p + p {
+      margin-top: 10px;
+    }
+
+    .inline-link {
+      color: var(--accent-blue);
+      display: inline;
+    }
+
+    .inline-link:hover {
+      color: var(--white-2);
+    }
+
+    .title-link {
+      color: var(--white-2);
+      display: inline;
+    }
+
+    .title-link:hover {
+      color: var(--accent-blue);
+    }
+
+    .contact-action {
+      color: var(--accent-blue);
+    }
+
+    .contact-action:hover {
+      color: var(--white-2);
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 72, 0.3);
+      background: rgba(255, 196, 72, 0.08);
+      color: var(--white-2);
+      margin-top: 14px;
+      font-size: var(--fs-7);
+    }
+
+    .availability::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #57d48c;
+      box-shadow: 0 0 12px rgba(87, 212, 140, 0.6);
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .callout {
+      margin-top: 24px;
+    }
+
+    .resume-columns {
       display: grid;
-      gap: 0.6rem;
-      grid-template-columns: 1fr;
+      gap: 24px;
     }
 
-    @media (min-width: 740px) {
-      .project-grid {
+    @media (min-width: 580px) {
+      .hero-grid,
+      .service-list,
+      .project-list,
+      .contact-grid,
+      .skill-groups {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    .project {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.75rem;
-      background: #101f2f;
-    }
-
-    .project .muted { color: #90a8bd; }
-
-    .project a {
-      color: var(--accent-2);
-      text-decoration: none;
-    }
-
-    .project a:hover { text-decoration: underline; }
-
-    .contact-cta {
-      border-left: 3px solid var(--accent);
-      padding-left: 0.7rem;
-    }
-
-    .notice {
-      margin-top: 1rem;
-      font-size: 0.78rem;
-      color: #95abc0;
-      border-top: 1px solid rgba(157, 177, 196, 0.2);
-      padding-top: 0.65rem;
-      font-family: "JetBrains Mono", monospace;
-    }
-
-    .warn { color: var(--danger); }
-  </style>
-</head>
-<body>
-  <div class="layout">
-    <aside class="panel sidebar">
-      <div class="avatar">DA</div>
-      <h1 class="name">Dawit Anelay</h1>
-      <p class="title">DevOps and Platform Engineer</p>
-      <span class="badge">Open to remote opportunities</span>
-
-      <h2 class="section-title">Contacts</h2>
-      <div class="contact-list">
-        <div class="contact-item">
-          <strong>Email</strong>
-          <a href="mailto:hello@dawitanelay.dev">hello@dawitanelay.dev</a>
-        </div>
-        <div class="contact-item">
-          <strong>Website</strong>
-          <a href="https://dawitanelay.dev">dawitanelay.dev</a>
-        </div>
-        <div class="contact-item">
-          <strong>Focus</strong>
-          Kubernetes, GitOps, CI/CD, Observability
-        </div>
-      </div>
-
-      <div class="links">
-        <a class="btn primary" href="/index.xml">RSS Feed</a>
-        <a class="btn" href="/">Home</a>
-      </div>
-
-      <p class="notice">Tip: wire your real LinkedIn/GitHub and phone in this sidebar for hiring use.</p>
-    </aside>
-
-    <main class="panel main">
-      <nav class="nav" aria-label="Resume sections">
-        <a href="#about" class="active">About</a>
-        <a href="#experience">Resume</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <section id="about" class="card">
-        <h2>About</h2>
-        <p>Platform-minded engineer building resilient delivery pipelines and production-ready Kubernetes environments. I focus on <span class="highlight">operability from day one</span>: release safety, observability, incident readiness, and secure automation.</p>
-        <div class="metrics">
-          <div class="metric">
-            <strong>99.9%</strong>
-            <span>Availability Target</span>
-          </div>
-          <div class="metric">
-            <strong>40%+</strong>
-            <span>Faster Lead Time</span>
-          </div>
-          <div class="metric">
-            <strong>60%+</strong>
-            <span>Triage Time Reduction</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience" class="card">
-        <h2>Resume</h2>
-
-        <article class="timeline-item">
-          <h3>Senior DevOps Engineer</h3>
-          <p class="muted">Cloud-Native Platform and Reliability</p>
-          <p>Operated Kubernetes services with GitOps guardrails, policy checks, and deployment automation to improve release confidence at scale.</p>
-        </article>
-
-        <article class="timeline-item">
-          <h3>Platform Engineer</h3>
-          <p class="muted">Developer Experience and Runtime Standards</p>
-          <p>Standardized Helm/K8s patterns, added reusable CI templates, and improved on-call visibility with centralized dashboards and tuned alerts.</p>
-        </article>
-
-        <article class="timeline-item">
-          <h3>Core Stack</h3>
-          <div class="chips">
-            <span class="chip">Kubernetes</span>
-            <span class="chip">FluxCD</span>
-            <span class="chip">Helm</span>
-            <span class="chip">GitHub Actions</span>
-            <span class="chip">Terraform</span>
-            <span class="chip">Prometheus</span>
-            <span class="chip">Grafana</span>
-            <span class="chip">ELK</span>
-            <span class="chip">PostgreSQL</span>
-            <span class="chip">Linux</span>
-            <span class="chip">Bash</span>
-            <span class="chip">Python</span>
-          </div>
-        </article>
-      </section>
-
-      <section id="projects" class="card">
-        <h2>Projects and Writing</h2>
-        <div class="project-grid">
-          <article class="project">
-            <h3>GitOps Playground</h3>
-            <p class="muted">FluxCD-driven Kubernetes delivery patterns</p>
-            <p>Hands-on repository structure and subscription patterns for repeatable environment rollouts.</p>
-          </article>
-          <article class="project">
-            <h3>Observability Stack</h3>
-            <p class="muted">Prometheus, Grafana, ELK, and alert pipelines</p>
-            <p>Dashboards and alert routing for incident clarity and faster MTTR across services.</p>
-          </article>
-          <article class="project">
-            <h3>Technical Blog</h3>
-            <p class="muted">DevOps notes and platform lessons</p>
-            <p>Follow updates via <a href="/index.xml">RSS</a> and long-form posts as they are published.</p>
-          </article>
-          <article class="project">
-            <h3>Infrastructure Practices</h3>
-            <p class="muted">Release quality, rollbacks, and production readiness</p>
-            <p>Designing safer delivery with verification steps and clear failure recovery paths.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="card">
-        <h2>Contact</h2>
-        <div class="contact-cta">
-          <p>Available for DevOps and platform engineering opportunities. Reach out at <a href="mailto:hello@dawitanelay.dev" class="highlight">hello@dawitanelay.dev</a>.</p>
-          <p class="muted">For best results, replace placeholder contact details with your live LinkedIn/GitHub profile links.</p>
-        </div>
-      </section>
-
-      <p class="notice"><span class="warn">Note:</span> This resume is intentionally lightweight and static so it can be hosted directly alongside your blog on GitHub Pages.</p>
-    </main>
-  </div>
-
-  <script>
-    // Highlight nav section based on viewport position.
-    (function () {
-      var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
-      var sections = links.map(function (link) {
-        return document.querySelector(link.getAttribute('href'));
-      });
-
-      function updateActive() {
-        var y = window.scrollY + 120;
-        var idx = 0;
-        for (var i = 0; i < sections.length; i += 1) {
-          if (sections[i] && sections[i].offsetTop <= y) idx = i;
-        }
-        links.forEach(function (a) { a.classList.remove('active'); });
-        if (links[idx]) links[idx].classList.add('active');
+    @media (min-width: 768px) {
+      main {
+        margin: 30px 24px;
       }
 
-      window.addEventListener('scroll', updateActive, { passive: true });
-      updateActive();
-    }());
+      .article-title {
+        margin-bottom: 24px;
+      }
+
+      .timeline-list {
+        margin-left: 28px;
+      }
+
+      .timeline-item {
+        padding-left: 32px;
+      }
+
+      .timeline-item:not(:last-child)::before {
+        left: 2px;
+      }
+
+      .timeline-item::after {
+        left: -3px;
+      }
+
+      .navbar-list {
+        gap: 18px;
+      }
+
+      .navbar-link {
+        font-size: var(--fs-6);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      main {
+        max-width: 1200px;
+        margin-inline: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 25px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 30px;
+        max-height: max-content;
+        width: 300px;
+        margin-bottom: 0;
+        padding-top: 30px;
+      }
+
+      .sidebar-info {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-content .title {
+        margin-inline: auto;
+      }
+
+      .info_more-btn {
+        display: none;
+      }
+
+      .sidebar-info_more {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .contacts-list {
+        gap: 18px;
+      }
+
+      .contact-item {
+        gap: 14px;
+      }
+
+      .social-list {
+        justify-content: center;
+        padding-left: 0;
+      }
+
+      .main-content {
+        min-width: 0;
+        width: calc(100% - 325px);
+      }
+
+      .navbar {
+        border-radius: 20px;
+      }
+
+      .resume-columns {
+        grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.9fr);
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-info">
+        <div class="avatar-box" aria-hidden="true">DM</div>
+
+        <div class="info-content">
+          <h1 class="name" title="Dawit Mezemir Anelay">Dawit Mezemir Anelay</h1>
+          <p class="title">DevOps Engineer<br>Pisa, Tuscany, IT</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn aria-label="Toggle contacts">
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+
+      <div class="sidebar-info_more">
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:dawit12mezemir@gmail.com" class="contact-link">dawit12mezemir@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+              <a href="tel:+393936787356" class="contact-link">+39 393 678 7356</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://linkedin.com/in/dawit-anelay" class="contact-link" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/dawitanelay" class="contact-link" target="_blank" rel="noreferrer">github.com/dawitanelay</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Pisa, Tuscany, Italy</address>
+            </div>
+          </li>
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+          <li class="social-item">
+            <a href="https://github.com/dawitanelay" class="social-link" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+          <li class="social-item">
+            <a href="https://linkedin.com/in/dawit-anelay" class="social-link" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+          <li class="social-item">
+            <a href="mailto:dawit12mezemir@gmail.com" class="social-link" aria-label="Send email">
+              <ion-icon name="mail-outline"></ion-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <nav class="navbar" aria-label="Resume navigation">
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>About</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Resume</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Research</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Projects</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Contact</button>
+          </li>
+        </ul>
+      </nav>
+
+      <article class="about active" data-page="about">
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            DevOps Engineer with over 5 years of experience and a background in Computer Engineering. Proven track record of designing scalable infrastructure, automating CI/CD pipelines, and implementing cloud-native DevOps practices on Azure and AWS.
+          </p>
+          <p>
+            My work centers on system reliability, security, and efficient delivery workflows, with hands-on experience across Kubernetes, Terraform, Jenkins, GitHub Actions, observability stacks, and production-grade networking.
+          </p>
+        </section>
+
+        <section class="hero-grid" aria-label="Highlights">
+          <div class="hero-stat content-card">
+            <strong>5+</strong>
+            <span>Years in DevOps</span>
+          </div>
+          <div class="hero-stat content-card">
+            <strong>90%</strong>
+            <span>Deployment Time Reduced</span>
+          </div>
+          <div class="hero-stat content-card">
+            <strong>Azure + AWS</strong>
+            <span>Cloud Platforms</span>
+          </div>
+          <div class="hero-stat content-card">
+            <strong>AKS / K8s</strong>
+            <span>Platform Operations</span>
+          </div>
+        </section>
+
+        <section class="service">
+          <h3 class="section-title">Core focus</h3>
+
+          <div class="service-list">
+            <div class="service-item">
+              <div class="icon-box">
+                <ion-icon name="git-branch-outline"></ion-icon>
+              </div>
+              <div>
+                <h4 class="service-item-title">CI/CD Engineering</h4>
+                <p class="service-item-text">Building secure delivery pipelines with Jenkins, GitHub Actions, GitLab, ArgoCD, validation gates, and release automation.</p>
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="icon-box">
+                <ion-icon name="layers-outline"></ion-icon>
+              </div>
+              <div>
+                <h4 class="service-item-title">Kubernetes Operations</h4>
+                <p class="service-item-text">Managing AKS workloads, Helm-based releases, container security, cluster rollouts, and production troubleshooting.</p>
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="icon-box">
+                <ion-icon name="cloud-outline"></ion-icon>
+              </div>
+              <div>
+                <h4 class="service-item-title">Cloud & IaC</h4>
+                <p class="service-item-text">Provisioning repeatable environments with Terraform, Ansible, Azure CLI, and infrastructure patterns designed for consistency.</p>
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="icon-box">
+                <ion-icon name="pulse-outline"></ion-icon>
+              </div>
+              <div>
+                <h4 class="service-item-title">Observability & Security</h4>
+                <p class="service-item-text">Deploying ELK, Prometheus, Grafana, Kafka-based event flows, and secure networking with private endpoints and policy controls.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="skill">
+          <h3 class="section-title">Skills</h3>
+
+          <div class="skill-groups">
+            <div class="skill-group">
+              <h4>DevOps Tools</h4>
+              <div class="chip-list">
+                <span class="chip">GitHub</span>
+                <span class="chip">GitLab</span>
+                <span class="chip">Jenkins</span>
+                <span class="chip">GitHub Actions</span>
+                <span class="chip">ArgoCD</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Cloud & IaC</h4>
+              <div class="chip-list">
+                <span class="chip">Azure</span>
+                <span class="chip">AWS</span>
+                <span class="chip">Terraform</span>
+                <span class="chip">Ansible</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Containers & Runtime</h4>
+              <div class="chip-list">
+                <span class="chip">Docker</span>
+                <span class="chip">Kubernetes</span>
+                <span class="chip">Helm</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Monitoring & Logging</h4>
+              <div class="chip-list">
+                <span class="chip">ELK Stack</span>
+                <span class="chip">Prometheus</span>
+                <span class="chip">Grafana</span>
+                <span class="chip">Kafka</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Scripting & Languages</h4>
+              <div class="chip-list">
+                <span class="chip">Bash</span>
+                <span class="chip">Python</span>
+                <span class="chip">Node.js</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Networking & Delivery</h4>
+              <div class="chip-list">
+                <span class="chip">HTTP</span>
+                <span class="chip">TCP/UDP</span>
+                <span class="chip">MySQL</span>
+                <span class="chip">MongoDB</span>
+                <span class="chip">Jira</span>
+                <span class="chip">Agile/Scrum</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout">
+            <p class="eyebrow">Current focus</p>
+            <p>Scalable Azure infrastructure, secure software delivery, Kubernetes reliability, and observability pipelines that reduce operational noise while preserving critical signals.</p>
+          </div>
+        </section>
+      </article>
+
+      <article class="resume" data-page="resume">
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <div class="resume-columns">
+          <div>
+            <section class="timeline">
+              <div class="title-wrapper">
+                <div class="icon-box">
+                  <ion-icon name="briefcase-outline"></ion-icon>
+                </div>
+                <h3 class="h3">Work Experience</h3>
+              </div>
+
+              <ol class="timeline-list">
+                <li class="timeline-item">
+                  <h4 class="h4 timeline-item-title">DevOps Engineer</h4>
+                  <div class="timeline-meta">
+                    <span>IGT, Remote</span>
+                    <span>Oct. 2022 - Present</span>
+                  </div>
+                  <div class="timeline-text">
+                    <ul>
+                      <li>Implemented container image signing with Cosign, Mend vulnerability scanning, and Azure Key Vault integration for secure deployments.</li>
+                      <li>Built and maintained infrastructure as code with Terraform for consistent, automated provisioning.</li>
+                      <li>Managed AKS clusters, application rollouts, monitoring, and production support.</li>
+                      <li>Developed CI/CD pipelines with Jenkins and GitHub Actions, reducing deployment time by 90%.</li>
+                      <li>Secured delivery flows with vulnerability scanning, image validation, private endpoints, and Azure Network Security Groups.</li>
+                      <li>Built Kubernetes Event Exporter routing into the ELK stack and resolved issues across Kubernetes, networking, Jenkins, and Elasticsearch.</li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="timeline-item">
+                  <h4 class="h4 timeline-item-title">DevOps Engineer</h4>
+                  <div class="timeline-meta">
+                    <span>GeoSolutions, Lucca, Italy</span>
+                    <span>May. 2021 - Dec. 2021</span>
+                  </div>
+                  <div class="timeline-text">
+                    <ul>
+                      <li>Designed continuous delivery workflows using Jenkins, Docker, and Git.</li>
+                      <li>Created Elastic Stack dashboards with Kibana and managed monitoring tools including AppDynamics and Splunk.</li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="timeline-item">
+                  <h4 class="h4 timeline-item-title">System Administrator</h4>
+                  <div class="timeline-meta">
+                    <span>Addis Ababa, Ethiopia</span>
+                    <span>Mar. 2018 - Oct. 2019</span>
+                  </div>
+                  <div class="timeline-text">
+                    <ul>
+                      <li>Managed Linux systems and collaborated with database and development teams to support 24/7 uptime.</li>
+                      <li>Developed Bash scripts to automate recurring system operations and simplify support tasks.</li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="timeline-item">
+                  <h4 class="h4 timeline-item-title">Network Administrator</h4>
+                  <div class="timeline-meta">
+                    <span>Addis Ababa, Ethiopia</span>
+                    <span>Mar. 2016 - Aug. 2016</span>
+                  </div>
+                  <div class="timeline-text">
+                    <ul>
+                      <li>Installed and configured LAN, WAN, and internet connectivity for organizational infrastructure.</li>
+                    </ul>
+                  </div>
+                </li>
+              </ol>
+            </section>
+
+            <section class="timeline">
+              <div class="title-wrapper">
+                <div class="icon-box">
+                  <ion-icon name="flask-outline"></ion-icon>
+                </div>
+                <h3 class="h3">Research & Thesis</h3>
+              </div>
+
+              <ol class="timeline-list">
+                <li class="timeline-item">
+                  <h4 class="h4 timeline-item-title">
+                    <a class="title-link" href="https://etd.adm.unipi.it/t/etd-09052022-171219/" target="_blank" rel="noreferrer">Artificial Intelligence Techniques to Support Monitoring of Infrastructures for Network Function Virtualization (NFV)</a>
+                  </h4>
+                  <div class="timeline-meta">
+                    <span>MSc Thesis, University of Pisa</span>
+                    <span>Sept. 2021 - Jul. 2022</span>
+                  </div>
+                  <div class="timeline-text">
+                    <p>This thesis project was realized in partial fulfillment of the requirements for the MSc in Computing Science at the University of Pisa.</p>
+                    <p>Supervisors: Tommaso Cucinotta (Scuola Superiore Sant'Anna), Davide Bacciu (University of Pisa)</p>
+                    <p>
+                      Public links:
+                      <a class="inline-link" href="https://etd.adm.unipi.it/t/etd-09052022-171219/" target="_blank" rel="noreferrer">University of Pisa thesis archive</a>
+                      and
+                      <a class="inline-link" href="https://retis.santannapisa.it/~tommaso/eng/thesisprojects.html" target="_blank" rel="noreferrer">RETIS thesis project page</a>.
+                    </p>
+                    <ul>
+                      <li>Designed AI-based tools for performance monitoring, troubleshooting, and capacity planning in NFV infrastructure.</li>
+                      <li>Addressed the shift from physical network appliances to elastic cloud-managed virtual machines and containers in telecom infrastructure.</li>
+                      <li>Applied deep learning and statistical models on real-world datasets from telecom environments.</li>
+                      <li>Developed systems using Python, C/C++, Bash, Linux command-line tooling, and virtualization platforms.</li>
+                      <li>Worked on real operational data with an emphasis on forecasting, anomaly detection, troubleshooting support, and capacity planning.</li>
+                      <li>Conducted industrial research in collaboration with Vodafone and academic labs including RETIS, INRETE, PERCRO, and ICT-COISP.</li>
+                    </ul>
+                  </div>
+                </li>
+              </ol>
+            </section>
+          </div>
+
+          <div>
+            <section class="timeline">
+              <div class="title-wrapper">
+                <div class="icon-box">
+                  <ion-icon name="school-outline"></ion-icon>
+                </div>
+                <h3 class="h3">Education</h3>
+              </div>
+
+              <ol class="timeline-list">
+                <li class="timeline-item">
+                  <h4 class="h4 timeline-item-title">M.Sc. Computer Science (Artificial Intelligence)</h4>
+                  <div class="timeline-meta">
+                    <span>University of Pisa, Italy</span>
+                    <span>Sept. 2019 - Aug. 2022</span>
+                  </div>
+                </li>
+
+                <li class="timeline-item">
+                  <h4 class="h4 timeline-item-title">B.Sc. Computer Engineering</h4>
+                  <div class="timeline-meta">
+                    <span>Addis Ababa University, Ethiopia</span>
+                    <span>Oct. 2012 - Jul. 2017</span>
+                  </div>
+                </li>
+              </ol>
+            </section>
+
+            <section class="skill">
+              <div class="title-wrapper">
+                <div class="icon-box">
+                  <ion-icon name="ribbon-outline"></ion-icon>
+                </div>
+                <h3 class="h3">Trainings & Certifications</h3>
+              </div>
+
+              <div class="content-card">
+                <p class="eyebrow">Featured training</p>
+                <p class="timeline-text">Azure DevOps Engineer Nanodegree, Udacity</p>
+                <p class="timeline-meta"><span>Jul. 2022 - Dec. 2022</span></p>
+                <div class="separator"></div>
+                <ul class="cert-list">
+                  <li>Azure DevOps Engineer (Udacity)</li>
+                  <li>Elasticsearch Essential Training</li>
+                  <li>Microservices Foundations</li>
+                  <li>Linux Automation with Bash Scripting</li>
+                  <li>Oracle Certified Associate: WebLogic Server 12c</li>
+                  <li>Oracle Certified Associate: Oracle Linux 5/6 System Administrator</li>
+                  <li>Oracle Certified Associate: Solaris 11 System Administrator</li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+      </article>
+
+      <article class="research" data-page="research">
+        <header>
+          <h2 class="h2 article-title">Research</h2>
+        </header>
+
+        <section class="project-list">
+          <div class="project-card">
+            <p class="project-tag">MSc Thesis</p>
+            <h3 class="project-title">
+              <a class="title-link" href="https://etd.adm.unipi.it/t/etd-09052022-171219/" target="_blank" rel="noreferrer">Artificial Intelligence Techniques to Support Monitoring of Infrastructures for Network Function Virtualization (NFV)</a>
+            </h3>
+            <p class="project-copy">Completed at the University of Pisa under the joint supervision of Tommaso Cucinotta and Davide Bacciu, focused on AI-assisted monitoring, troubleshooting, and capacity planning for NFV infrastructure.</p>
+            <p class="project-copy">The work addresses the shift from physical network appliances to elastic, cloud-managed virtual machines and containers used by telecom operators.</p>
+          </div>
+
+          <div class="project-card">
+            <p class="project-tag">Archive Record</p>
+            <h3 class="project-title">University of Pisa digital archive entry</h3>
+            <p class="project-copy">The public ETD archive records the defended thesis under the title <a class="inline-link" href="https://etd.adm.unipi.it/t/etd-09052022-171219/" target="_blank" rel="noreferrer">Short-term Operation Metrics Forecasting and Anomaly Detection for Virtualized Network Functions</a>.</p>
+            <p class="project-copy">It highlights forecasting, clustering, anomaly detection, and real Vodafone NFV data as part of the research output.</p>
+          </div>
+        </section>
+
+        <div class="callout">
+          <p class="eyebrow">Research summary</p>
+          <p>This thesis project proposed Artificial Intelligence techniques to support performance monitoring, troubleshooting, and capacity planning for Network Function Virtualization in telecom operations.</p>
+          <p>It relied on strong C/C++, Python, Linux command-line, Bash, operating systems, and virtualization knowledge, and was framed within an industrial collaboration involving Vodafone, RETIS, INRETE, PERCRO, and ICT-COISP.</p>
+        </div>
+
+        <section class="skill">
+          <h3 class="section-title">Research stack</h3>
+
+          <div class="skill-groups">
+            <div class="skill-group">
+              <h4>Technical areas</h4>
+              <div class="chip-list">
+                <span class="chip">Anomaly Detection</span>
+                <span class="chip">Forecasting</span>
+                <span class="chip">Clustering</span>
+                <span class="chip">NFV</span>
+                <span class="chip">Time Series</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Tools & foundations</h4>
+              <div class="chip-list">
+                <span class="chip">Python</span>
+                <span class="chip">C/C++</span>
+                <span class="chip">Bash</span>
+                <span class="chip">Linux</span>
+                <span class="chip">Virtualization</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <article class="projects" data-page="projects">
+        <header>
+          <h2 class="h2 article-title">Projects</h2>
+        </header>
+
+        <section class="project-list">
+          <div class="project-card">
+            <p class="project-tag">Azure Database Modernization</p>
+            <h3 class="project-title">PostgreSQL Major Version Upgrade on Azure Flexible Server</h3>
+            <p class="project-copy">Led the upgrade from PostgreSQL 13 to 16, including pre-upgrade cleanup, extension removal, replication slot management, PITR testing, VACUUM validation, and post-upgrade health checks.</p>
+          </div>
+
+          <div class="project-card">
+            <p class="project-tag">Data Security</p>
+            <h3 class="project-title">Customer Managed Key Implementation in Azure</h3>
+            <p class="project-copy">Created and managed Customer Managed Keys in Azure Key Vault for encryption at rest, and automated key creation, permission configuration, and rotation policy setup with Azure CLI and Terraform.</p>
+          </div>
+
+          <div class="project-card">
+            <p class="project-tag">Observability</p>
+            <h3 class="project-title">Kubernetes Event Monitoring Pipeline</h3>
+            <p class="project-copy">Deployed Kubernetes Event Exporter with custom routing to Elasticsearch and Kibana dashboards, tuning filters and throttling to highlight critical infrastructure events and cut noise.</p>
+          </div>
+
+          <div class="project-card">
+            <p class="project-tag">Secure Platform Networking</p>
+            <h3 class="project-title">AKS Integration with Private Endpoints</h3>
+            <p class="project-copy">Configured secure connectivity between Azure Key Vault, AKS, and Jenkins agents using Private Endpoints and Network Security Groups to enforce tighter access boundaries.</p>
+          </div>
+        </section>
+
+        <div class="callout">
+          <p class="eyebrow">Operating style</p>
+          <p>I prefer infrastructure work that is measurable, automated, and reversible: strong rollout controls, clear observability, deliberate security boundaries, and repeatable cloud provisioning.</p>
+        </div>
+      </article>
+
+      <article class="contact" data-page="contact">
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+        <section class="contact-grid">
+          <div class="contact-card">
+            <h3>Open to opportunities</h3>
+            <p>Available for DevOps, platform engineering, and cloud infrastructure roles, especially where Kubernetes, CI/CD, and secure delivery are core to the work.</p>
+            <div class="availability">Based in Pisa, open to remote and hybrid collaboration</div>
+          </div>
+
+          <div class="contact-card">
+            <h3>Reach me directly</h3>
+            <p><a class="contact-action" href="mailto:dawit12mezemir@gmail.com">dawit12mezemir@gmail.com</a></p>
+            <p><a class="contact-action" href="tel:+393936787356">+39 393 678 7356</a></p>
+            <p><a class="contact-action" href="https://github.com/dawitanelay" target="_blank" rel="noreferrer">github.com/dawitanelay</a></p>
+            <p><a class="contact-action" href="https://linkedin.com/in/dawit-anelay" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a></p>
+          </div>
+        </section>
+
+        <div class="callout">
+          <p class="eyebrow">Profile summary</p>
+          <p>DevOps Engineer with experience across Azure, AWS, Terraform, Kubernetes, Jenkins, GitHub Actions, ELK, Prometheus, and Grafana, with a consistent focus on reliability, security, and delivery efficiency.</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    'use strict';
+
+    var sidebar = document.querySelector('[data-sidebar]');
+    var sidebarBtn = document.querySelector('[data-sidebar-btn]');
+    var navigationLinks = document.querySelectorAll('[data-nav-link]');
+    var pages = document.querySelectorAll('[data-page]');
+
+    if (sidebar && sidebarBtn) {
+      sidebarBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+      });
+    }
+
+    for (var i = 0; i < navigationLinks.length; i += 1) {
+      navigationLinks[i].addEventListener('click', function () {
+        for (var j = 0; j < pages.length; j += 1) {
+          var isActive = this.textContent.toLowerCase() === pages[j].dataset.page;
+          pages[j].classList.toggle('active', isActive);
+          navigationLinks[j].classList.toggle('active', isActive);
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   </script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" crossorigin="anonymous"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

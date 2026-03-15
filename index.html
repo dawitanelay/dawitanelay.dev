@@ -204,6 +204,13 @@
 			overflow: hidden;
 		}
 
+		.avatar-box img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: inherit;
+		}
+
 		.avatar-box::after {
 			content: "";
 			position: absolute;
@@ -453,6 +460,26 @@
 			line-height: 1.7;
 		}
 
+		.contact-intro {
+			margin-bottom: 14px;
+			color: var(--light-gray-70);
+			font-size: var(--fs-6);
+		}
+
+		.contact-map {
+			grid-column: 1 / -1;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		.contact-map iframe {
+			width: 100%;
+			height: 280px;
+			border: 0;
+			display: block;
+			filter: saturate(0.95) contrast(1.05);
+		}
+
 		.section-title {
 			color: var(--white-2);
 			font-size: var(--fs-2);
@@ -664,7 +691,9 @@
 	<main>
 		<aside class="sidebar" data-sidebar>
 			<div class="sidebar-info">
-				<div class="avatar-box" aria-hidden="true">DM</div>
+				<div class="avatar-box">
+					<img src="https://github.com/dawitanelay.png" alt="Dawit Mezemir Anelay profile photo" loading="lazy">
+				</div>
 
 				<div class="info-content">
 					<h1 class="name" title="Dawit Mezemir Anelay">Dawit Mezemir Anelay</h1>
@@ -1023,10 +1052,11 @@
 
 			<article class="contact" data-page="contact">
 				<header><h2 class="h2 article-title">Contact</h2></header>
+				<p class="contact-intro">Let us connect for DevOps, platform engineering, cloud automation, and reliability-focused delivery work.</p>
 				<section class="contact-grid">
 					<div class="contact-card">
 						<h3>Open to opportunities</h3>
-						<p>Available for DevOps, platform engineering, and cloud infrastructure roles with focus on secure delivery and production reliability.</p>
+						<p>Available for DevOps, platform engineering, and cloud infrastructure roles with focus on secure delivery, production reliability, and operational excellence.</p>
 						<div class="availability">Open to remote and hybrid collaboration</div>
 					</div>
 					<div class="contact-card">
@@ -1035,6 +1065,13 @@
 						<p><a class="contact-action" href="tel:+393936787356">+39 393 678 7356</a></p>
 						<p><a class="contact-action" href="https://github.com/dawitanelay" target="_blank" rel="noreferrer">github.com/dawitanelay</a></p>
 						<p><a class="contact-action" href="https://linkedin.com/in/dawit-anelay" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a></p>
+					</div>
+					<div class="contact-card contact-map">
+						<iframe
+							title="Map of Pisa, Tuscany, Italy"
+							src="https://www.google.com/maps?q=Pisa%2C%20Tuscany%2C%20Italy&output=embed"
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</div>
 				</section>
 			</article>

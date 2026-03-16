@@ -1,87 +1,516 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Azure Developer Associate Journey | Dawit Anelay</title>
-  <meta name="description" content="Microsoft Certified: Azure Developer Associate study journey posts by Dawit Anelay." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azure Developer Associate Journey | Dawit Mezemir Anelay</title>
+  <meta name="description" content="Microsoft Certified: Azure Developer Associate journey posts by Dawit Mezemir Anelay.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
     :root {
-      --bg: #0b131d;
-      --panel: #132131;
-      --panel-2: #0f1a27;
-      --text: #e9f2fb;
-      --muted: #9cb1c6;
-      --accent: #ffc56f;
-      --border: #263d52;
+      --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
+      --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.25) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
+      --border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 50%);
+      --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 100%, 68%));
+      --jet: hsl(0, 0%, 22%);
+      --onyx: hsl(240, 1%, 17%);
+      --eerie-black-1: hsl(240, 2%, 13%);
+      --eerie-black-2: hsl(240, 2%, 12%);
+      --smoky-black: hsl(0, 0%, 7%);
+      --white-1: hsl(0, 0%, 100%);
+      --white-2: hsl(0, 0%, 98%);
+      --orange-yellow-crayola: hsl(45, 100%, 72%);
+      --light-gray: hsl(0, 0%, 84%);
+      --light-gray-70: hsla(0, 0%, 84%, 0.7);
+      --accent-blue: hsl(205, 88%, 65%);
+      --ff-poppins: "Poppins", sans-serif;
+      --fs-1: 24px;
+      --fs-2: 18px;
+      --fs-3: 17px;
+      --fs-6: 14px;
+      --fs-7: 13px;
+      --fs-8: 11px;
+      --fw-300: 300;
+      --fw-500: 500;
+      --fw-600: 600;
+      --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+      --transition-2: 0.5s ease-in-out;
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { font-family: var(--ff-poppins); }
+
     body {
-      font-family: "Outfit", "Segoe UI", sans-serif;
-      color: var(--text);
       background:
-        radial-gradient(circle at 10% 5%, rgba(42, 195, 144, 0.22) 0%, transparent 24%),
-        radial-gradient(circle at 88% 14%, rgba(255, 197, 111, 0.18) 0%, transparent 23%),
-        linear-gradient(180deg, #0e1723 0%, var(--bg) 55%);
-      line-height: 1.55;
+        radial-gradient(circle at 10% 0%, rgba(255, 211, 93, 0.12), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(40, 147, 255, 0.1), transparent 20%),
+        var(--smoky-black);
+      color: var(--light-gray);
+      min-height: 100vh;
     }
-    .container { max-width: 980px; margin: 0 auto; padding: 1rem; }
-    .actions { display: flex; gap: 0.55rem; flex-wrap: wrap; margin-bottom: 0.7rem; }
-    .btn {
-      text-decoration: none; border: 1px solid var(--border); color: var(--text);
-      background: #16283b; border-radius: 10px; padding: 0.46rem 0.72rem;
-      font-family: "JetBrains Mono", monospace; text-transform: uppercase;
-      letter-spacing: 0.03em; font-size: 0.75rem;
+
+    a { text-decoration: none; color: inherit; }
+    li { list-style: none; }
+    img, ion-icon, a, button, span { display: block; }
+
+    .sidebar,
+    article {
+      background: var(--eerie-black-2);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: var(--shadow-1);
+      z-index: 1;
     }
-    .header {
-      border: 1px solid var(--border); border-radius: 18px;
-      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
-      box-shadow: 0 26px 58px rgba(0, 0, 0, 0.32); padding: 1rem;
+
+    .separator {
+      width: 100%;
+      height: 1px;
+      background: var(--jet);
+      margin: 16px 0;
     }
-    h1 { margin: 0; }
-    p { color: var(--muted); }
+
+    .icon-box {
+      position: relative;
+      background: var(--border-gradient-onyx);
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      color: var(--orange-yellow-crayola);
+      box-shadow: var(--shadow-1);
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .icon-box::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background: var(--eerie-black-1);
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    .h2, .h3, .h4 { color: var(--white-2); }
+    .h2 { font-size: var(--fs-1); }
+    .h3 { font-size: var(--fs-2); }
+    .h4 { font-size: var(--fs-3); }
+
+    .article-title {
+      position: relative;
+      padding-bottom: 7px;
+      margin-bottom: 20px;
+    }
+
+    .article-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30px;
+      height: 3px;
+      background: var(--text-gradient-yellow);
+      border-radius: 3px;
+    }
+
+    main {
+      margin: 15px 12px;
+      margin-bottom: 32px;
+      min-width: 259px;
+    }
+
+    .sidebar {
+      margin-bottom: 15px;
+      max-height: 130px;
+      overflow: hidden;
+      transition: var(--transition-2);
+    }
+
+    .sidebar.active { max-height: 600px; }
+
+    .sidebar-info {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .avatar-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: var(--bg-gradient-onyx);
+      overflow: hidden;
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info-content .name {
+      color: var(--white-2);
+      font-size: var(--fs-3);
+      font-weight: var(--fw-500);
+      letter-spacing: -0.25px;
+      margin-bottom: 10px;
+    }
+
+    .info-content .title {
+      color: var(--white-1);
+      background: var(--onyx);
+      font-size: var(--fs-8);
+      font-weight: var(--fw-300);
+      width: max-content;
+      padding: 5px 12px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .info_more-btn {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      border-radius: 0 15px;
+      font-size: 13px;
+      color: var(--orange-yellow-crayola);
+      background: var(--border-gradient-onyx);
+      padding: 10px;
+      box-shadow: var(--shadow-1);
+      border: 0;
+      cursor: pointer;
+    }
+
+    .info_more-btn span { display: none; }
+
+    .sidebar-info_more {
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-2);
+    }
+
+    .sidebar.active .sidebar-info_more {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contacts-list { display: grid; gap: 15px; }
+
+    .contact-item {
+      min-width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-info {
+      max-width: calc(100% - 46px);
+      width: calc(100% - 46px);
+    }
+
+    .contact-title {
+      color: var(--light-gray-70);
+      font-size: var(--fs-8);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .contact-link,
+    .contact-info address {
+      color: var(--white-2);
+      font-size: var(--fs-7);
+      overflow-wrap: anywhere;
+      font-style: normal;
+    }
+
+    .social-list {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 4px;
+      padding-left: 8px;
+    }
+
+    .social-item .social-link {
+      color: var(--light-gray-70);
+      font-size: 18px;
+    }
+
+    .main-content {
+      position: relative;
+      width: 100%;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(22, 22, 25, 0.82);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      box-shadow: var(--shadow-1);
+      z-index: 5;
+      margin-bottom: 15px;
+    }
+
+    .navbar-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    .navbar-link {
+      color: var(--light-gray);
+      font-size: var(--fs-8);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+
+    .navbar-link.active {
+      color: var(--orange-yellow-crayola);
+      background: rgba(255, 196, 72, 0.08);
+      border-color: rgba(255, 196, 72, 0.2);
+    }
+
+    .category-panel {
+      border: 1px solid var(--jet);
+      border-radius: 16px;
+      padding: 16px;
+      background: var(--bg-gradient-jet);
+    }
+
+    .kicker {
+      color: var(--orange-yellow-crayola);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: var(--fs-8);
+      margin-bottom: 8px;
+      font-weight: var(--fw-500);
+    }
+
+    .lead {
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+
+    .cards {
+      margin-top: 16px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      border: 1px solid var(--jet);
+      border-radius: 14px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .card h3 {
+      color: var(--white-2);
+      font-size: 1.04rem;
+      margin: 0;
+    }
+
     .meta {
-      margin-top: 0.35rem; color: #90a8bf; font-family: "JetBrains Mono", monospace;
-      font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em;
+      margin-top: 6px;
+      color: var(--orange-yellow-crayola);
+      font-size: var(--fs-8);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
-    .list { margin-top: 0.8rem; display: grid; gap: 0.6rem; }
-    .post {
-      border: 1px solid var(--border); border-radius: 12px; background: #102235; padding: 0.75rem;
+
+    .card p {
+      margin-top: 8px;
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+      line-height: 1.65;
     }
-    .post h2 { margin: 0; font-size: 1.05rem; }
-    .post a { color: var(--accent); text-decoration: none; }
-    .post a:hover { text-decoration: underline; }
+
+    .inline-link { color: var(--accent-blue); }
+
+    @media (min-width: 720px) {
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      main {
+        max-width: 1200px;
+        margin-inline: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 25px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 30px;
+        max-height: max-content;
+        width: 300px;
+        margin-bottom: 0;
+        padding-top: 28px;
+      }
+
+      .sidebar-info {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-content .title { margin-inline: auto; }
+      .info_more-btn { display: none; }
+      .sidebar-info_more { opacity: 1; visibility: visible; }
+      .social-list { justify-content: center; padding-left: 0; }
+
+      .main-content {
+        min-width: 0;
+        width: calc(100% - 325px);
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="actions">
-      <a class="btn" href="/">Home</a>
-      <a class="btn" href="/posts/">Posts</a>
-      <a class="btn" href="/categories/">All Categories</a>
+  <main>
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-info">
+        <div class="avatar-box">
+          <img src="https://github.com/dawitanelay.png" alt="Dawit Mezemir Anelay profile photo" loading="lazy">
+        </div>
+
+        <div class="info-content">
+          <h1 class="name" title="Dawit Mezemir Anelay">Dawit Mezemir Anelay</h1>
+          <p class="title">DevOps Engineer, Cloud Engineer<br>MSc Computer Science (AI)</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn aria-label="Show contacts">
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+
+      <div class="sidebar-info_more">
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:dawit12mezemir@gmail.com" class="contact-link">dawit12mezemir@gmail.com</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="phone-portrait-outline"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+              <a href="tel:+393936787356" class="contact-link">+39 393 678 7356</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-linkedin"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://linkedin.com/in/dawit-anelay" class="contact-link" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-github"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/dawitanelay" class="contact-link" target="_blank" rel="noreferrer">github.com/dawitanelay</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Pisa, Tuscany, Italy</address>
+            </div>
+          </li>
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+          <li class="social-item"><a href="https://github.com/dawitanelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
+          <li class="social-item"><a href="https://linkedin.com/in/dawit-anelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+          <li class="social-item"><a href="mailto:dawit12mezemir@gmail.com" class="social-link"><ion-icon name="mail-outline"></ion-icon></a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <nav class="navbar" aria-label="Primary navigation">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="/">About</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/#resume">Resume</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/#research">Research</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/posts/">Blog</a></li>
+          <li class="navbar-item"><a class="navbar-link active" href="/categories/azure-developer-associate/">Journey</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <article>
+        <header>
+          <h2 class="h2 article-title">Azure Developer Associate Journey</h2>
+        </header>
+
+        <section class="category-panel">
+          <p class="kicker">Microsoft Certified: Azure Developer Associate</p>
+          <h3 class="h3">Category Panel</h3>
+          <p class="lead">This panel is your study journey hub. Every new topic can be added here using the same layout and card pattern, so the blog stays organized and easy to expand.</p>
+        </section>
+
+        <section class="cards">
+          <article class="card">
+            <h3><a class="inline-link" href="/posts/microsoft-certified-azure-developer-associate/azure-container-apps-plans-and-environment-types/">Understanding Azure Container Apps Plans and Environment Types</a></h3>
+            <p class="meta">2026-03-16 | Azure Container Apps</p>
+            <p>Consumption vs Dedicated plans and how they relate to Consumption-only and Workload profiles environments.</p>
+          </article>
+
+          <article class="card">
+            <h3>More topics coming soon</h3>
+            <p class="meta">Roadmap</p>
+            <p>Add future posts here such as Azure Functions, API Management, Key Vault, identity, and event-driven integration patterns.</p>
+          </article>
+        </section>
+      </article>
     </div>
+  </main>
 
-    <header class="header">
-      <h1>Azure Developer Associate Journey</h1>
-      <p>Study notes and practical Azure development topics while preparing for Microsoft Certified: Azure Developer Associate.</p>
-      <div class="meta">Certification Journey</div>
-    </header>
+  <script>
+    'use strict';
+    var sidebar = document.querySelector('[data-sidebar]');
+    var sidebarBtn = document.querySelector('[data-sidebar-btn]');
 
-    <section class="list">
-      <article class="post">
-        <h2><a href="/posts/microsoft-certified-azure-developer-associate/azure-container-apps-plans-and-environment-types/">Understanding Azure Container Apps Plans and Environment Types</a></h2>
-        <div class="meta">2026-03-16</div>
-        <p>Consumption vs Dedicated plans and how they relate to Consumption-only and Workload profiles environments.</p>
-      </article>
-
-      <article class="post">
-        <h2>More topics coming soon</h2>
-        <div class="meta">Roadmap</div>
-        <p>Future posts in this journey can be added under the same path structure, for example API Management, Functions, Key Vault, identity, and integration patterns.</p>
-      </article>
-    </section>
-  </div>
+    if (sidebar && sidebarBtn) {
+      sidebarBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+      });
+    }
+  </script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" crossorigin="anonymous"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

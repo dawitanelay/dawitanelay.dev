@@ -319,6 +319,22 @@
       grid-template-columns: 1fr;
     }
 
+    .journey-hero {
+      margin-bottom: 14px;
+      border: 1px solid var(--jet);
+      border-radius: 14px;
+      padding: 10px;
+      background: var(--bg-gradient-jet);
+    }
+
+    .journey-hero img {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+
     .card {
       border: 1px solid var(--jet);
       border-radius: 14px;
@@ -475,6 +491,11 @@
         <header>
           <h2 class="h2 article-title">Azure Developer Associate Journey</h2>
         </header>
+
+        <figure class="journey-hero" aria-labelledby="journey-hero-caption">
+          <img src="/assets/images/azure-container-apps-badge.svg" alt="Azure Developer Associate journey visual" loading="lazy">
+          <figcaption class="lead" id="journey-hero-caption">Azure Developer Associate journey visual.</figcaption>
+        </figure>
 
         <section class="cards">
           <article class="card">

@@ -1,0 +1,41 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azure Container Apps icon style badge">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1B2A"/>
+      <stop offset="1" stop-color="#15263A"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="84" y1="32" x2="556" y2="328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2CD0F2"/>
+      <stop offset="1" stop-color="#34A9E6"/>
+    </linearGradient>
+    <linearGradient id="cubeMain" x1="209" y1="90" x2="342" y2="272" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A57AF4"/>
+      <stop offset="1" stop-color="#6D34D5"/>
+    </linearGradient>
+    <linearGradient id="cubeLeft" x1="154" y1="114" x2="251" y2="224" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8A61E7"/>
+      <stop offset="1" stop-color="#6B3DD3"/>
+    </linearGradient>
+    <linearGradient id="cubeRight" x1="344" y1="114" x2="452" y2="224" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9B74EA"/>
+      <stop offset="1" stop-color="#7140D8"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="1" y="1" width="638" height="358" rx="22" fill="url(#bg)" stroke="#2E4460"/>
+
+  <path d="M128 77C160 45 203 27 250 27H391C442 27 488 48 521 83" stroke="url(#ring)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M517 279C485 312 441 332 392 332H249C199 332 154 311 122 278" stroke="url(#ring)" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="518" cy="74" r="31" fill="#32BDE8"/>
+  <circle cx="123" cy="285" r="31" fill="#32BDE8"/>
+
+  <path d="M293 90L388 120V246L293 272L198 246V120L293 90Z" fill="url(#cubeMain)"/>
+  <path d="M198 120L293 90V216L198 246V120Z" fill="url(#cubeLeft)"/>
+  <path d="M388 120L293 90V216L388 246V120Z" fill="url(#cubeRight)"/>
+
+  <rect x="218" y="124" width="34" height="114" rx="4" fill="#A98BF0" opacity="0.45"/>
+  <rect x="264" y="136" width="30" height="98" rx="4" fill="#B195F6" opacity="0.35"/>
+
+  <path d="M420 140L515 122V238L420 255L389 246V120L420 140Z" fill="url(#cubeRight)"/>
+  <rect x="412" y="134" width="103" height="128" rx="14" stroke="#0B1120" stroke-width="4"/>
+</svg>

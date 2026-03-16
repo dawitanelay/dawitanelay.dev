@@ -1,284 +1,702 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Understanding Azure Container Apps Plans and Environment Types | Dawit Anelay</title>
-  <meta name="description" content="Understanding the difference between Azure Container Apps plans and environment types.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Azure Container Apps Plans and Environment Types | Dawit Mezemir Anelay</title>
+  <meta name="description" content="Understanding Azure Container Apps plans and environment types as part of the Azure Developer Associate journey.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
     :root {
-      --bg: #0b131d;
-      --panel: #132131;
-      --panel-2: #0f1a27;
-      --text: #e9f2fb;
-      --muted: #9cb1c6;
-      --accent: #2ac592;
-      --accent-2: #ffc56f;
-      --border: #263d52;
+      --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
+      --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.25) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
+      --border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 50%);
+      --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 100%, 68%));
+      --jet: hsl(0, 0%, 22%);
+      --onyx: hsl(240, 1%, 17%);
+      --eerie-black-1: hsl(240, 2%, 13%);
+      --eerie-black-2: hsl(240, 2%, 12%);
+      --smoky-black: hsl(0, 0%, 7%);
+      --white-1: hsl(0, 0%, 100%);
+      --white-2: hsl(0, 0%, 98%);
+      --orange-yellow-crayola: hsl(45, 100%, 72%);
+      --light-gray: hsl(0, 0%, 84%);
+      --light-gray-70: hsla(0, 0%, 84%, 0.7);
+      --accent-blue: hsl(205, 88%, 65%);
+      --ff-poppins: "Poppins", sans-serif;
+      --fs-1: 24px;
+      --fs-2: 18px;
+      --fs-3: 17px;
+      --fs-4: 16px;
+      --fs-6: 14px;
+      --fs-7: 13px;
+      --fs-8: 11px;
+      --fw-300: 300;
+      --fw-500: 500;
+      --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+      --transition-2: 0.5s ease-in-out;
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { font-family: var(--ff-poppins); }
+
     body {
-      font-family: "Outfit", "Segoe UI", sans-serif;
-      color: var(--text);
       background:
-        radial-gradient(circle at 10% 5%, rgba(42, 195, 144, 0.22) 0%, transparent 24%),
-        radial-gradient(circle at 88% 14%, rgba(255, 197, 111, 0.18) 0%, transparent 23%),
-        linear-gradient(180deg, #0e1723 0%, var(--bg) 55%);
-      line-height: 1.65;
+        radial-gradient(circle at 10% 0%, rgba(255, 211, 93, 0.12), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(40, 147, 255, 0.1), transparent 20%),
+        var(--smoky-black);
+      color: var(--light-gray);
+      min-height: 100vh;
+      line-height: 1.7;
     }
-    .container {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 1rem;
+
+    a { text-decoration: none; color: inherit; }
+    li { list-style: none; }
+    img, ion-icon, a, button, span { display: block; }
+    button {
+      font: inherit;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
     }
-    .article {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
-      box-shadow: 0 26px 58px rgba(0, 0, 0, 0.32);
-      padding: 1.15rem;
-      margin-top: 0.7rem;
+
+    .sidebar,
+    article {
+      background: var(--eerie-black-2);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: var(--shadow-1);
+      z-index: 1;
     }
-    .kicker {
-      display: inline-block;
-      border: 1px solid #35506a;
-      border-radius: 999px;
-      padding: 0.18rem 0.55rem;
-      font-family: "JetBrains Mono", monospace;
+
+    .separator {
+      width: 100%;
+      height: 1px;
+      background: var(--jet);
+      margin: 16px 0;
+    }
+
+    .icon-box {
+      position: relative;
+      background: var(--border-gradient-onyx);
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      color: var(--orange-yellow-crayola);
+      box-shadow: var(--shadow-1);
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .icon-box::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background: var(--eerie-black-1);
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    .h2, .h3, .h4 { color: var(--white-2); }
+    .h2 { font-size: var(--fs-1); }
+    .h3 { font-size: var(--fs-2); }
+    .h4 { font-size: var(--fs-4); }
+
+    .article-title {
+      position: relative;
+      padding-bottom: 7px;
+      margin-bottom: 20px;
+    }
+
+    .article-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30px;
+      height: 3px;
+      background: var(--text-gradient-yellow);
+      border-radius: 3px;
+    }
+
+    main {
+      margin: 15px 12px;
+      margin-bottom: 32px;
+      min-width: 259px;
+    }
+
+    .sidebar {
+      margin-bottom: 15px;
+      max-height: 130px;
+      overflow: hidden;
+      transition: var(--transition-2);
+    }
+
+    .sidebar.active { max-height: 600px; }
+
+    .sidebar-info {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .avatar-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: var(--bg-gradient-onyx);
+      overflow: hidden;
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info-content .name {
+      color: var(--white-2);
+      font-size: var(--fs-3);
+      font-weight: var(--fw-500);
+      letter-spacing: -0.25px;
+      margin-bottom: 10px;
+    }
+
+    .info-content .title {
+      color: var(--white-1);
+      background: var(--onyx);
+      font-size: var(--fs-8);
+      font-weight: var(--fw-300);
+      width: max-content;
+      padding: 5px 12px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .info_more-btn {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      border-radius: 0 15px;
+      font-size: 13px;
+      color: var(--orange-yellow-crayola);
+      background: var(--border-gradient-onyx);
+      padding: 10px;
+      box-shadow: var(--shadow-1);
+    }
+
+    .info_more-btn span { display: none; }
+
+    .sidebar-info_more {
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-2);
+    }
+
+    .sidebar.active .sidebar-info_more {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contacts-list { display: grid; gap: 15px; }
+
+    .contact-item {
+      min-width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-info {
+      max-width: calc(100% - 46px);
+      width: calc(100% - 46px);
+    }
+
+    .contact-title {
+      color: var(--light-gray-70);
+      font-size: var(--fs-8);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #8bf6cd;
-      font-size: 0.72rem;
-      margin-bottom: 0.55rem;
+      margin-bottom: 2px;
     }
-    .tags {
-      margin-top: 0.55rem;
+
+    .contact-link,
+    .contact-info address {
+      color: var(--white-2);
+      font-size: var(--fs-7);
+      overflow-wrap: anywhere;
+      font-style: normal;
+    }
+
+    .social-list {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 4px;
+      padding-left: 8px;
+    }
+
+    .social-item .social-link {
+      color: var(--light-gray-70);
+      font-size: 18px;
+    }
+
+    .main-content {
+      position: relative;
+      width: 100%;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(22, 22, 25, 0.82);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      box-shadow: var(--shadow-1);
+      z-index: 5;
+      margin-bottom: 15px;
+    }
+
+    .navbar-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
     }
-    .tag {
-      display: inline-block;
-      border: 1px solid #35506a;
-      border-radius: 999px;
-      padding: 0.16rem 0.52rem;
-      font-family: "JetBrains Mono", monospace;
+
+    .navbar-link {
+      color: var(--light-gray);
+      font-size: var(--fs-8);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+
+    .navbar-link.active {
+      color: var(--orange-yellow-crayola);
+      background: rgba(255, 196, 72, 0.08);
+      border-color: rgba(255, 196, 72, 0.2);
+    }
+
+    .panel,
+    .article-shell,
+    .topic-card {
+      border: 1px solid var(--jet);
+      border-radius: 16px;
+      background: var(--bg-gradient-jet);
+    }
+
+    .panel,
+    .article-shell {
+      padding: 16px;
+    }
+
+    .kicker {
+      color: var(--orange-yellow-crayola);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #9cd9ff;
-      font-size: 0.68rem;
-      text-decoration: none;
+      letter-spacing: 0.06em;
+      font-size: var(--fs-8);
+      margin-bottom: 8px;
+      font-weight: var(--fw-500);
     }
-    .tag:hover { border-color: #4d7ca1; }
-    h1 {
+
+    .post-meta,
+    .post-tags {
+      color: var(--light-gray-70);
+      font-size: var(--fs-7);
+      margin-top: 8px;
+    }
+
+    .post-tags a,
+    .inline-link {
+      color: var(--accent-blue);
+    }
+
+    .hero-grid,
+    .topic-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .topic-card {
+      padding: 16px;
+    }
+
+    .topic-card h3 {
+      color: var(--white-2);
+      font-size: 1.1rem;
       margin: 0;
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
-      line-height: 1.15;
     }
-    h2 {
-      margin: 1.2rem 0 0.35rem;
+
+    .topic-card p {
+      margin-top: 8px;
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+    }
+
+    .article-shell {
+      margin-top: 14px;
+    }
+
+    .article-shell p,
+    .article-shell ul {
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+    }
+
+    .article-shell h2 {
+      color: var(--white-2);
       font-size: 1.25rem;
+      margin: 1.2rem 0 0.35rem;
     }
-    h3 {
-      margin: 0.95rem 0 0.3rem;
+
+    .article-shell h3 {
+      color: var(--white-2);
       font-size: 1.04rem;
+      margin: 0.95rem 0 0.3rem;
     }
-    p { color: var(--muted); }
-    ul { color: #b9ccdf; }
-    li { margin: 0.28rem 0; }
-    .meta {
-      margin-top: 0.55rem;
-      color: #90a8bf;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.76rem;
+
+    .article-shell ul {
+      padding-left: 18px;
     }
+
+    .article-shell li {
+      list-style: disc;
+      margin: 0.28rem 0;
+    }
+
     .rule {
       margin: 1.2rem 0;
       border: 0;
       border-top: 1px solid rgba(156, 177, 198, 0.3);
     }
-    a { color: var(--accent-2); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .actions {
-      display: flex;
-      gap: 0.55rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.7rem;
+
+    @media (min-width: 720px) {
+      .topic-grid { grid-template-columns: 1fr 1fr; }
     }
-    .btn {
-      text-decoration: none;
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: #16283b;
-      border-radius: 10px;
-      padding: 0.46rem 0.72rem;
-      font-family: "JetBrains Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      font-size: 0.75rem;
+
+    @media (min-width: 1024px) {
+      main {
+        max-width: 1200px;
+        margin-inline: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 25px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 30px;
+        max-height: max-content;
+        width: 300px;
+        margin-bottom: 0;
+        padding-top: 28px;
+      }
+
+      .sidebar-info {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-content .title { margin-inline: auto; }
+      .info_more-btn { display: none; }
+      .sidebar-info_more { opacity: 1; visibility: visible; }
+      .social-list { justify-content: center; padding-left: 0; }
+
+      .main-content {
+        min-width: 0;
+        width: calc(100% - 325px);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="actions">
-      <a class="btn" href="/">Home</a>
-      <a class="btn" href="/posts/">All Posts</a>
-      <a class="btn" href="/resume/">Resume</a>
-    </div>
+  <main>
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-info">
+        <div class="avatar-box">
+          <img src="https://github.com/dawitanelay.png" alt="Dawit Mezemir Anelay profile photo" loading="lazy">
+        </div>
 
-    <article class="article">
-      <span class="kicker">Microsoft Certified: Azure Developer Associate</span>
-      <h1>Understanding Azure Container Apps Plans and Environment Types</h1>
-      <p class="meta">Published: 2026-03-16</p>
-      <div class="tags">
-        <a class="tag" href="/categories/azure-developer-associate/">Category: Azure Developer Associate Journey</a>
-        <a class="tag" href="/categories/azure-developer-associate/">Topic: Azure Container Apps</a>
+        <div class="info-content">
+          <h1 class="name" title="Dawit Mezemir Anelay">Dawit Mezemir Anelay</h1>
+          <p class="title">DevOps Engineer, Cloud Engineer<br>MSc Computer Science (AI)</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn aria-label="Show contacts">
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
       </div>
 
-      <p>
-        When working with Azure Container Apps, one topic that often causes confusion is the difference between <strong>plans</strong> and <strong>environment types</strong>.
-        At first glance they might seem related or interchangeable, but they actually represent two different layers of how Azure Container Apps works.
-      </p>
-      <p>
-        In this post, I walk through the difference between <strong>Consumption and Dedicated plans</strong>, and explain how they relate to
-        <strong>Container Apps environments</strong>.
-      </p>
+      <div class="sidebar-info_more">
+        <div class="separator"></div>
+        <ul class="contacts-list">
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:dawit12mezemir@gmail.com" class="contact-link">dawit12mezemir@gmail.com</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="phone-portrait-outline"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+              <a href="tel:+393936787356" class="contact-link">+39 393 678 7356</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-linkedin"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://linkedin.com/in/dawit-anelay" class="contact-link" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-github"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/dawitanelay" class="contact-link" target="_blank" rel="noreferrer">github.com/dawitanelay</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Pisa, Tuscany, Italy</address>
+            </div>
+          </li>
+        </ul>
 
-      <hr class="rule" />
+        <div class="separator"></div>
 
-      <h2>Azure Container Apps Plans</h2>
-      <p>Azure Container Apps provides two main pricing and execution models: <strong>Consumption</strong> and <strong>Dedicated</strong>.</p>
+        <ul class="social-list">
+          <li class="social-item"><a href="https://github.com/dawitanelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
+          <li class="social-item"><a href="https://linkedin.com/in/dawit-anelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+          <li class="social-item"><a href="mailto:dawit12mezemir@gmail.com" class="social-link"><ion-icon name="mail-outline"></ion-icon></a></li>
+        </ul>
+      </div>
+    </aside>
 
-      <h3>Consumption Plan</h3>
-      <p>
-        The <strong>Consumption plan</strong> follows a serverless model. You do not reserve infrastructure or capacity ahead of time.
-        Instead, Azure automatically allocates the resources required when your application runs.
-      </p>
-      <p>Billing in the consumption plan is based on:</p>
-      <ul>
-        <li>vCPU usage</li>
-        <li>Memory usage (GiB)</li>
-        <li>Execution time in seconds</li>
-      </ul>
-      <p>
-        One of the biggest advantages of this model is that applications can <strong>scale to zero</strong>.
-        If there are no incoming requests or workloads, container instances stop running and you do not pay for compute during idle periods.
-      </p>
-      <p>This plan works well for:</p>
-      <ul>
-        <li>Event-driven applications</li>
-        <li>APIs with unpredictable traffic</li>
-        <li>Microservices that do not require constant compute capacity</li>
-      </ul>
+    <div class="main-content">
+      <nav class="navbar" aria-label="Primary navigation">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="/">About</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/posts/">Blog</a></li>
+          <li class="navbar-item"><a class="navbar-link active" href="/categories/azure-developer-associate/">Journey</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/resume/">Resume</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/categories/">Categories</a></li>
+        </ul>
+      </nav>
 
-      <h3>Dedicated Plan</h3>
-      <p>
-        The <strong>Dedicated plan</strong> provides a managed but reserved infrastructure environment.
-        Instead of paying only for usage, you allocate resources using <strong>workload profiles</strong>.
-      </p>
-      <p>A workload profile defines the amount of:</p>
-      <ul>
-        <li>CPU</li>
-        <li>Memory</li>
-        <li>Instance capacity</li>
-      </ul>
-      <p>
-        Multiple applications can run inside the same workload profile and share allocated resources.
-        Billing is based on resources allocated to each workload profile rather than individual app consumption.
-      </p>
-      <p>
-        Even though this plan reserves capacity, applications can still <strong>scale down to zero instances</strong>
-        if they are not actively running.
-      </p>
-      <p>This model is more suitable for workloads that require:</p>
-      <ul>
-        <li>Predictable performance</li>
-        <li>Consistent resource allocation</li>
-        <li>Dedicated compute capacity for multiple applications</li>
-      </ul>
+      <article>
+        <header>
+          <h2 class="h2 article-title">Understanding Azure Container Apps Plans and Environment Types</h2>
+        </header>
 
-      <h2>Understanding Container Apps Environments</h2>
-      <p>
-        The other concept that often gets mixed up with plans is the <strong>environment type</strong>.
-      </p>
-      <p>
-        A <strong>Container Apps environment</strong> is the boundary where container apps run.
-        It provides networking, observability, and isolation for applications deployed inside it.
-      </p>
-      <p>There are two environment types.</p>
+        <section class="hero-grid">
+          <div class="panel">
+            <p class="kicker">Microsoft Certified: Azure Developer Associate</p>
+            <h3 class="h3">Azure Container Apps</h3>
+            <p class="post-meta">Published: 2026-03-16</p>
+            <p class="post-tags">
+              Journey: <a class="inline-link" href="/categories/azure-developer-associate/">Azure Developer Associate Journey</a>
+            </p>
+          </div>
 
-      <h3>Consumption-only Environment</h3>
-      <p>A <strong>Consumption-only environment</strong> supports only the Consumption plan.</p>
-      <p>This means:</p>
-      <ul>
-        <li>All applications run in serverless mode</li>
-        <li>Workload profiles are not available</li>
-        <li>Dedicated resources cannot be configured</li>
-      </ul>
-      <p>
-        This type of environment is simpler and is typically used when all workloads follow the serverless model.
-      </p>
+          <div class="topic-grid">
+            <div class="topic-card">
+              <p class="kicker">Current topics</p>
+              <h3>What I am documenting</h3>
+              <p>Azure Container Apps, workload profiles, serverless vs dedicated execution, identity-aware architecture choices, and practical service selection for cloud-native applications.</p>
+              <p>I use this Azure Developer journey as a public knowledge base so future topics stay connected and easy to follow.</p>
+            </div>
 
-      <h3>Workload Profiles Environment</h3>
-      <p>
-        A <strong>Workload profiles environment</strong> is more flexible. It supports both:
-      </p>
-      <ul>
-        <li>Consumption plan applications</li>
-        <li>Dedicated plan applications that use workload profiles</li>
-      </ul>
-      <p>
-        In this setup, some applications can run in serverless mode while others run on dedicated resources within workload profiles.
-        This allows teams to mix different workload requirements inside the same environment.
-      </p>
+            <div class="topic-card">
+              <p class="kicker">Why this topic</p>
+              <h3>Useful for exam and real systems</h3>
+              <p>This topic matters because plan selection directly affects cost, scaling behavior, environment design, and deployment flexibility in Azure application architectures.</p>
+            </div>
+          </div>
+        </section>
 
-      <h2>Key Differences to Remember</h2>
-      <p>A simple way to think about this is:</p>
-      <ul>
-        <li><strong>Plans define how resources are billed and allocated</strong></li>
-        <li><strong>Environments define where container apps run</strong></li>
-      </ul>
-      <p>Another useful rule:</p>
-      <ul>
-        <li>A <strong>Consumption-only environment</strong> supports only the <strong>Consumption plan</strong></li>
-        <li>A <strong>Workload profiles environment</strong> supports <strong>both Consumption and Dedicated plans</strong></li>
-      </ul>
+        <section class="article-shell">
+          <p>
+            When working with Azure Container Apps, one topic that often causes confusion is the difference between <strong>plans</strong> and <strong>environment types</strong>.
+            At first glance they might seem related or interchangeable, but they actually represent two different layers of how Azure Container Apps works.
+          </p>
+          <p>
+            In this post, I walk through the difference between <strong>Consumption and Dedicated plans</strong>, and explain how they relate to
+            <strong>Container Apps environments</strong>.
+          </p>
 
-      <h2>Final Thoughts</h2>
-      <p>
-        Understanding the distinction between <strong>plans</strong> and <strong>environment types</strong> is important when designing containerized applications on Azure.
-        The choice depends largely on workload characteristics.
-      </p>
-      <p>
-        If your application benefits from serverless scaling and unpredictable traffic patterns, the <strong>Consumption plan</strong> is usually the best fit.
-        If you need predictable compute capacity and want to run multiple applications on reserved resources,
-        then <strong>Dedicated with workload profiles</strong> may be a better choice.
-      </p>
-      <p>
-        Choosing the right combination can help balance cost, performance, and operational flexibility.
-      </p>
+          <hr class="rule" />
 
-      <h2>References</h2>
-      <ul>
-        <li>
-          Microsoft Learn - Azure Container Apps environments and workload profiles<br />
-          <a href="https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview">https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview</a>
-        </li>
-        <li>
-          Microsoft Learn - Azure Container Apps pricing and plans<br />
-          <a href="https://learn.microsoft.com/en-us/azure/container-apps/plans">https://learn.microsoft.com/en-us/azure/container-apps/plans</a>
-        </li>
-      </ul>
+          <h2>Azure Container Apps Plans</h2>
+          <p>Azure Container Apps provides two main pricing and execution models: <strong>Consumption</strong> and <strong>Dedicated</strong>.</p>
 
-      <hr class="rule" />
-      <p>
-        Continue this learning path:
-        <a href="/categories/azure-developer-associate/">Azure Developer Associate Journey</a>
-      </p>
-    </article>
-  </div>
+          <h3>Consumption Plan</h3>
+          <p>
+            The <strong>Consumption plan</strong> follows a serverless model. You do not reserve infrastructure or capacity ahead of time.
+            Instead, Azure automatically allocates the resources required when your application runs.
+          </p>
+          <p>Billing in the consumption plan is based on:</p>
+          <ul>
+            <li>vCPU usage</li>
+            <li>Memory usage (GiB)</li>
+            <li>Execution time in seconds</li>
+          </ul>
+          <p>
+            One of the biggest advantages of this model is that applications can <strong>scale to zero</strong>.
+            If there are no incoming requests or workloads, container instances stop running and you do not pay for compute during idle periods.
+          </p>
+          <p>This plan works well for:</p>
+          <ul>
+            <li>Event-driven applications</li>
+            <li>APIs with unpredictable traffic</li>
+            <li>Microservices that do not require constant compute capacity</li>
+          </ul>
+
+          <h3>Dedicated Plan</h3>
+          <p>
+            The <strong>Dedicated plan</strong> provides a managed but reserved infrastructure environment.
+            Instead of paying only for usage, you allocate resources using <strong>workload profiles</strong>.
+          </p>
+          <p>A workload profile defines the amount of:</p>
+          <ul>
+            <li>CPU</li>
+            <li>Memory</li>
+            <li>Instance capacity</li>
+          </ul>
+          <p>
+            Multiple applications can run inside the same workload profile and share allocated resources.
+            Billing is based on resources allocated to each workload profile rather than individual app consumption.
+          </p>
+          <p>
+            Even though this plan reserves capacity, applications can still <strong>scale down to zero instances</strong>
+            if they are not actively running.
+          </p>
+          <p>This model is more suitable for workloads that require:</p>
+          <ul>
+            <li>Predictable performance</li>
+            <li>Consistent resource allocation</li>
+            <li>Dedicated compute capacity for multiple applications</li>
+          </ul>
+
+          <h2>Understanding Container Apps Environments</h2>
+          <p>
+            The other concept that often gets mixed up with plans is the <strong>environment type</strong>.
+          </p>
+          <p>
+            A <strong>Container Apps environment</strong> is the boundary where container apps run.
+            It provides networking, observability, and isolation for applications deployed inside it.
+          </p>
+          <p>There are two environment types.</p>
+
+          <h3>Consumption-only Environment</h3>
+          <p>A <strong>Consumption-only environment</strong> supports only the Consumption plan.</p>
+          <p>This means:</p>
+          <ul>
+            <li>All applications run in serverless mode</li>
+            <li>Workload profiles are not available</li>
+            <li>Dedicated resources cannot be configured</li>
+          </ul>
+          <p>
+            This type of environment is simpler and is typically used when all workloads follow the serverless model.
+          </p>
+
+          <h3>Workload Profiles Environment</h3>
+          <p>
+            A <strong>Workload profiles environment</strong> is more flexible. It supports both:
+          </p>
+          <ul>
+            <li>Consumption plan applications</li>
+            <li>Dedicated plan applications that use workload profiles</li>
+          </ul>
+          <p>
+            In this setup, some applications can run in serverless mode while others run on dedicated resources within workload profiles.
+            This allows teams to mix different workload requirements inside the same environment.
+          </p>
+
+          <h2>Key Differences to Remember</h2>
+          <p>A simple way to think about this is:</p>
+          <ul>
+            <li><strong>Plans define how resources are billed and allocated</strong></li>
+            <li><strong>Environments define where container apps run</strong></li>
+          </ul>
+          <p>Another useful rule:</p>
+          <ul>
+            <li>A <strong>Consumption-only environment</strong> supports only the <strong>Consumption plan</strong></li>
+            <li>A <strong>Workload profiles environment</strong> supports <strong>both Consumption and Dedicated plans</strong></li>
+          </ul>
+
+          <h2>Final Thoughts</h2>
+          <p>
+            Understanding the distinction between <strong>plans</strong> and <strong>environment types</strong> is important when designing containerized applications on Azure.
+            The choice depends largely on workload characteristics.
+          </p>
+          <p>
+            If your application benefits from serverless scaling and unpredictable traffic patterns, the <strong>Consumption plan</strong> is usually the best fit.
+            If you need predictable compute capacity and want to run multiple applications on reserved resources,
+            then <strong>Dedicated with workload profiles</strong> may be a better choice.
+          </p>
+          <p>
+            Choosing the right combination can help balance cost, performance, and operational flexibility.
+          </p>
+
+          <h2>References</h2>
+          <ul>
+            <li>
+              Microsoft Learn - Azure Container Apps environments and workload profiles<br>
+              <a class="inline-link" href="https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview">https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview</a>
+            </li>
+            <li>
+              Microsoft Learn - Azure Container Apps pricing and plans<br>
+              <a class="inline-link" href="https://learn.microsoft.com/en-us/azure/container-apps/plans">https://learn.microsoft.com/en-us/azure/container-apps/plans</a>
+            </li>
+          </ul>
+
+          <hr class="rule">
+          <p>
+            Continue this learning path:
+            <a class="inline-link" href="/categories/azure-developer-associate/">Azure Developer Associate Journey</a>
+          </p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    'use strict';
+    var sidebar = document.querySelector('[data-sidebar]');
+    var sidebarBtn = document.querySelector('[data-sidebar-btn]');
+
+    if (sidebar && sidebarBtn) {
+      sidebarBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+      });
+    }
+  </script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" crossorigin="anonymous"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

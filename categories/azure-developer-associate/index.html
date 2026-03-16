@@ -386,6 +386,10 @@
       line-height: 1.65;
     }
 
+    .card-full {
+      grid-column: 1 / -1;
+    }
+
     .inline-link { color: var(--accent-blue); }
 
     @media (min-width: 720px) {
@@ -518,20 +522,14 @@
         <figure class="journey-hero" aria-labelledby="journey-hero-caption">
           <img src="/assets/images/azure-container-apps-badge.svg" alt="Azure Developer Associate journey visual" loading="lazy">
           <figcaption id="journey-hero-caption">
-            <p class="hero-post-title">Understanding Azure Container Apps Plans and Environment Types</p>
+            <p class="hero-post-title"><a class="inline-link" href="/posts/microsoft-certified-azure-developer-associate/azure-container-apps-plans-and-environment-types/">Understanding Azure Container Apps Plans and Environment Types</a></p>
             <p class="hero-post-meta">2026-03-16 | Azure Container Apps</p>
             <p class="hero-post-summary">Consumption vs Dedicated plans and how they relate to Consumption-only and Workload profiles environments.</p>
           </figcaption>
         </figure>
 
         <section class="cards">
-          <article class="card">
-            <h3><a class="inline-link" href="/posts/microsoft-certified-azure-developer-associate/azure-container-apps-plans-and-environment-types/">Understanding Azure Container Apps Plans and Environment Types</a></h3>
-            <p class="meta">2026-03-16 | Azure Container Apps</p>
-            <p>Consumption vs Dedicated plans and how they relate to Consumption-only and Workload profiles environments.</p>
-          </article>
-
-          <article class="card">
+          <article class="card card-full">
             <h3>More topics coming soon</h3>
             <p class="meta">Roadmap</p>
             <p>Add future posts here such as Azure Functions, API Management, Key Vault, identity, and event-driven integration patterns.</p>

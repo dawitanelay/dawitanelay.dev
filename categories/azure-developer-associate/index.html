@@ -335,6 +335,29 @@
       border-radius: 10px;
     }
 
+    .hero-post-title {
+      margin-top: 10px;
+      color: var(--white-2);
+      font-size: 1.02rem;
+      font-weight: var(--fw-600);
+      line-height: 1.5;
+    }
+
+    .hero-post-meta {
+      margin-top: 6px;
+      color: var(--orange-yellow-crayola);
+      font-size: var(--fs-8);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-post-summary {
+      margin-top: 8px;
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+      line-height: 1.65;
+    }
+
     .card {
       border: 1px solid var(--jet);
       border-radius: 14px;
@@ -494,7 +517,11 @@
 
         <figure class="journey-hero" aria-labelledby="journey-hero-caption">
           <img src="/assets/images/azure-container-apps-badge.svg" alt="Azure Developer Associate journey visual" loading="lazy">
-          <figcaption class="lead" id="journey-hero-caption">Azure Developer Associate journey visual.</figcaption>
+          <figcaption id="journey-hero-caption">
+            <p class="hero-post-title">Understanding Azure Container Apps Plans and Environment Types</p>
+            <p class="hero-post-meta">2026-03-16 | Azure Container Apps</p>
+            <p class="hero-post-summary">Consumption vs Dedicated plans and how they relate to Consumption-only and Workload profiles environments.</p>
+          </figcaption>
         </figure>
 
         <section class="cards">

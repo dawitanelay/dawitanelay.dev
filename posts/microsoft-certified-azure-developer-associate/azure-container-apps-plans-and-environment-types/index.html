@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Understanding Azure Container Apps Plans and Environment Types | Dawit Anelay</title>
+  <meta name="description" content="Understanding the difference between Azure Container Apps plans and environment types.">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
+    :root {
+      --bg: #0b131d;
+      --panel: #132131;
+      --panel-2: #0f1a27;
+      --text: #e9f2fb;
+      --muted: #9cb1c6;
+      --accent: #2ac592;
+      --accent-2: #ffc56f;
+      --border: #263d52;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: "Outfit", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(42, 195, 144, 0.22) 0%, transparent 24%),
+        radial-gradient(circle at 88% 14%, rgba(255, 197, 111, 0.18) 0%, transparent 23%),
+        linear-gradient(180deg, #0e1723 0%, var(--bg) 55%);
+      line-height: 1.65;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .article {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+      box-shadow: 0 26px 58px rgba(0, 0, 0, 0.32);
+      padding: 1.15rem;
+      margin-top: 0.7rem;
+    }
+    .kicker {
+      display: inline-block;
+      border: 1px solid #35506a;
+      border-radius: 999px;
+      padding: 0.18rem 0.55rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8bf6cd;
+      font-size: 0.72rem;
+      margin-bottom: 0.55rem;
+    }
+    .tags {
+      margin-top: 0.55rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid #35506a;
+      border-radius: 999px;
+      padding: 0.16rem 0.52rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9cd9ff;
+      font-size: 0.68rem;
+      text-decoration: none;
+    }
+    .tag:hover { border-color: #4d7ca1; }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      line-height: 1.15;
+    }
+    h2 {
+      margin: 1.2rem 0 0.35rem;
+      font-size: 1.25rem;
+    }
+    h3 {
+      margin: 0.95rem 0 0.3rem;
+      font-size: 1.04rem;
+    }
+    p { color: var(--muted); }
+    ul { color: #b9ccdf; }
+    li { margin: 0.28rem 0; }
+    .meta {
+      margin-top: 0.55rem;
+      color: #90a8bf;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.76rem;
+    }
+    .rule {
+      margin: 1.2rem 0;
+      border: 0;
+      border-top: 1px solid rgba(156, 177, 198, 0.3);
+    }
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .actions {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.7rem;
+    }
+    .btn {
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: #16283b;
+      border-radius: 10px;
+      padding: 0.46rem 0.72rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="actions">
+      <a class="btn" href="/">Home</a>
+      <a class="btn" href="/posts/">All Posts</a>
+      <a class="btn" href="/resume/">Resume</a>
+    </div>
+
+    <article class="article">
+      <span class="kicker">Microsoft Certified: Azure Developer Associate</span>
+      <h1>Understanding Azure Container Apps Plans and Environment Types</h1>
+      <p class="meta">Published: 2026-03-16</p>
+      <div class="tags">
+        <a class="tag" href="/categories/azure-developer-associate/">Category: Azure Developer Associate Journey</a>
+        <a class="tag" href="/categories/azure-developer-associate/">Topic: Azure Container Apps</a>
+      </div>
+
+      <p>
+        When working with Azure Container Apps, one topic that often causes confusion is the difference between <strong>plans</strong> and <strong>environment types</strong>.
+        At first glance they might seem related or interchangeable, but they actually represent two different layers of how Azure Container Apps works.
+      </p>
+      <p>
+        In this post, I walk through the difference between <strong>Consumption and Dedicated plans</strong>, and explain how they relate to
+        <strong>Container Apps environments</strong>.
+      </p>
+
+      <hr class="rule" />
+
+      <h2>Azure Container Apps Plans</h2>
+      <p>Azure Container Apps provides two main pricing and execution models: <strong>Consumption</strong> and <strong>Dedicated</strong>.</p>
+
+      <h3>Consumption Plan</h3>
+      <p>
+        The <strong>Consumption plan</strong> follows a serverless model. You do not reserve infrastructure or capacity ahead of time.
+        Instead, Azure automatically allocates the resources required when your application runs.
+      </p>
+      <p>Billing in the consumption plan is based on:</p>
+      <ul>
+        <li>vCPU usage</li>
+        <li>Memory usage (GiB)</li>
+        <li>Execution time in seconds</li>
+      </ul>
+      <p>
+        One of the biggest advantages of this model is that applications can <strong>scale to zero</strong>.
+        If there are no incoming requests or workloads, container instances stop running and you do not pay for compute during idle periods.
+      </p>
+      <p>This plan works well for:</p>
+      <ul>
+        <li>Event-driven applications</li>
+        <li>APIs with unpredictable traffic</li>
+        <li>Microservices that do not require constant compute capacity</li>
+      </ul>
+
+      <h3>Dedicated Plan</h3>
+      <p>
+        The <strong>Dedicated plan</strong> provides a managed but reserved infrastructure environment.
+        Instead of paying only for usage, you allocate resources using <strong>workload profiles</strong>.
+      </p>
+      <p>A workload profile defines the amount of:</p>
+      <ul>
+        <li>CPU</li>
+        <li>Memory</li>
+        <li>Instance capacity</li>
+      </ul>
+      <p>
+        Multiple applications can run inside the same workload profile and share allocated resources.
+        Billing is based on resources allocated to each workload profile rather than individual app consumption.
+      </p>
+      <p>
+        Even though this plan reserves capacity, applications can still <strong>scale down to zero instances</strong>
+        if they are not actively running.
+      </p>
+      <p>This model is more suitable for workloads that require:</p>
+      <ul>
+        <li>Predictable performance</li>
+        <li>Consistent resource allocation</li>
+        <li>Dedicated compute capacity for multiple applications</li>
+      </ul>
+
+      <h2>Understanding Container Apps Environments</h2>
+      <p>
+        The other concept that often gets mixed up with plans is the <strong>environment type</strong>.
+      </p>
+      <p>
+        A <strong>Container Apps environment</strong> is the boundary where container apps run.
+        It provides networking, observability, and isolation for applications deployed inside it.
+      </p>
+      <p>There are two environment types.</p>
+
+      <h3>Consumption-only Environment</h3>
+      <p>A <strong>Consumption-only environment</strong> supports only the Consumption plan.</p>
+      <p>This means:</p>
+      <ul>
+        <li>All applications run in serverless mode</li>
+        <li>Workload profiles are not available</li>
+        <li>Dedicated resources cannot be configured</li>
+      </ul>
+      <p>
+        This type of environment is simpler and is typically used when all workloads follow the serverless model.
+      </p>
+
+      <h3>Workload Profiles Environment</h3>
+      <p>
+        A <strong>Workload profiles environment</strong> is more flexible. It supports both:
+      </p>
+      <ul>
+        <li>Consumption plan applications</li>
+        <li>Dedicated plan applications that use workload profiles</li>
+      </ul>
+      <p>
+        In this setup, some applications can run in serverless mode while others run on dedicated resources within workload profiles.
+        This allows teams to mix different workload requirements inside the same environment.
+      </p>
+
+      <h2>Key Differences to Remember</h2>
+      <p>A simple way to think about this is:</p>
+      <ul>
+        <li><strong>Plans define how resources are billed and allocated</strong></li>
+        <li><strong>Environments define where container apps run</strong></li>
+      </ul>
+      <p>Another useful rule:</p>
+      <ul>
+        <li>A <strong>Consumption-only environment</strong> supports only the <strong>Consumption plan</strong></li>
+        <li>A <strong>Workload profiles environment</strong> supports <strong>both Consumption and Dedicated plans</strong></li>
+      </ul>
+
+      <h2>Final Thoughts</h2>
+      <p>
+        Understanding the distinction between <strong>plans</strong> and <strong>environment types</strong> is important when designing containerized applications on Azure.
+        The choice depends largely on workload characteristics.
+      </p>
+      <p>
+        If your application benefits from serverless scaling and unpredictable traffic patterns, the <strong>Consumption plan</strong> is usually the best fit.
+        If you need predictable compute capacity and want to run multiple applications on reserved resources,
+        then <strong>Dedicated with workload profiles</strong> may be a better choice.
+      </p>
+      <p>
+        Choosing the right combination can help balance cost, performance, and operational flexibility.
+      </p>
+
+      <h2>References</h2>
+      <ul>
+        <li>
+          Microsoft Learn - Azure Container Apps environments and workload profiles<br />
+          <a href="https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview">https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview</a>
+        </li>
+        <li>
+          Microsoft Learn - Azure Container Apps pricing and plans<br />
+          <a href="https://learn.microsoft.com/en-us/azure/container-apps/plans">https://learn.microsoft.com/en-us/azure/container-apps/plans</a>
+        </li>
+      </ul>
+
+      <hr class="rule" />
+      <p>
+        Continue this learning path:
+        <a href="/categories/azure-developer-associate/">Azure Developer Associate Journey</a>
+      </p>
+    </article>
+  </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Posts | Dawit Anelay</title>
+  <meta name="description" content="Blog posts by Dawit Anelay on DevOps, cloud, and engineering practices." />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
+    :root {
+      --bg: #0b131d;
+      --panel: #132131;
+      --panel-2: #0f1a27;
+      --text: #e9f2fb;
+      --muted: #9cb1c6;
+      --accent: #ffc56f;
+      --border: #263d52;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: "Outfit", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(42, 195, 144, 0.22) 0%, transparent 24%),
+        radial-gradient(circle at 88% 14%, rgba(255, 197, 111, 0.18) 0%, transparent 23%),
+        linear-gradient(180deg, #0e1723 0%, var(--bg) 55%);
+      line-height: 1.55;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .actions {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.7rem;
+    }
+    .btn {
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: #16283b;
+      border-radius: 10px;
+      padding: 0.46rem 0.72rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 0.75rem;
+    }
+    .header {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+      box-shadow: 0 26px 58px rgba(0, 0, 0, 0.32);
+      padding: 1rem;
+    }
+    h1 { margin: 0; }
+    p { color: var(--muted); }
+    .list {
+      margin-top: 0.8rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+    .journeys {
+      margin-top: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #102235;
+      padding: 0.75rem;
+    }
+    .journeys h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+    .journeys a { color: var(--accent); text-decoration: none; }
+    .journeys a:hover { text-decoration: underline; }
+    .post {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #102235;
+      padding: 0.75rem;
+    }
+    .post h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+    .meta {
+      margin-top: 0.3rem;
+      color: #90a8bf;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .post a { color: var(--accent); text-decoration: none; }
+    .post a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="actions">
+      <a class="btn" href="/">Home</a>
+      <a class="btn" href="/resume/">Resume</a>
+      <a class="btn" href="/index.xml">RSS</a>
+    </div>
+
+    <header class="header">
+      <h1>Blog Posts</h1>
+      <p>DevOps, Azure, Kubernetes, CI/CD, and practical engineering notes.</p>
+    </header>
+
+    <section class="journeys">
+      <h2>Learning Journeys</h2>
+      <p><a href="/categories/azure-developer-associate/">Azure Developer Associate Journey</a> - your ongoing certification track where new study topics can be added over time.</p>
+      <p><a href="/categories/">Browse all categories</a></p>
+    </section>
+
+    <section class="list">
+      <article class="post">
+        <h2><a href="/posts/microsoft-certified-azure-developer-associate/azure-container-apps-plans-and-environment-types/">Understanding Azure Container Apps Plans and Environment Types</a></h2>
+        <div class="meta">2026-03-16 | Azure Developer Associate Journey</div>
+        <p>A practical explanation of Consumption vs Dedicated plans and Consumption-only vs Workload profiles environments in Azure Container Apps.</p>
+      </article>
+
+      <article class="post">
+        <h2><a href="/posts/2026-03-11-hello-world/">Hello, world</a></h2>
+        <div class="meta">2026-03-11</div>
+        <p>Welcome post and direction for future writing on DevOps, coding, and engineering adventures.</p>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implement Azure Security — Managed Identities, Key Vault, and RBAC | Dawit Mezemir Anelay</title>
+  <meta name="description" content="Study notes on Azure security for the Developer Associate exam: managed identities, Key Vault, RBAC, and Microsoft Entra ID authentication.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif; color: #333; background: #fff; line-height: 1.6; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    .site-nav { border-bottom: 1px solid #e5e7eb; background: #fff; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 2px; height: 50px; overflow-x: auto; scrollbar-width: none; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-home { font-weight: 600; font-size: 0.9rem; color: #111; margin-right: 10px; white-space: nowrap; flex-shrink: 0; }
+    .nav-home:hover { text-decoration: none; color: #2563eb; }
+    .nav-inner a { font-size: 0.82rem; color: #555; padding: 5px 10px; border-radius: 5px; transition: background 0.12s, color 0.12s; white-space: nowrap; flex-shrink: 0; }
+    .nav-inner a:hover { background: #f3f4f6; color: #111; text-decoration: none; }
+    .page { max-width: 1060px; margin: 0 auto; padding: 36px 24px 64px; display: flex; gap: 48px; align-items: flex-start; }
+    .sidebar { width: 210px; flex-shrink: 0; position: sticky; top: 66px; }
+    .sidebar-photo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
+    .sidebar-name { font-size: 0.97rem; font-weight: 600; color: #111; margin-bottom: 5px; line-height: 1.3; }
+    .sidebar-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 18px; line-height: 1.5; }
+    .sidebar-contacts { display: flex; flex-direction: column; gap: 8px; }
+    .sidebar-contacts li { display: flex; gap: 8px; align-items: flex-start; }
+    .contact-icon { display: flex; align-items: center; width: 20px; flex-shrink: 0; color: #9ca3af; margin-top: 1px; }
+    .contact-value { font-size: 0.78rem; color: #374151; overflow-wrap: anywhere; }
+    .contact-value a { color: #374151; }
+    .contact-value a:hover { color: #2563eb; text-decoration: none; }
+    .available-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 0.74rem; color: #15803d; border: 1px solid #bbf7d0; background: #f0fdf4; padding: 4px 10px; border-radius: 999px; }
+    .available-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+    .main { flex: 1; min-width: 0; }
+    .post-back { font-size: 0.82rem; margin-bottom: 20px; }
+    .post-back a { color: #6b7280; }
+    .post-back a:hover { color: #2563eb; text-decoration: none; }
+    .post-title { font-size: 1.35rem; font-weight: 600; color: #111; line-height: 1.35; margin-bottom: 10px; }
+    .post-meta { font-size: 0.8rem; color: #9ca3af; margin-bottom: 28px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .post-tag { font-size: 0.72rem; padding: 2px 8px; background: #eff6ff; color: #2563eb; border-radius: 999px; border: 1px solid #bfdbfe; }
+    .post-body { font-size: 0.9rem; line-height: 1.75; color: #374151; }
+    .post-body p { margin-bottom: 14px; }
+    .post-body h2 { font-size: 1.1rem; font-weight: 600; color: #111; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #f3f4f6; }
+    .post-body h3 { font-size: 0.95rem; font-weight: 600; color: #111; margin: 22px 0 8px; }
+    .post-body ul { padding-left: 18px; margin-bottom: 14px; }
+    .post-body ul li { list-style: disc; margin-bottom: 5px; color: #4b5563; }
+    .post-body strong { color: #111; font-weight: 600; }
+    .post-body hr { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+    .post-body a { color: #2563eb; }
+    .post-footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 0.85rem; color: #6b7280; }
+    @media (max-width: 720px) {
+      .page { flex-direction: column; gap: 28px; padding: 20px 16px 48px; }
+      .sidebar { width: 100%; position: static; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .sidebar-photo { margin-bottom: 0; }
+      .sidebar-info { flex: 1; min-width: 160px; }
+      .sidebar-contacts { margin-top: 14px; width: 100%; }
+      .post-title { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner" id="site-nav"></div>
+</nav>
+
+<div class="page">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+    <div class="post-back"><a href="/blog/">← Blog</a></div>
+
+    <h1 class="post-title">Implement Azure Security — Managed Identities, Key Vault, and RBAC</h1>
+
+    <div class="post-meta">
+      <span>2024-03-01</span>
+      <span class="post-tag">Azure</span>
+      <span class="post-tag">Security</span>
+      <span class="post-tag">Azure Developer Associate</span>
+    </div>
+
+    <article class="post-body">
+
+      <p>
+        Security in Azure applications centres on three main areas: <strong>who</strong> can access resources (identity and RBAC),
+        <strong>what secrets</strong> the application uses (Key Vault), and <strong>how</strong> services authenticate to each other without storing credentials (managed identities).
+        This post covers the concepts that appear most frequently in the Developer Associate exam.
+      </p>
+
+      <h2>Microsoft Entra ID (formerly Azure AD)</h2>
+      <p>
+        Microsoft Entra ID is the cloud identity platform that underpins authentication and authorisation across all Azure services.
+        Applications registered in Entra ID receive a <strong>service principal</strong> — an identity used to authenticate and obtain access tokens for Azure resources.
+      </p>
+
+      <h3>App registration vs service principal</h3>
+      <ul>
+        <li>An <strong>app registration</strong> defines the application identity globally in the Entra ID tenant</li>
+        <li>A <strong>service principal</strong> is the local representation of that registration in a specific tenant</li>
+        <li>When you register an app, an enterprise application (service principal) is automatically created in the same tenant</li>
+      </ul>
+
+      <h3>OAuth 2.0 flows relevant to developers</h3>
+      <ul>
+        <li><strong>Authorization code flow</strong> — for web apps with a browser; user signs in, app receives a code, exchanges it for a token</li>
+        <li><strong>Client credentials flow</strong> — for service-to-service calls; no user involved; app authenticates with a secret or certificate</li>
+        <li><strong>On-behalf-of flow</strong> — a service receives a user token and exchanges it for a token to call a downstream API on behalf of that user</li>
+        <li><strong>Device code flow</strong> — for CLI tools and devices without a browser</li>
+      </ul>
+
+      <h2>Managed Identities</h2>
+      <p>
+        A managed identity gives an Azure resource (a VM, App Service, Function App, AKS pod, etc.) an automatically managed identity in Entra ID.
+        The key benefit is that <strong>you never store credentials</strong> — Azure manages the secret rotation and token issuance.
+      </p>
+
+      <h3>System-assigned vs user-assigned</h3>
+      <ul>
+        <li><strong>System-assigned</strong> — tied to a single resource; created and deleted with that resource; simple to set up</li>
+        <li><strong>User-assigned</strong> — an independent resource that can be assigned to multiple services; useful when several resources need the same access, or when you need the identity to outlive a single resource</li>
+      </ul>
+
+      <h3>How it works in practice</h3>
+      <ul>
+        <li>Enable managed identity on the resource (one toggle in the portal or one CLI flag)</li>
+        <li>Assign the identity an RBAC role on the target resource (e.g. <code>Storage Blob Data Reader</code> on a storage account)</li>
+        <li>In application code, use <code>DefaultAzureCredential</code> from the Azure Identity SDK — it automatically uses the managed identity token when running in Azure</li>
+        <li>Locally, <code>DefaultAzureCredential</code> falls back to your developer credentials (Azure CLI login), so no code change is needed between local and deployed environments</li>
+      </ul>
+
+      <h2>Azure Key Vault</h2>
+      <p>
+        Key Vault is the centralised secrets management service. It stores three types of objects: secrets, keys, and certificates.
+      </p>
+
+      <h3>Secrets</h3>
+      <ul>
+        <li>Store connection strings, API keys, passwords, and any other sensitive string values</li>
+        <li>Versioned — each update creates a new version; previous versions remain accessible until explicitly deleted</li>
+        <li>Soft delete is enabled by default and protects against accidental deletion (configurable retention period)</li>
+      </ul>
+
+      <h3>Keys</h3>
+      <ul>
+        <li>Cryptographic keys for encryption, signing, and wrapping operations</li>
+        <li>Can be software-protected or HSM-protected (hardware security module — requires Premium tier)</li>
+        <li>Used by services like Storage (customer-managed keys) and Disk Encryption</li>
+      </ul>
+
+      <h3>Certificates</h3>
+      <ul>
+        <li>Key Vault can manage the full certificate lifecycle including auto-renewal with DigiCert and GlobalSign</li>
+        <li>When a certificate is stored, Key Vault also stores the private key as a Key Vault Key and the certificate data as a Secret</li>
+      </ul>
+
+      <h3>Accessing Key Vault from application code</h3>
+      <ul>
+        <li>Use the <code>SecretClient</code> from the <code>azure-keyvault-secrets</code> SDK</li>
+        <li>Authenticate with <code>DefaultAzureCredential</code> — no secrets needed in code</li>
+        <li>In App Service and Azure Functions, use <strong>Key Vault references</strong> in app settings: <code>@Microsoft.KeyVault(SecretUri=https://vault.vault.azure.net/secrets/name/version)</code></li>
+        <li>The app's managed identity must have the <code>Key Vault Secrets User</code> role (or the legacy access policy equivalent)</li>
+      </ul>
+
+      <h2>Role-Based Access Control (RBAC)</h2>
+      <p>
+        Azure RBAC controls who can do what on which Azure resource.
+        A role assignment has three parts: a <strong>security principal</strong> (who), a <strong>role definition</strong> (what actions), and a <strong>scope</strong> (which resource or resource group).
+      </p>
+
+      <h3>Built-in roles to know</h3>
+      <ul>
+        <li><strong>Owner</strong> — full access including ability to assign roles</li>
+        <li><strong>Contributor</strong> — full access to resources, cannot assign roles</li>
+        <li><strong>Reader</strong> — read-only access</li>
+        <li><strong>Storage Blob Data Contributor</strong> — read/write/delete access to blob data (not storage account management)</li>
+        <li><strong>Key Vault Secrets User</strong> — read secrets from Key Vault</li>
+        <li><strong>Key Vault Secrets Officer</strong> — manage secrets (create, update, delete)</li>
+        <li><strong>AcrPull</strong> — pull images from Azure Container Registry</li>
+      </ul>
+
+      <p>
+        RBAC roles control the <strong>management plane</strong> (Azure Resource Manager operations).
+        For data plane access (reading blobs, reading secrets), use the appropriate data-plane roles or access policies rather than relying on Owner/Contributor.
+      </p>
+
+      <h2>Microsoft Authentication Library (MSAL)</h2>
+      <p>
+        MSAL is the library used to acquire tokens from Entra ID in application code.
+        It handles token caching, refresh, and the details of each OAuth flow.
+      </p>
+      <ul>
+        <li>For apps running on Azure, prefer <code>DefaultAzureCredential</code> (Azure Identity SDK) which handles managed identities automatically</li>
+        <li>For apps that authenticate on behalf of a user (web apps, SPAs), use MSAL with the appropriate flow for the client type</li>
+      </ul>
+
+      <hr>
+
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview">Managed identities overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/overview">Azure Key Vault overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/overview">Azure RBAC overview — Microsoft Learn</a></li>
+      </ul>
+
+    </article>
+
+    <div class="post-footer">
+      Continue this learning path: <a href="/blog/">Azure Developer Associate Journey →</a>
+    </div>
+  </main>
+</div>
+
+<script src="/content.js"></script>
+<script src="/layout.js"></script>
+<script>
+  buildNav('/');
+  buildSidebar();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Dawit Mezemir Anelay</title>
+  <meta name="description" content="DevOps, cloud engineering, and AI learning notes by Dawit Mezemir Anelay.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif; color: #333; background: #fff; line-height: 1.6; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    .site-nav { border-bottom: 1px solid #e5e7eb; background: #fff; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 2px; height: 50px; overflow-x: auto; scrollbar-width: none; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-home { font-weight: 600; font-size: 0.9rem; color: #111; margin-right: 10px; white-space: nowrap; flex-shrink: 0; }
+    .nav-home:hover { text-decoration: none; color: #2563eb; }
+    .nav-inner a { font-size: 0.82rem; color: #555; padding: 5px 10px; border-radius: 5px; transition: background 0.12s, color 0.12s; white-space: nowrap; flex-shrink: 0; }
+    .nav-inner a:hover { background: #f3f4f6; color: #111; text-decoration: none; }
+    .nav-inner a.nav-active { background: #eff6ff; color: #2563eb; font-weight: 500; }
+
+    .page { max-width: 1060px; margin: 0 auto; padding: 36px 24px 64px; display: flex; gap: 48px; align-items: flex-start; }
+    .sidebar { width: 210px; flex-shrink: 0; position: sticky; top: 66px; }
+    .sidebar-photo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
+    .sidebar-name { font-size: 0.97rem; font-weight: 600; color: #111; margin-bottom: 5px; line-height: 1.3; }
+    .sidebar-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 18px; line-height: 1.5; }
+    .sidebar-contacts { display: flex; flex-direction: column; gap: 8px; }
+    .sidebar-contacts li { display: flex; gap: 8px; align-items: flex-start; }
+    .contact-icon { display: flex; align-items: center; width: 20px; flex-shrink: 0; color: #9ca3af; margin-top: 1px; }
+    .contact-value { font-size: 0.78rem; color: #374151; overflow-wrap: anywhere; }
+    .contact-value a { color: #374151; }
+    .contact-value a:hover { color: #2563eb; text-decoration: none; }
+    .available-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 0.74rem; color: #15803d; border: 1px solid #bbf7d0; background: #f0fdf4; padding: 4px 10px; border-radius: 999px; }
+    .available-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+
+    .main { flex: 1; min-width: 0; }
+
+    .blog-page-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+    }
+
+    .blog-search-wrap { margin-bottom: 24px; }
+    .blog-search {
+      font-size: 0.82rem;
+      font-family: inherit;
+      color: #333;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 7px 12px 7px 32px;
+      width: 100%;
+      max-width: 340px;
+      outline: none;
+      transition: border-color 0.15s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 10px center;
+    }
+    .blog-search:focus { border-color: #2563eb; background-color: #fff; }
+    .blog-search::placeholder { color: #9ca3af; }
+
+    .blog-entry { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f3f4f6; }
+    .blog-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .blog-date { font-size: 0.75rem; color: #9ca3af; margin-bottom: 4px; }
+    .blog-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; }
+    .blog-excerpt { font-size: 0.85rem; color: #4b5563; line-height: 1.65; margin-bottom: 8px; }
+    .blog-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .blog-tag { font-size: 0.72rem; padding: 2px 8px; background: #eff6ff; color: #2563eb; border-radius: 999px; border: 1px solid #bfdbfe; }
+
+    .series-group { margin-bottom: 36px; }
+    .series-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #9ca3af; margin-bottom: 14px; }
+    .series-posts { border-left: 2px solid #e5e7eb; padding-left: 16px; }
+
+    .standalone-heading { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #9ca3af; margin-bottom: 14px; }
+
+    .search-empty { font-size: 0.85rem; color: #9ca3af; display: none; margin-top: 8px; }
+
+    @media (max-width: 720px) {
+      .page { flex-direction: column; gap: 28px; padding: 20px 16px 48px; }
+      .sidebar { width: 100%; position: static; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .sidebar-photo { margin-bottom: 0; }
+      .sidebar-info { flex: 1; min-width: 160px; }
+      .sidebar-contacts { margin-top: 14px; width: 100%; }
+      .blog-search { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner" id="site-nav"></div>
+</nav>
+
+<div class="page">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main">
+    <h1 class="blog-page-title">Blog</h1>
+
+    <div class="blog-search-wrap">
+      <input type="search" id="blog-search" class="blog-search" placeholder="Search posts…" aria-label="Search posts">
+    </div>
+
+    <div id="blog-list"></div>
+    <p class="search-empty" id="search-empty">No posts match your search.</p>
+  </main>
+</div>
+
+<script src="/content.js"></script>
+<script src="/layout.js"></script>
+<script>
+'use strict';
+
+buildNav('/');
+buildSidebar();
+
+// Mark Blog nav link as active
+(function() {
+  Array.from(document.querySelectorAll('.nav-inner a')).forEach(function(link) {
+    if (link.getAttribute('href') === '/blog/') link.classList.add('nav-active');
+  });
+})();
+
+var list = document.getElementById('blog-list');
+
+function h(tag, className, text) {
+  var e = document.createElement(tag);
+  if (className) e.className = className;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function makeLink(href, text) {
+  var e = document.createElement('a');
+  e.href = href;
+  e.textContent = text;
+  return e;
+}
+
+function renderPost(post) {
+  var entry = h('div', 'blog-entry');
+  entry.appendChild(h('div', 'blog-date', post.date));
+  var titleWrap = h('div', 'blog-title');
+  titleWrap.appendChild(makeLink(post.url, post.title));
+  entry.appendChild(titleWrap);
+  if (post.excerpt) entry.appendChild(h('div', 'blog-excerpt', post.excerpt));
+  if (post.tags && post.tags.length) {
+    var tags = h('div', 'blog-tags');
+    post.tags.forEach(function(t) { tags.appendChild(h('span', 'blog-tag', t)); });
+    entry.appendChild(tags);
+  }
+  return entry;
+}
+
+// Auto-detect series: any tag on 3+ posts
+var tagCount = {};
+SITE.blog.forEach(function(post) {
+  (post.tags || []).forEach(function(t) { tagCount[t] = (tagCount[t] || 0) + 1; });
+});
+var seriesTags = Object.keys(tagCount).filter(function(t) { return tagCount[t] >= 3; });
+
+var standalone = [];
+var seriesMap = {};
+SITE.blog.forEach(function(post) {
+  var st = (post.tags || []).find(function(t) { return seriesTags.indexOf(t) !== -1; });
+  if (st) {
+    if (!seriesMap[st]) seriesMap[st] = [];
+    seriesMap[st].push(post);
+  } else {
+    standalone.push(post);
+  }
+});
+
+// Standalone posts first
+if (standalone.length) {
+  if (seriesTags.length) list.appendChild(h('div', 'standalone-heading', 'Recent'));
+  standalone.forEach(function(post) { list.appendChild(renderPost(post)); });
+}
+
+// Series groups
+Object.keys(seriesMap).forEach(function(name) {
+  var group = h('div', 'series-group');
+  group.appendChild(h('div', 'series-label', 'Series · ' + name));
+  var inner = h('div', 'series-posts');
+  seriesMap[name].forEach(function(post) { inner.appendChild(renderPost(post)); });
+  group.appendChild(inner);
+  list.appendChild(group);
+});
+
+// Search
+(function() {
+  var input = document.getElementById('blog-search');
+  var emptyMsg = document.getElementById('search-empty');
+
+  input.addEventListener('input', function() {
+    var q = input.value.trim().toLowerCase();
+    var allEntries = Array.from(list.querySelectorAll('.blog-entry'));
+
+    allEntries.forEach(function(entry) {
+      entry.style.display = (!q || entry.textContent.toLowerCase().indexOf(q) !== -1) ? '' : 'none';
+    });
+
+    list.querySelectorAll('.series-group').forEach(function(group) {
+      var anyVisible = Array.from(group.querySelectorAll('.blog-entry')).some(function(e) {
+        return e.style.display !== 'none';
+      });
+      group.style.display = (!q || anyVisible) ? '' : 'none';
+    });
+
+    var noneVisible = allEntries.every(function(e) { return e.style.display === 'none'; });
+    emptyMsg.style.display = (q && noneVisible) ? 'block' : 'none';
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      input.value = '';
+      input.dispatchEvent(new Event('input'));
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

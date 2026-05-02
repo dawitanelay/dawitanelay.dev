@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azure Services and Third-Party Integration — Service Bus, Event Grid, API Management | Dawit Mezemir Anelay</title>
+  <meta name="description" content="Study notes on Azure integration services for the Developer Associate exam: Service Bus, Event Grid, Event Hub, API Management, and Logic Apps.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif; color: #333; background: #fff; line-height: 1.6; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    .site-nav { border-bottom: 1px solid #e5e7eb; background: #fff; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 2px; height: 50px; overflow-x: auto; scrollbar-width: none; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-home { font-weight: 600; font-size: 0.9rem; color: #111; margin-right: 10px; white-space: nowrap; flex-shrink: 0; }
+    .nav-home:hover { text-decoration: none; color: #2563eb; }
+    .nav-inner a { font-size: 0.82rem; color: #555; padding: 5px 10px; border-radius: 5px; transition: background 0.12s, color 0.12s; white-space: nowrap; flex-shrink: 0; }
+    .nav-inner a:hover { background: #f3f4f6; color: #111; text-decoration: none; }
+    .page { max-width: 1060px; margin: 0 auto; padding: 36px 24px 64px; display: flex; gap: 48px; align-items: flex-start; }
+    .sidebar { width: 210px; flex-shrink: 0; position: sticky; top: 66px; }
+    .sidebar-photo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
+    .sidebar-name { font-size: 0.97rem; font-weight: 600; color: #111; margin-bottom: 5px; line-height: 1.3; }
+    .sidebar-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 18px; line-height: 1.5; }
+    .sidebar-contacts { display: flex; flex-direction: column; gap: 8px; }
+    .sidebar-contacts li { display: flex; gap: 8px; align-items: flex-start; }
+    .contact-icon { display: flex; align-items: center; width: 20px; flex-shrink: 0; color: #9ca3af; margin-top: 1px; }
+    .contact-value { font-size: 0.78rem; color: #374151; overflow-wrap: anywhere; }
+    .contact-value a { color: #374151; }
+    .contact-value a:hover { color: #2563eb; text-decoration: none; }
+    .available-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 0.74rem; color: #15803d; border: 1px solid #bbf7d0; background: #f0fdf4; padding: 4px 10px; border-radius: 999px; }
+    .available-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+    .main { flex: 1; min-width: 0; }
+    .post-back { font-size: 0.82rem; margin-bottom: 20px; }
+    .post-back a { color: #6b7280; }
+    .post-back a:hover { color: #2563eb; text-decoration: none; }
+    .post-title { font-size: 1.35rem; font-weight: 600; color: #111; line-height: 1.35; margin-bottom: 10px; }
+    .post-meta { font-size: 0.8rem; color: #9ca3af; margin-bottom: 28px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .post-tag { font-size: 0.72rem; padding: 2px 8px; background: #eff6ff; color: #2563eb; border-radius: 999px; border: 1px solid #bfdbfe; }
+    .post-body { font-size: 0.9rem; line-height: 1.75; color: #374151; }
+    .post-body p { margin-bottom: 14px; }
+    .post-body h2 { font-size: 1.1rem; font-weight: 600; color: #111; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #f3f4f6; }
+    .post-body h3 { font-size: 0.95rem; font-weight: 600; color: #111; margin: 22px 0 8px; }
+    .post-body ul { padding-left: 18px; margin-bottom: 14px; }
+    .post-body ul li { list-style: disc; margin-bottom: 5px; color: #4b5563; }
+    .post-body strong { color: #111; font-weight: 600; }
+    .post-body hr { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+    .post-body a { color: #2563eb; }
+    .post-footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 0.85rem; color: #6b7280; }
+    @media (max-width: 720px) {
+      .page { flex-direction: column; gap: 28px; padding: 20px 16px 48px; }
+      .sidebar { width: 100%; position: static; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .sidebar-photo { margin-bottom: 0; }
+      .sidebar-info { flex: 1; min-width: 160px; }
+      .sidebar-contacts { margin-top: 14px; width: 100%; }
+      .post-title { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner" id="site-nav"></div>
+</nav>
+
+<div class="page">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+    <div class="post-back"><a href="/blog/">← Blog</a></div>
+
+    <h1 class="post-title">Azure Services and Third-Party Integration — Service Bus, Event Grid, API Management</h1>
+
+    <div class="post-meta">
+      <span>2024-03-28</span>
+      <span class="post-tag">Azure</span>
+      <span class="post-tag">Integration</span>
+      <span class="post-tag">Azure Developer Associate</span>
+    </div>
+
+    <article class="post-body">
+
+      <p>
+        Azure provides a rich set of messaging and integration services that connect applications, services, and third-party systems.
+        For the Developer Associate exam the focus is on knowing <strong>which service to use for which scenario</strong> — and understanding the key properties of each one.
+      </p>
+
+      <h2>Azure Service Bus</h2>
+      <p>
+        Service Bus is a fully managed enterprise message broker for reliable, asynchronous communication between decoupled services.
+        It supports both queues (point-to-point) and topics (publish/subscribe).
+      </p>
+
+      <h3>Queues vs topics</h3>
+      <ul>
+        <li><strong>Queue</strong> — a single consumer receives each message (FIFO with sessions, competing consumers without)</li>
+        <li><strong>Topic</strong> — messages are published to a topic and delivered to one or more subscriptions; each subscription acts as an independent queue</li>
+        <li>Subscriptions can have <strong>filters</strong> (SQL-like or correlation) to receive only matching messages</li>
+      </ul>
+
+      <h3>Key features</h3>
+      <ul>
+        <li><strong>Dead-letter queue (DLQ)</strong> — messages that fail processing or expire move to the DLQ for inspection and retry</li>
+        <li><strong>Message sessions</strong> — guarantee ordered delivery and group related messages; required for FIFO processing</li>
+        <li><strong>Duplicate detection</strong> — automatically discards duplicate messages within a configurable time window</li>
+        <li><strong>Message lock</strong> — a receiver holds a lock on the message while processing; if the lock expires, the message becomes available again</li>
+        <li>Message size up to <strong>256 KB</strong> (Standard tier) or <strong>100 MB</strong> (Premium tier)</li>
+        <li>Premium tier supports VNet integration, private endpoints, and message encryption</li>
+      </ul>
+
+      <h3>When to use Service Bus vs Storage Queue</h3>
+      <ul>
+        <li>Use <strong>Service Bus</strong> when you need guaranteed delivery, ordering, sessions, dead-lettering, or messages larger than 64 KB</li>
+        <li>Use <strong>Storage Queue</strong> for simple, high-volume workloads where those guarantees are not required</li>
+      </ul>
+
+      <h2>Azure Event Grid</h2>
+      <p>
+        Event Grid is a fully managed event routing service built on a publish/subscribe model.
+        It routes discrete events from sources to handlers, with filtering and fan-out support.
+      </p>
+
+      <h3>Core concepts</h3>
+      <ul>
+        <li><strong>Event source</strong> — emits events (Azure Blob Storage, Resource Groups, custom topics, etc.)</li>
+        <li><strong>Topic</strong> — the endpoint where events are published; system topics are created automatically for Azure services</li>
+        <li><strong>Event subscription</strong> — defines which events to receive and where to deliver them</li>
+        <li><strong>Event handler</strong> — receives and processes events (Azure Functions, Logic Apps, Service Bus, Event Hubs, Webhooks, etc.)</li>
+      </ul>
+
+      <h3>Key properties</h3>
+      <ul>
+        <li>Near real-time event delivery with <strong>at-least-once</strong> delivery guarantee</li>
+        <li>Built-in retry with exponential backoff (up to 24 hours)</li>
+        <li>Event filtering by event type and subject prefix/suffix — reduces unnecessary invocations</li>
+        <li>Events are <strong>discrete notifications</strong> (something happened) — not large payloads; max 1 MB per event</li>
+        <li>Dead-lettering supported: undeliverable events go to a storage container you specify</li>
+      </ul>
+
+      <h3>Event Grid vs Service Bus</h3>
+      <ul>
+        <li>Use <strong>Event Grid</strong> for reactive, event-driven architectures where many subscribers need to react to the same event</li>
+        <li>Use <strong>Service Bus</strong> for reliable message processing workflows where order, sessions, or transactional guarantees matter</li>
+      </ul>
+
+      <h2>Azure Event Hubs</h2>
+      <p>
+        Event Hubs is a big-data streaming platform and event ingestion service.
+        It is designed for high-throughput telemetry and log ingestion from many producers.
+      </p>
+
+      <h3>Key concepts</h3>
+      <ul>
+        <li><strong>Partition</strong> — events are written to partitions; consumers read from specific partitions independently</li>
+        <li><strong>Consumer group</strong> — a view of the event stream; multiple consumer groups can read the same data independently without interfering</li>
+        <li><strong>Capture</strong> — automatically stores raw events to Azure Blob Storage or Azure Data Lake Storage for batch processing</li>
+        <li>Retention is configurable from 1 to 90 days (Standard and Premium tiers)</li>
+        <li>Throughput measured in <strong>throughput units</strong> (Standard) or <strong>processing units</strong> (Premium)</li>
+      </ul>
+
+      <h3>When to use Event Hubs</h3>
+      <ul>
+        <li>Telemetry ingestion (IoT devices, application logs, click streams)</li>
+        <li>When you need multiple independent consumers to read the same stream</li>
+        <li>When downstream processing is done by Spark, Stream Analytics, or Azure Functions with the Event Hub trigger</li>
+      </ul>
+
+      <h2>Azure API Management (APIM)</h2>
+      <p>
+        API Management is a fully managed API gateway that sits in front of your backend services.
+        It handles cross-cutting concerns like authentication, rate limiting, caching, and transformation.
+      </p>
+
+      <h3>Core components</h3>
+      <ul>
+        <li><strong>API Gateway</strong> — the runtime proxy that accepts requests, applies policies, and forwards calls to backends</li>
+        <li><strong>Developer portal</strong> — auto-generated documentation and a self-service portal for API consumers</li>
+        <li><strong>Management plane</strong> — the Azure portal, REST API, or Bicep/Terraform used to configure APIM</li>
+      </ul>
+
+      <h3>Policies</h3>
+      <p>
+        Policies are the main extensibility mechanism in APIM. They are XML-based rules applied at four lifecycle points:
+        <strong>inbound</strong> (on the request before it hits the backend), <strong>backend</strong> (just before the backend call),
+        <strong>outbound</strong> (on the response before it reaches the caller), and <strong>on-error</strong>.
+      </p>
+      <ul>
+        <li><code>rate-limit-by-key</code> / <code>quota-by-key</code> — throttle requests per subscription or IP</li>
+        <li><code>validate-jwt</code> — enforce Entra ID or other JWT tokens before passing to the backend</li>
+        <li><code>set-header</code> / <code>rewrite-uri</code> — transform requests and responses</li>
+        <li><code>cache-lookup</code> / <code>cache-store</code> — cache backend responses</li>
+        <li><code>mock-response</code> — return a static response without calling the backend; useful for testing</li>
+      </ul>
+
+      <h3>Subscriptions and products</h3>
+      <ul>
+        <li>APIs are grouped into <strong>products</strong> (e.g. "Free tier", "Premium"); consumers subscribe to a product</li>
+        <li>Each subscription gets a key that must be sent in the <code>Ocp-Apim-Subscription-Key</code> header by default</li>
+        <li>Subscriptions can be scoped to a product, a single API, or all APIs</li>
+      </ul>
+
+      <h2>Azure Logic Apps</h2>
+      <p>
+        Logic Apps is a low-code integration platform for automating workflows that connect Azure services, SaaS applications, and on-premises systems.
+      </p>
+      <ul>
+        <li>Workflows are defined visually or in JSON; no code required for most scenarios</li>
+        <li>Over 400 built-in connectors (Office 365, Salesforce, SAP, ServiceNow, Twitter, etc.)</li>
+        <li><strong>Standard tier</strong> (single-tenant) runs on App Service Infrastructure — supports VNet integration and stateful/stateless workflows</li>
+        <li><strong>Consumption tier</strong> — serverless, multi-tenant, pay-per-execution</li>
+        <li>Prefer Logic Apps over custom code for orchestrating SaaS integrations where connectors already exist; use Azure Functions for custom logic that doesn't map to a connector</li>
+      </ul>
+
+      <h2>Integrating Third-Party Services</h2>
+
+      <h3>Webhooks</h3>
+      <ul>
+        <li>Many third-party services push events to a URL you provide — validate the payload signature before processing</li>
+        <li>Azure Functions with an HTTP trigger is a common handler for incoming webhooks</li>
+        <li>Use Event Grid to fan out webhook events to multiple internal handlers</li>
+      </ul>
+
+      <h3>Outbound HTTP calls from Azure Functions</h3>
+      <ul>
+        <li>Use <code>HttpClient</code> (injected as a singleton) or the SDK of the third-party service</li>
+        <li>Store API keys in Key Vault and access them via Key Vault references or <code>SecretClient</code></li>
+        <li>Use <strong>Polly</strong> or the built-in retry policies in Durable Functions for transient failures</li>
+      </ul>
+
+      <h3>SendGrid (email)</h3>
+      <ul>
+        <li>Azure Functions has a <strong>SendGrid output binding</strong> — declare it in the binding config, pass the message object, no HTTP client code needed</li>
+        <li>The API key is stored in app settings and referenced by binding attribute name</li>
+      </ul>
+
+      <h3>Twilio (SMS)</h3>
+      <ul>
+        <li>Azure Functions has a <strong>Twilio output binding</strong> for sending SMS from a function output</li>
+        <li>Same pattern: binding config declares the connection, function code returns the message body</li>
+      </ul>
+
+      <hr>
+
+      <h2>Service selection cheat sheet</h2>
+      <ul>
+        <li><strong>Reliable ordered processing</strong> → Service Bus (queues with sessions)</li>
+        <li><strong>Pub/sub fan-out to multiple subscribers</strong> → Service Bus topics or Event Grid</li>
+        <li><strong>High-throughput event streaming / telemetry</strong> → Event Hubs</li>
+        <li><strong>Reactive events from Azure resources</strong> → Event Grid (system topics)</li>
+        <li><strong>API gateway / throttling / auth enforcement</strong> → API Management</li>
+        <li><strong>SaaS workflow automation</strong> → Logic Apps</li>
+        <li><strong>Custom compute / code</strong> → Azure Functions</li>
+      </ul>
+
+      <hr>
+
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview">Azure Service Bus overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/event-grid/overview">Azure Event Grid overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about">Azure Event Hubs overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts">Azure API Management overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview">Azure Logic Apps overview — Microsoft Learn</a></li>
+      </ul>
+
+    </article>
+
+    <div class="post-footer">
+      Continue this learning path: <a href="/blog/">Azure Developer Associate Journey →</a>
+    </div>
+  </main>
+</div>
+
+<script src="/content.js"></script>
+<script src="/layout.js"></script>
+<script>
+  buildNav('/');
+  buildSidebar();
+</script>
+
+</body>
+</html>

@@ -7,806 +7,518 @@
   <meta name="description" content="Understanding Azure Container Apps plans and environment types as part of the Azure Developer Associate journey.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
-      --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.25) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
-      --border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 50%);
-      --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 100%, 68%));
-      --jet: hsl(0, 0%, 22%);
-      --onyx: hsl(240, 1%, 17%);
-      --eerie-black-1: hsl(240, 2%, 13%);
-      --eerie-black-2: hsl(240, 2%, 12%);
-      --smoky-black: hsl(0, 0%, 7%);
-      --white-1: hsl(0, 0%, 100%);
-      --white-2: hsl(0, 0%, 98%);
-      --orange-yellow-crayola: hsl(45, 100%, 72%);
-      --light-gray: hsl(0, 0%, 84%);
-      --light-gray-70: hsla(0, 0%, 84%, 0.7);
-      --accent-blue: hsl(205, 88%, 65%);
-      --ff-poppins: "Poppins", sans-serif;
-      --fs-1: 24px;
-      --fs-2: 18px;
-      --fs-3: 17px;
-      --fs-4: 16px;
-      --fs-6: 14px;
-      --fs-7: 13px;
-      --fs-8: 11px;
-      --fw-300: 300;
-      --fw-500: 500;
-      --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
-      --transition-2: 0.5s ease-in-out;
-    }
-
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html { font-family: var(--ff-poppins); }
-
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
     body {
-      background:
-        radial-gradient(circle at 10% 0%, rgba(255, 211, 93, 0.12), transparent 24%),
-        radial-gradient(circle at 88% 12%, rgba(40, 147, 255, 0.1), transparent 20%),
-        var(--smoky-black);
-      color: var(--light-gray);
-      min-height: 100vh;
-      line-height: 1.7;
+      font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif;
+      color: #333;
+      background: #fff;
+      line-height: 1.6;
     }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
 
-    a { text-decoration: none; color: inherit; }
-    li { list-style: none; }
-    img, ion-icon, a, button, span { display: block; }
-    button {
-      font: inherit;
-      background: none;
-      border: none;
-      text-align: left;
-      cursor: pointer;
+    /* ── Nav ── */
+    .site-nav {
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-
-    .sidebar,
-    article {
-      background: var(--eerie-black-2);
-      border: 1px solid var(--jet);
-      border-radius: 20px;
-      padding: 15px;
-      box-shadow: var(--shadow-1);
-      z-index: 1;
-    }
-
-    .separator {
-      width: 100%;
-      height: 1px;
-      background: var(--jet);
-      margin: 16px 0;
-    }
-
-    .icon-box {
-      position: relative;
-      background: var(--border-gradient-onyx);
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
+    .nav-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 24px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 16px;
-      color: var(--orange-yellow-crayola);
-      box-shadow: var(--shadow-1);
-      z-index: 1;
+      gap: 2px;
+      height: 50px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-home {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #111;
+      margin-right: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-home:hover { text-decoration: none; color: #2563eb; }
+    .nav-inner a {
+      font-size: 0.82rem;
+      color: #555;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-inner a:hover { background: #f3f4f6; color: #111; text-decoration: none; }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 210px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 66px;
+    }
+    .sidebar-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+    .sidebar-name {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+    .sidebar-title {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    .sidebar-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar-contacts li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      display: flex;
+      align-items: center;
+      width: 20px;
+      flex-shrink: 0;
+      color: #9ca3af;
+      margin-top: 1px;
+    }
+    .contact-value {
+      font-size: 0.78rem;
+      color: #374151;
+      overflow-wrap: anywhere;
+    }
+    .contact-value a { color: #374151; }
+    .contact-value a:hover { color: #2563eb; text-decoration: none; }
+    .available-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 0.74rem;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .available-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
       flex-shrink: 0;
     }
 
-    .icon-box::before {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      background: var(--eerie-black-1);
-      border-radius: inherit;
-      z-index: -1;
-    }
+    /* ── Main ── */
+    .main { flex: 1; min-width: 0; }
 
-    .h2, .h3, .h4 { color: var(--white-2); }
-    .h2 { font-size: var(--fs-1); }
-    .h3 { font-size: var(--fs-2); }
-    .h4 { font-size: var(--fs-4); }
-
-    .article-title {
-      position: relative;
-      padding-bottom: 7px;
+    /* ── Post header ── */
+    .post-back {
+      font-size: 0.82rem;
       margin-bottom: 20px;
     }
-
-    .article-title::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 30px;
-      height: 3px;
-      background: var(--text-gradient-yellow);
-      border-radius: 3px;
-    }
-
-    main {
-      margin: 15px 12px;
-      margin-bottom: 32px;
-      min-width: 259px;
-    }
-
-    .sidebar {
-      margin-bottom: 15px;
-      max-height: 130px;
-      overflow: hidden;
-      transition: var(--transition-2);
-    }
-
-    .sidebar.active { max-height: 600px; }
-
-    .sidebar-info {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .avatar-box {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      background: var(--bg-gradient-onyx);
-      overflow: hidden;
-    }
-
-    .avatar-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .info-content .name {
-      color: var(--white-2);
-      font-size: var(--fs-3);
-      font-weight: var(--fw-500);
-      letter-spacing: -0.25px;
+    .post-back a { color: #6b7280; }
+    .post-back a:hover { color: #2563eb; text-decoration: none; }
+    .post-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.35;
       margin-bottom: 10px;
     }
-
-    .info-content .title {
-      color: var(--white-1);
-      background: var(--onyx);
-      font-size: var(--fs-8);
-      font-weight: var(--fw-300);
-      width: max-content;
-      padding: 5px 12px;
-      border-radius: 8px;
-      line-height: 1.5;
-    }
-
-    .info_more-btn {
-      position: absolute;
-      top: -15px;
-      right: -15px;
-      border-radius: 0 15px;
-      font-size: 13px;
-      color: var(--orange-yellow-crayola);
-      background: var(--border-gradient-onyx);
-      padding: 10px;
-      box-shadow: var(--shadow-1);
-    }
-
-    .info_more-btn span { display: none; }
-
-    .sidebar-info_more {
-      opacity: 0;
-      visibility: hidden;
-      transition: var(--transition-2);
-    }
-
-    .sidebar.active .sidebar-info_more {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .contacts-list { display: grid; gap: 15px; }
-
-    .contact-item {
-      min-width: 100%;
+    .post-meta {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 28px;
       display: flex;
       align-items: center;
-      gap: 16px;
-    }
-
-    .contact-info {
-      max-width: calc(100% - 46px);
-      width: calc(100% - 46px);
-    }
-
-    .contact-title {
-      color: var(--light-gray-70);
-      font-size: var(--fs-8);
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-
-    .contact-link,
-    .contact-info address {
-      color: var(--white-2);
-      font-size: var(--fs-7);
-      overflow-wrap: anywhere;
-      font-style: normal;
-    }
-
-    .social-list {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 4px;
-      padding-left: 8px;
-    }
-
-    .social-item .social-link {
-      color: var(--light-gray-70);
-      font-size: 18px;
-    }
-
-    .main-content {
-      position: relative;
-      width: 100%;
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      background: rgba(22, 22, 25, 0.82);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--jet);
-      border-radius: 20px;
-      box-shadow: var(--shadow-1);
-      z-index: 5;
-      margin-bottom: 15px;
-    }
-
-    .navbar-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
       gap: 10px;
+      flex-wrap: wrap;
+    }
+    .post-tag {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      background: #eff6ff;
+      color: #2563eb;
+      border-radius: 999px;
+      border: 1px solid #bfdbfe;
     }
 
-    .navbar-link {
-      color: var(--light-gray);
-      font-size: var(--fs-8);
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-    }
-
-    .navbar-link.active {
-      color: var(--orange-yellow-crayola);
-      background: rgba(255, 196, 72, 0.08);
-      border-color: rgba(255, 196, 72, 0.2);
-    }
-
-    .panel,
-    .article-shell,
-    .topic-card {
-      border: 1px solid var(--jet);
-      border-radius: 16px;
-      background: var(--bg-gradient-jet);
-    }
-
-    .panel,
-    .article-shell {
-      padding: 16px;
-    }
-
-    .kicker {
-      color: var(--orange-yellow-crayola);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-size: var(--fs-8);
-      margin-bottom: 8px;
-      font-weight: var(--fw-500);
-    }
-
-    .post-meta,
-    .post-tags {
-      color: var(--light-gray-70);
-      font-size: var(--fs-7);
-      margin-top: 8px;
-    }
-
-    .post-tags a,
-    .inline-link {
-      color: var(--accent-blue);
-    }
-
-    .hero-grid,
-    .topic-grid {
-      display: grid;
-      gap: 14px;
-    }
-
-    .topic-card {
-      padding: 16px;
-    }
-
-    .topic-card h3 {
-      color: var(--white-2);
+    /* ── Post body ── */
+    .post-body { font-size: 0.9rem; line-height: 1.75; color: #374151; }
+    .post-body p { margin-bottom: 14px; }
+    .post-body h2 {
       font-size: 1.1rem;
-      margin: 0;
+      font-weight: 600;
+      color: #111;
+      margin: 32px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #f3f4f6;
     }
-
-    .topic-card p {
-      margin-top: 8px;
-      color: var(--light-gray-70);
-      font-size: var(--fs-6);
+    .post-body h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #111;
+      margin: 22px 0 8px;
     }
-
-    .article-shell {
-      margin-top: 14px;
-    }
-
-    .article-shell p,
-    .article-shell ul {
-      color: var(--light-gray-70);
-      font-size: var(--fs-6);
-    }
-
-    .article-shell h2 {
-      color: var(--white-2);
-      font-size: 1.25rem;
-      margin: 1.2rem 0 0.35rem;
-    }
-
-    .article-shell h3 {
-      color: var(--white-2);
-      font-size: 1.04rem;
-      margin: 0.95rem 0 0.3rem;
-    }
-
-    .article-shell ul {
+    .post-body ul {
       padding-left: 18px;
+      margin-bottom: 14px;
     }
-
-    .article-shell li {
+    .post-body ul li {
       list-style: disc;
-      margin: 0.28rem 0;
+      margin-bottom: 5px;
+      color: #4b5563;
     }
-
-    .rule {
-      margin: 1.2rem 0;
-      border: 0;
-      border-top: 1px solid rgba(156, 177, 198, 0.3);
+    .post-body strong { color: #111; font-weight: 600; }
+    .post-body hr {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 28px 0;
     }
-
-    .diagram-block {
-      margin: 1rem 0 1.2rem;
-      padding: 12px;
-      border: 1px solid var(--jet);
-      border-radius: 14px;
-      background: var(--bg-gradient-jet);
-    }
-
-    .topic-illustration {
-      margin: 0.25rem 0 1rem;
-      padding: 10px;
-      border: 1px solid var(--jet);
-      border-radius: 14px;
-      background: var(--bg-gradient-jet);
-    }
-
-    .topic-illustration img,
-    .topic-illustration svg {
-      width: 100%;
-      max-width: 640px;
-      height: auto;
-      margin: 0 auto;
+    .post-body figure {
+      margin: 20px 0;
+      border: 1px solid #e5e7eb;
       border-radius: 10px;
+      overflow: hidden;
+      background: #fafafa;
     }
-
-    .diagram-svg {
-      width: 100%;
-      height: auto;
+    .post-body figcaption {
+      font-size: 0.76rem;
+      color: #9ca3af;
+      padding: 8px 12px;
+      border-top: 1px solid #f3f4f6;
+    }
+    .post-body figure svg,
+    .post-body figure img { display: block; width: 100%; height: auto; }
+    .post-body .diagram-block {
+      margin: 20px 0;
+      border: 1px solid #e5e7eb;
       border-radius: 10px;
-      display: block;
+      overflow: hidden;
+      background: #fafafa;
+      padding: 0;
+    }
+    .post-body .diagram-block svg { display: block; width: 100%; height: auto; }
+    .post-body a { color: #2563eb; }
+    .post-body a:hover { text-decoration: underline; }
+
+    /* ── Continue reading ── */
+    .post-footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.85rem;
+      color: #6b7280;
     }
 
-    .diagram-caption {
-      margin-top: 8px;
-      color: var(--light-gray-70);
-      font-size: var(--fs-7);
-    }
-
-    @media (min-width: 720px) {
-      .topic-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (min-width: 1024px) {
-      main {
-        max-width: 1200px;
-        margin-inline: auto;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 25px;
-      }
-
-      .sidebar {
-        position: sticky;
-        top: 30px;
-        max-height: max-content;
-        width: 300px;
-        margin-bottom: 0;
-        padding-top: 28px;
-      }
-
-      .sidebar-info {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .info-content .title { margin-inline: auto; }
-      .info_more-btn { display: none; }
-      .sidebar-info_more { opacity: 1; visibility: visible; }
-      .social-list { justify-content: center; padding-left: 0; }
-
-      .main-content {
-        min-width: 0;
-        width: calc(100% - 325px);
-      }
+    /* ── Mobile ── */
+    @media (max-width: 720px) {
+      .page { flex-direction: column; gap: 28px; padding: 20px 16px 48px; }
+      .sidebar { width: 100%; position: static; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .sidebar-photo { margin-bottom: 0; }
+      .sidebar-info { flex: 1; min-width: 160px; }
+      .sidebar-contacts { margin-top: 14px; width: 100%; }
+      .post-title { font-size: 1.15rem; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <aside class="sidebar" data-sidebar>
-      <div class="sidebar-info">
-        <div class="avatar-box">
-          <img src="https://github.com/dawitanelay.png" alt="Dawit Mezemir Anelay profile photo" loading="lazy">
-        </div>
 
-        <div class="info-content">
-          <h1 class="name" title="Dawit Mezemir Anelay">Dawit Mezemir Anelay</h1>
-          <p class="title">DevOps Engineer, Cloud Engineer<br>MSc Computer Science (AI)</p>
-        </div>
+<nav class="site-nav">
+  <div class="nav-inner" id="site-nav"></div>
+</nav>
 
-        <button class="info_more-btn" data-sidebar-btn aria-label="Show contacts">
-          <span>Show Contacts</span>
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
+<div class="page">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+    <div class="post-back"><a href="/blog/">← Blog</a></div>
+
+    <h1 class="post-title">Understanding Azure Container Apps Plans and Environment Types</h1>
+
+    <div class="post-meta">
+      <span>2024-03-14</span>
+      <span class="post-tag">Azure</span>
+      <span class="post-tag">Kubernetes</span>
+    </div>
+
+    <article class="post-body">
+      <p>
+        When working with Azure Container Apps, one topic that often causes confusion is the difference between <strong>plans</strong> and <strong>environment types</strong>.
+        At first glance they might seem related or interchangeable, but they actually represent two different layers of how Azure Container Apps works.
+      </p>
+      <p>
+        In this post, I walk through the difference between <strong>Consumption and Dedicated plans</strong>, and explain how they relate to
+        <strong>Container Apps environments</strong>.
+      </p>
+
+      <!-- <figure aria-labelledby="aca-icon-caption">
+        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azure Container Apps visual">
+          <defs>
+            <linearGradient id="postBg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0F1B2A"/>
+              <stop offset="1" stop-color="#15263A"/>
+            </linearGradient>
+            <linearGradient id="postRing" x1="84" y1="32" x2="556" y2="328" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2CD0F2"/>
+              <stop offset="1" stop-color="#34A9E6"/>
+            </linearGradient>
+            <linearGradient id="postCubeMain" x1="209" y1="90" x2="342" y2="272" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#A57AF4"/>
+              <stop offset="1" stop-color="#6D34D5"/>
+            </linearGradient>
+            <linearGradient id="postCubeLeft" x1="154" y1="114" x2="251" y2="224" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8A61E7"/>
+              <stop offset="1" stop-color="#6B3DD3"/>
+            </linearGradient>
+            <linearGradient id="postCubeRight" x1="344" y1="114" x2="452" y2="224" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#9B74EA"/>
+              <stop offset="1" stop-color="#7140D8"/>
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="638" height="358" rx="22" fill="url(#postBg)" stroke="#2E4460"/>
+          <path d="M128 77C160 45 203 27 250 27H391C442 27 488 48 521 83" stroke="url(#postRing)" stroke-width="16" stroke-linecap="round"/>
+          <path d="M517 279C485 312 441 332 392 332H249C199 332 154 311 122 278" stroke="url(#postRing)" stroke-width="16" stroke-linecap="round"/>
+          <circle cx="518" cy="74" r="31" fill="#32BDE8"/>
+          <circle cx="123" cy="285" r="31" fill="#32BDE8"/>
+          <path d="M293 90L388 120V246L293 272L198 246V120L293 90Z" fill="url(#postCubeMain)"/>
+          <path d="M198 120L293 90V216L198 246V120Z" fill="url(#postCubeLeft)"/>
+          <path d="M388 120L293 90V216L388 246V120Z" fill="url(#postCubeRight)"/>
+          <rect x="218" y="124" width="34" height="114" rx="4" fill="#A98BF0" opacity="0.45"/>
+          <rect x="264" y="136" width="30" height="98" rx="4" fill="#B195F6" opacity="0.35"/>
+          <path d="M420 140L515 122V238L420 255L389 246V120L420 140Z" fill="url(#postCubeRight)"/>
+          <rect x="412" y="134" width="103" height="128" rx="14" stroke="#0B1120" stroke-width="4"/>
+        </svg>
+        <figcaption id="aca-icon-caption">Azure Container Apps topic visual.</figcaption>
+      </figure> -->
+
+      <!-- <div class="diagram-block">
+        <svg viewBox="0 0 1100 540" role="img" aria-label="Azure Container Apps plans and environments diagram" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="panelBg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#1f2b3a"/>
+              <stop offset="100%" stop-color="#141d29"/>
+            </linearGradient>
+            <linearGradient id="accentA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#4fb8ff"/>
+              <stop offset="100%" stop-color="#2f87d1"/>
+            </linearGradient>
+            <linearGradient id="accentB" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffd073"/>
+              <stop offset="100%" stop-color="#f0a83f"/>
+            </linearGradient>
+            <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#8db7d9" />
+            </marker>
+          </defs>
+          <rect x="20" y="20" width="1060" height="500" rx="16" fill="#101721" stroke="#2c3c50"/>
+          <text x="70" y="75" fill="#f7f7f7" font-size="28" font-family="Inter, sans-serif" font-weight="600">Plans (how resources are billed)</text>
+          <text x="620" y="75" fill="#f7f7f7" font-size="28" font-family="Inter, sans-serif" font-weight="600">Environments (where apps run)</text>
+          <rect x="70" y="105" width="430" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
+          <rect x="70" y="295" width="430" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
+          <rect x="620" y="105" width="410" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
+          <rect x="620" y="295" width="410" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
+          <rect x="90" y="125" width="170" height="36" rx="8" fill="url(#accentA)"/>
+          <text x="105" y="149" fill="#0e1a27" font-size="20" font-family="Inter, sans-serif" font-weight="600">Consumption</text>
+          <text x="90" y="185" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Serverless, scales to zero</text>
+          <text x="90" y="212" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Pay per vCPU / memory / seconds</text>
+          <text x="90" y="239" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Best for variable traffic</text>
+          <rect x="90" y="315" width="140" height="36" rx="8" fill="url(#accentB)"/>
+          <text x="107" y="339" fill="#1f1610" font-size="20" font-family="Inter, sans-serif" font-weight="600">Dedicated</text>
+          <text x="90" y="375" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Uses workload profiles</text>
+          <text x="90" y="402" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Reserved managed capacity</text>
+          <text x="90" y="429" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Predictable performance</text>
+          <rect x="640" y="125" width="235" height="36" rx="8" fill="url(#accentA)"/>
+          <text x="655" y="149" fill="#0e1a27" font-size="20" font-family="Inter, sans-serif" font-weight="600">Consumption-only env</text>
+          <text x="640" y="185" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Runs Consumption plan apps only</text>
+          <text x="640" y="212" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- No workload profiles</text>
+          <rect x="640" y="315" width="245" height="36" rx="8" fill="url(#accentB)"/>
+          <text x="655" y="339" fill="#1f1610" font-size="20" font-family="Inter, sans-serif" font-weight="600">Workload profiles env</text>
+          <text x="640" y="375" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Runs both Consumption and Dedicated</text>
+          <text x="640" y="402" fill="#bcd4ea" font-size="18" font-family="Inter, sans-serif">- Supports mixed workloads</text>
+          <line x1="500" y1="185" x2="620" y2="185" stroke="#8db7d9" stroke-width="3" marker-end="url(#arrow)"/>
+          <line x1="500" y1="380" x2="620" y2="380" stroke="#8db7d9" stroke-width="3" marker-end="url(#arrow)"/>
+          <line x1="500" y1="338" x2="620" y2="338" stroke="#8db7d9" stroke-width="3" marker-end="url(#arrow)"/>
+          <text x="520" y="172" fill="#9ec4e3" font-size="14" font-family="Inter, sans-serif">supported in</text>
+          <text x="520" y="325" fill="#9ec4e3" font-size="14" font-family="Inter, sans-serif">also supported in</text>
+          <text x="520" y="367" fill="#9ec4e3" font-size="14" font-family="Inter, sans-serif">supported in</text>
+        </svg>
       </div>
 
-      <div class="sidebar-info_more">
-        <div class="separator"></div>
-        <ul class="contacts-list">
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-              <a href="mailto:dawit12mezemir@gmail.com" class="contact-link">dawit12mezemir@gmail.com</a>
-            </div>
-          </li>
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="phone-portrait-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-              <a href="tel:+393936787356" class="contact-link">+39 393 678 7356</a>
-            </div>
-          </li>
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="logo-linkedin"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">LinkedIn</p>
-              <a href="https://linkedin.com/in/dawit-anelay" class="contact-link" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a>
-            </div>
-          </li>
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="logo-github"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">GitHub</p>
-              <a href="https://github.com/dawitanelay" class="contact-link" target="_blank" rel="noreferrer">github.com/dawitanelay</a>
-            </div>
-          </li>
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-              <address>Pisa, Tuscany, Italy</address>
-            </div>
-          </li>
-        </ul>
+      <hr> -->
 
-        <div class="separator"></div>
+      <h2>Azure Container Apps Plans</h2>
+      <p>Azure Container Apps provides two main pricing and execution models: <strong>Consumption</strong> and <strong>Dedicated</strong>.</p>
 
-        <ul class="social-list">
-          <li class="social-item"><a href="https://github.com/dawitanelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
-          <li class="social-item"><a href="https://linkedin.com/in/dawit-anelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-          <li class="social-item"><a href="mailto:dawit12mezemir@gmail.com" class="social-link"><ion-icon name="mail-outline"></ion-icon></a></li>
-        </ul>
-      </div>
-    </aside>
+      <h3>Consumption Plan</h3>
+      <p>
+        The <strong>Consumption plan</strong> follows a serverless model. You do not reserve infrastructure or capacity ahead of time.
+        Instead, Azure automatically allocates the resources required when your application runs.
+      </p>
+      <p>Billing in the consumption plan is based on:</p>
+      <ul>
+        <li>vCPU usage</li>
+        <li>Memory usage (GiB)</li>
+        <li>Execution time in seconds</li>
+      </ul>
+      <p>
+        One of the biggest advantages of this model is that applications can <strong>scale to zero</strong>.
+        If there are no incoming requests or workloads, container instances stop running and you do not pay for compute during idle periods.
+      </p>
+      <p>This plan works well for:</p>
+      <ul>
+        <li>Event-driven applications</li>
+        <li>APIs with unpredictable traffic</li>
+        <li>Microservices that do not require constant compute capacity</li>
+      </ul>
 
-    <div class="main-content">
-      <nav class="navbar" aria-label="Primary navigation">
-        <ul class="navbar-list">
-          <li class="navbar-item"><a class="navbar-link" href="/">About</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="/categories/azure-developer-associate/">Journey</a></li>
-          <li class="navbar-item"><a class="navbar-link active" href="/categories/azure-developer-associate/">Journey</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="/resume/">Resume</a></li>
-        </ul>
-      </nav>
+      <h3>Dedicated Plan</h3>
+      <p>
+        The <strong>Dedicated plan</strong> provides a managed but reserved infrastructure environment.
+        Instead of paying only for usage, you allocate resources using <strong>workload profiles</strong>.
+      </p>
+      <p>A workload profile defines the amount of:</p>
+      <ul>
+        <li>CPU</li>
+        <li>Memory</li>
+        <li>Instance capacity</li>
+      </ul>
+      <p>
+        Multiple applications can run inside the same workload profile and share allocated resources.
+        Billing is based on resources allocated to each workload profile rather than individual app consumption.
+      </p>
+      <p>
+        Even though this plan reserves capacity, applications can still <strong>scale down to zero instances</strong>
+        if they are not actively running.
+      </p>
+      <p>This model is more suitable for workloads that require:</p>
+      <ul>
+        <li>Predictable performance</li>
+        <li>Consistent resource allocation</li>
+        <li>Dedicated compute capacity for multiple applications</li>
+      </ul>
 
-      <article>
-        <section class="article-shell">
-          <p>
-            When working with Azure Container Apps, one topic that often causes confusion is the difference between <strong>plans</strong> and <strong>environment types</strong>.
-            At first glance they might seem related or interchangeable, but they actually represent two different layers of how Azure Container Apps works.
-          </p>
-          <p>
-            In this post, I walk through the difference between <strong>Consumption and Dedicated plans</strong>, and explain how they relate to
-            <strong>Container Apps environments</strong>.
-          </p>
+      <h2>Understanding Container Apps Environments</h2>
+      <p>
+        The other concept that often gets mixed up with plans is the <strong>environment type</strong>.
+      </p>
+      <p>
+        A <strong>Container Apps environment</strong> is the boundary where container apps run.
+        It provides networking, observability, and isolation for applications deployed inside it.
+      </p>
+      <p>There are two environment types.</p>
 
-          <figure class="topic-illustration" aria-labelledby="aca-icon-caption">
-            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azure Container Apps visual">
-              <defs>
-                <linearGradient id="postBg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#0F1B2A"/>
-                  <stop offset="1" stop-color="#15263A"/>
-                </linearGradient>
-                <linearGradient id="postRing" x1="84" y1="32" x2="556" y2="328" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#2CD0F2"/>
-                  <stop offset="1" stop-color="#34A9E6"/>
-                </linearGradient>
-                <linearGradient id="postCubeMain" x1="209" y1="90" x2="342" y2="272" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#A57AF4"/>
-                  <stop offset="1" stop-color="#6D34D5"/>
-                </linearGradient>
-                <linearGradient id="postCubeLeft" x1="154" y1="114" x2="251" y2="224" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#8A61E7"/>
-                  <stop offset="1" stop-color="#6B3DD3"/>
-                </linearGradient>
-                <linearGradient id="postCubeRight" x1="344" y1="114" x2="452" y2="224" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#9B74EA"/>
-                  <stop offset="1" stop-color="#7140D8"/>
-                </linearGradient>
-              </defs>
-              <rect x="1" y="1" width="638" height="358" rx="22" fill="url(#postBg)" stroke="#2E4460"/>
-              <path d="M128 77C160 45 203 27 250 27H391C442 27 488 48 521 83" stroke="url(#postRing)" stroke-width="16" stroke-linecap="round"/>
-              <path d="M517 279C485 312 441 332 392 332H249C199 332 154 311 122 278" stroke="url(#postRing)" stroke-width="16" stroke-linecap="round"/>
-              <circle cx="518" cy="74" r="31" fill="#32BDE8"/>
-              <circle cx="123" cy="285" r="31" fill="#32BDE8"/>
-              <path d="M293 90L388 120V246L293 272L198 246V120L293 90Z" fill="url(#postCubeMain)"/>
-              <path d="M198 120L293 90V216L198 246V120Z" fill="url(#postCubeLeft)"/>
-              <path d="M388 120L293 90V216L388 246V120Z" fill="url(#postCubeRight)"/>
-              <rect x="218" y="124" width="34" height="114" rx="4" fill="#A98BF0" opacity="0.45"/>
-              <rect x="264" y="136" width="30" height="98" rx="4" fill="#B195F6" opacity="0.35"/>
-              <path d="M420 140L515 122V238L420 255L389 246V120L420 140Z" fill="url(#postCubeRight)"/>
-              <rect x="412" y="134" width="103" height="128" rx="14" stroke="#0B1120" stroke-width="4"/>
-            </svg>
-            <figcaption class="diagram-caption" id="aca-icon-caption">Azure Container Apps topic visual.</figcaption>
-          </figure>
+      <h3>Consumption-only Environment</h3>
+      <p>A <strong>Consumption-only environment</strong> supports only the Consumption plan.</p>
+      <p>This means:</p>
+      <ul>
+        <li>All applications run in serverless mode</li>
+        <li>Workload profiles are not available</li>
+        <li>Dedicated resources cannot be configured</li>
+      </ul>
+      <p>
+        This type of environment is simpler and is typically used when all workloads follow the serverless model.
+      </p>
 
-          <figure class="diagram-block">
-            <svg class="diagram-svg" viewBox="0 0 1100 540" role="img" aria-label="Azure Container Apps plans and environments diagram" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="panelBg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#1f2b3a"/>
-                  <stop offset="100%" stop-color="#141d29"/>
-                </linearGradient>
-                <linearGradient id="accentA" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#4fb8ff"/>
-                  <stop offset="100%" stop-color="#2f87d1"/>
-                </linearGradient>
-                <linearGradient id="accentB" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#ffd073"/>
-                  <stop offset="100%" stop-color="#f0a83f"/>
-                </linearGradient>
-                <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                  <polygon points="0 0, 10 3.5, 0 7" fill="#8db7d9" />
-                </marker>
-              </defs>
+      <h3>Workload Profiles Environment</h3>
+      <p>A <strong>Workload profiles environment</strong> is more flexible. It supports both:</p>
+      <ul>
+        <li>Consumption plan applications</li>
+        <li>Dedicated plan applications that use workload profiles</li>
+      </ul>
+      <p>
+        In this setup, some applications can run in serverless mode while others run on dedicated resources within workload profiles.
+        This allows teams to mix different workload requirements inside the same environment.
+      </p>
 
-              <rect x="20" y="20" width="1060" height="500" rx="16" fill="#101721" stroke="#2c3c50"/>
+      <h2>Key Differences to Remember</h2>
+      <p>A simple way to think about this is:</p>
+      <ul>
+        <li><strong>Plans define how resources are billed and allocated</strong></li>
+        <li><strong>Environments define where container apps run</strong></li>
+      </ul>
+      <p>Another useful rule:</p>
+      <ul>
+        <li>A <strong>Consumption-only environment</strong> supports only the <strong>Consumption plan</strong></li>
+        <li>A <strong>Workload profiles environment</strong> supports <strong>both Consumption and Dedicated plans</strong></li>
+      </ul>
 
-              <text x="70" y="75" fill="#f7f7f7" font-size="28" font-family="Poppins, sans-serif" font-weight="600">Plans (how resources are billed)</text>
-              <text x="620" y="75" fill="#f7f7f7" font-size="28" font-family="Poppins, sans-serif" font-weight="600">Environments (where apps run)</text>
+      <h2>Final Thoughts</h2>
+      <p>
+        Understanding the distinction between <strong>plans</strong> and <strong>environment types</strong> is important when designing containerized applications on Azure.
+        The choice depends largely on workload characteristics.
+      </p>
+      <p>
+        If your application benefits from serverless scaling and unpredictable traffic patterns, the <strong>Consumption plan</strong> is usually the best fit.
+        If you need predictable compute capacity and want to run multiple applications on reserved resources,
+        then <strong>Dedicated with workload profiles</strong> may be a better choice.
+      </p>
+      <p>
+        Choosing the right combination can help balance cost, performance, and operational flexibility.
+      </p>
 
-              <rect x="70" y="105" width="430" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
-              <rect x="70" y="295" width="430" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
+      <h2>References</h2>
+      <ul>
+        <li>
+          Microsoft Learn — Azure Container Apps environments and workload profiles<br>
+          <a href="https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview">learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview</a>
+        </li>
+        <li>
+          Microsoft Learn — Azure Container Apps pricing and plans<br>
+          <a href="https://learn.microsoft.com/en-us/azure/container-apps/plans">learn.microsoft.com/en-us/azure/container-apps/plans</a>
+        </li>
+      </ul>
+    </article>
 
-              <rect x="620" y="105" width="410" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
-              <rect x="620" y="295" width="410" height="170" rx="14" fill="url(#panelBg)" stroke="#32506d"/>
-
-              <rect x="90" y="125" width="170" height="36" rx="8" fill="url(#accentA)"/>
-              <text x="105" y="149" fill="#0e1a27" font-size="20" font-family="Poppins, sans-serif" font-weight="600">Consumption</text>
-              <text x="90" y="185" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Serverless, scales to zero</text>
-              <text x="90" y="212" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Pay per vCPU / memory / seconds</text>
-              <text x="90" y="239" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Best for variable traffic</text>
-
-              <rect x="90" y="315" width="140" height="36" rx="8" fill="url(#accentB)"/>
-              <text x="107" y="339" fill="#1f1610" font-size="20" font-family="Poppins, sans-serif" font-weight="600">Dedicated</text>
-              <text x="90" y="375" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Uses workload profiles</text>
-              <text x="90" y="402" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Reserved managed capacity</text>
-              <text x="90" y="429" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Predictable performance</text>
-
-              <rect x="640" y="125" width="235" height="36" rx="8" fill="url(#accentA)"/>
-              <text x="655" y="149" fill="#0e1a27" font-size="20" font-family="Poppins, sans-serif" font-weight="600">Consumption-only env</text>
-              <text x="640" y="185" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Runs Consumption plan apps only</text>
-              <text x="640" y="212" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- No workload profiles</text>
-
-              <rect x="640" y="315" width="245" height="36" rx="8" fill="url(#accentB)"/>
-              <text x="655" y="339" fill="#1f1610" font-size="20" font-family="Poppins, sans-serif" font-weight="600">Workload profiles env</text>
-              <text x="640" y="375" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Runs both Consumption and Dedicated</text>
-              <text x="640" y="402" fill="#bcd4ea" font-size="18" font-family="Poppins, sans-serif">- Supports mixed workloads</text>
-
-              <line x1="500" y1="185" x2="620" y2="185" stroke="#8db7d9" stroke-width="3" marker-end="url(#arrow)"/>
-              <line x1="500" y1="380" x2="620" y2="380" stroke="#8db7d9" stroke-width="3" marker-end="url(#arrow)"/>
-              <line x1="500" y1="338" x2="620" y2="338" stroke="#8db7d9" stroke-width="3" marker-end="url(#arrow)"/>
-
-              <text x="520" y="172" fill="#9ec4e3" font-size="14" font-family="Poppins, sans-serif">supported in</text>
-              <text x="520" y="325" fill="#9ec4e3" font-size="14" font-family="Poppins, sans-serif">also supported in</text>
-              <text x="520" y="367" fill="#9ec4e3" font-size="14" font-family="Poppins, sans-serif">supported in</text>
-            </svg>
-          </figure>
-
-          <hr class="rule" />
-
-          <h2>Azure Container Apps Plans</h2>
-          <p>Azure Container Apps provides two main pricing and execution models: <strong>Consumption</strong> and <strong>Dedicated</strong>.</p>
-
-          <h3>Consumption Plan</h3>
-          <p>
-            The <strong>Consumption plan</strong> follows a serverless model. You do not reserve infrastructure or capacity ahead of time.
-            Instead, Azure automatically allocates the resources required when your application runs.
-          </p>
-          <p>Billing in the consumption plan is based on:</p>
-          <ul>
-            <li>vCPU usage</li>
-            <li>Memory usage (GiB)</li>
-            <li>Execution time in seconds</li>
-          </ul>
-          <p>
-            One of the biggest advantages of this model is that applications can <strong>scale to zero</strong>.
-            If there are no incoming requests or workloads, container instances stop running and you do not pay for compute during idle periods.
-          </p>
-          <p>This plan works well for:</p>
-          <ul>
-            <li>Event-driven applications</li>
-            <li>APIs with unpredictable traffic</li>
-            <li>Microservices that do not require constant compute capacity</li>
-          </ul>
-
-          <h3>Dedicated Plan</h3>
-          <p>
-            The <strong>Dedicated plan</strong> provides a managed but reserved infrastructure environment.
-            Instead of paying only for usage, you allocate resources using <strong>workload profiles</strong>.
-          </p>
-          <p>A workload profile defines the amount of:</p>
-          <ul>
-            <li>CPU</li>
-            <li>Memory</li>
-            <li>Instance capacity</li>
-          </ul>
-          <p>
-            Multiple applications can run inside the same workload profile and share allocated resources.
-            Billing is based on resources allocated to each workload profile rather than individual app consumption.
-          </p>
-          <p>
-            Even though this plan reserves capacity, applications can still <strong>scale down to zero instances</strong>
-            if they are not actively running.
-          </p>
-          <p>This model is more suitable for workloads that require:</p>
-          <ul>
-            <li>Predictable performance</li>
-            <li>Consistent resource allocation</li>
-            <li>Dedicated compute capacity for multiple applications</li>
-          </ul>
-
-          <h2>Understanding Container Apps Environments</h2>
-          <p>
-            The other concept that often gets mixed up with plans is the <strong>environment type</strong>.
-          </p>
-          <p>
-            A <strong>Container Apps environment</strong> is the boundary where container apps run.
-            It provides networking, observability, and isolation for applications deployed inside it.
-          </p>
-          <p>There are two environment types.</p>
-
-          <h3>Consumption-only Environment</h3>
-          <p>A <strong>Consumption-only environment</strong> supports only the Consumption plan.</p>
-          <p>This means:</p>
-          <ul>
-            <li>All applications run in serverless mode</li>
-            <li>Workload profiles are not available</li>
-            <li>Dedicated resources cannot be configured</li>
-          </ul>
-          <p>
-            This type of environment is simpler and is typically used when all workloads follow the serverless model.
-          </p>
-
-          <h3>Workload Profiles Environment</h3>
-          <p>
-            A <strong>Workload profiles environment</strong> is more flexible. It supports both:
-          </p>
-          <ul>
-            <li>Consumption plan applications</li>
-            <li>Dedicated plan applications that use workload profiles</li>
-          </ul>
-          <p>
-            In this setup, some applications can run in serverless mode while others run on dedicated resources within workload profiles.
-            This allows teams to mix different workload requirements inside the same environment.
-          </p>
-
-          <h2>Key Differences to Remember</h2>
-          <p>A simple way to think about this is:</p>
-          <ul>
-            <li><strong>Plans define how resources are billed and allocated</strong></li>
-            <li><strong>Environments define where container apps run</strong></li>
-          </ul>
-          <p>Another useful rule:</p>
-          <ul>
-            <li>A <strong>Consumption-only environment</strong> supports only the <strong>Consumption plan</strong></li>
-            <li>A <strong>Workload profiles environment</strong> supports <strong>both Consumption and Dedicated plans</strong></li>
-          </ul>
-
-          <h2>Final Thoughts</h2>
-          <p>
-            Understanding the distinction between <strong>plans</strong> and <strong>environment types</strong> is important when designing containerized applications on Azure.
-            The choice depends largely on workload characteristics.
-          </p>
-          <p>
-            If your application benefits from serverless scaling and unpredictable traffic patterns, the <strong>Consumption plan</strong> is usually the best fit.
-            If you need predictable compute capacity and want to run multiple applications on reserved resources,
-            then <strong>Dedicated with workload profiles</strong> may be a better choice.
-          </p>
-          <p>
-            Choosing the right combination can help balance cost, performance, and operational flexibility.
-          </p>
-
-          <h2>References</h2>
-          <ul>
-            <li>
-              Microsoft Learn - Azure Container Apps environments and workload profiles<br>
-              <a class="inline-link" href="https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview">https://learn.microsoft.com/en-us/azure/container-apps/workload-profiles-overview</a>
-            </li>
-            <li>
-              Microsoft Learn - Azure Container Apps pricing and plans<br>
-              <a class="inline-link" href="https://learn.microsoft.com/en-us/azure/container-apps/plans">https://learn.microsoft.com/en-us/azure/container-apps/plans</a>
-            </li>
-          </ul>
-
-          <hr class="rule">
-          <p>
-            Continue this learning path:
-            <a class="inline-link" href="/categories/azure-developer-associate/">Azure Developer Associate Journey</a>
-          </p>
-        </section>
-      </article>
+    <div class="post-footer">
+      Continue this learning path: <a href="/blog/">Azure Developer Associate Journey →</a>
     </div>
   </main>
+</div>
 
-  <script>
-    'use strict';
-    var sidebar = document.querySelector('[data-sidebar]');
-    var sidebarBtn = document.querySelector('[data-sidebar-btn]');
+<script src="/content.js"></script>
+<script src="/layout.js"></script>
+<script>
+  buildNav('/');
+  buildSidebar();
+</script>
 
-    if (sidebar && sidebarBtn) {
-      sidebarBtn.addEventListener('click', function () {
-        sidebar.classList.toggle('active');
-      });
-    }
-  </script>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" crossorigin="anonymous"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

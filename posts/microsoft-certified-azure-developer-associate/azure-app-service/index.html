@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azure App Service — Key Concepts for the Developer Associate | Dawit Mezemir Anelay</title>
+  <meta name="description" content="Study notes on Azure App Service: plans, deployment, scaling, slots, and authentication for the Azure Developer Associate exam.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif; color: #333; background: #fff; line-height: 1.6; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    .site-nav { border-bottom: 1px solid #e5e7eb; background: #fff; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 2px; height: 50px; overflow-x: auto; scrollbar-width: none; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-home { font-weight: 600; font-size: 0.9rem; color: #111; margin-right: 10px; white-space: nowrap; flex-shrink: 0; }
+    .nav-home:hover { text-decoration: none; color: #2563eb; }
+    .nav-inner a { font-size: 0.82rem; color: #555; padding: 5px 10px; border-radius: 5px; transition: background 0.12s, color 0.12s; white-space: nowrap; flex-shrink: 0; }
+    .nav-inner a:hover { background: #f3f4f6; color: #111; text-decoration: none; }
+    .page { max-width: 1060px; margin: 0 auto; padding: 36px 24px 64px; display: flex; gap: 48px; align-items: flex-start; }
+    .sidebar { width: 210px; flex-shrink: 0; position: sticky; top: 66px; }
+    .sidebar-photo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
+    .sidebar-name { font-size: 0.97rem; font-weight: 600; color: #111; margin-bottom: 5px; line-height: 1.3; }
+    .sidebar-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 18px; line-height: 1.5; }
+    .sidebar-contacts { display: flex; flex-direction: column; gap: 8px; }
+    .sidebar-contacts li { display: flex; gap: 8px; align-items: flex-start; }
+    .contact-icon { display: flex; align-items: center; width: 20px; flex-shrink: 0; color: #9ca3af; margin-top: 1px; }
+    .contact-value { font-size: 0.78rem; color: #374151; overflow-wrap: anywhere; }
+    .contact-value a { color: #374151; }
+    .contact-value a:hover { color: #2563eb; text-decoration: none; }
+    .available-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 0.74rem; color: #15803d; border: 1px solid #bbf7d0; background: #f0fdf4; padding: 4px 10px; border-radius: 999px; }
+    .available-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+    .main { flex: 1; min-width: 0; }
+    .post-back { font-size: 0.82rem; margin-bottom: 20px; }
+    .post-back a { color: #6b7280; }
+    .post-back a:hover { color: #2563eb; text-decoration: none; }
+    .post-title { font-size: 1.35rem; font-weight: 600; color: #111; line-height: 1.35; margin-bottom: 10px; }
+    .post-meta { font-size: 0.8rem; color: #9ca3af; margin-bottom: 28px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .post-tag { font-size: 0.72rem; padding: 2px 8px; background: #eff6ff; color: #2563eb; border-radius: 999px; border: 1px solid #bfdbfe; }
+    .post-body { font-size: 0.9rem; line-height: 1.75; color: #374151; }
+    .post-body p { margin-bottom: 14px; }
+    .post-body h2 { font-size: 1.1rem; font-weight: 600; color: #111; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #f3f4f6; }
+    .post-body h3 { font-size: 0.95rem; font-weight: 600; color: #111; margin: 22px 0 8px; }
+    .post-body ul { padding-left: 18px; margin-bottom: 14px; }
+    .post-body ul li { list-style: disc; margin-bottom: 5px; color: #4b5563; }
+    .post-body strong { color: #111; font-weight: 600; }
+    .post-body hr { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+    .post-body a { color: #2563eb; }
+    .post-footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 0.85rem; color: #6b7280; }
+    @media (max-width: 720px) {
+      .page { flex-direction: column; gap: 28px; padding: 20px 16px 48px; }
+      .sidebar { width: 100%; position: static; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .sidebar-photo { margin-bottom: 0; }
+      .sidebar-info { flex: 1; min-width: 160px; }
+      .sidebar-contacts { margin-top: 14px; width: 100%; }
+      .post-title { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner" id="site-nav"></div>
+</nav>
+
+<div class="page">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+    <div class="post-back"><a href="/blog/">← Blog</a></div>
+
+    <h1 class="post-title">Azure App Service — Key Concepts for the Developer Associate</h1>
+
+    <div class="post-meta">
+      <span>2024-01-18</span>
+      <span class="post-tag">Azure</span>
+      <span class="post-tag">App Service</span>
+      <span class="post-tag">Azure Developer Associate</span>
+    </div>
+
+    <article class="post-body">
+
+      <p>
+        Azure App Service is a fully managed PaaS (Platform as a Service) offering for hosting web applications, REST APIs, and mobile backends.
+        It abstracts infrastructure management and lets you focus on application code.
+        For the Azure Developer Associate exam, understanding how App Service works under the hood matters more than just knowing that it exists.
+      </p>
+
+      <h2>App Service Plans</h2>
+      <p>
+        Every App Service app runs inside an <strong>App Service Plan</strong>, which defines the region, the number of VM instances, and the pricing tier.
+        The plan is the unit of compute — not the app itself.
+      </p>
+      <p>Multiple apps can share the same plan and therefore share the same compute resources.</p>
+
+      <h3>Pricing tiers</h3>
+      <ul>
+        <li><strong>Free / Shared</strong> — shared infrastructure, no SLA, development only</li>
+        <li><strong>Basic</strong> — dedicated VMs, manual scaling, no deployment slots</li>
+        <li><strong>Standard</strong> — auto-scaling, up to 5 deployment slots, daily backups</li>
+        <li><strong>Premium</strong> — more scale-out instances, more slots, VNet integration</li>
+        <li><strong>Isolated</strong> — runs in an App Service Environment (ASE), fully private networking</li>
+      </ul>
+
+      <h2>Deployment Slots</h2>
+      <p>
+        Deployment slots are live environments within the same App Service app — for example <code>production</code> and <code>staging</code>.
+        Each slot has its own hostname and can run independently.
+      </p>
+      <p>
+        The key feature is <strong>slot swapping</strong>: you swap staging into production with zero downtime.
+        During a swap, App Service warms up the staging slot before routing traffic, so users never hit a cold instance.
+      </p>
+      <h3>Slot settings</h3>
+      <ul>
+        <li>App settings and connection strings marked as <strong>slot-specific</strong> stay with the slot and do not follow the swap</li>
+        <li>Settings not marked as slot-specific are swapped along with the code</li>
+        <li>This lets staging point to a staging database while production points to the production database — without changing config after a swap</li>
+      </ul>
+
+      <h2>Scaling</h2>
+      <h3>Scale up (vertical)</h3>
+      <p>Move to a higher pricing tier to get more CPU, memory, and features. Requires a plan change.</p>
+
+      <h3>Scale out (horizontal)</h3>
+      <p>
+        Add more VM instances to handle load. Available from Standard tier upward.
+        Can be configured manually (fixed instance count) or automatically with <strong>autoscale rules</strong> based on metrics like CPU, memory, or HTTP queue length.
+      </p>
+
+      <h2>Custom Domains and TLS</h2>
+      <ul>
+        <li>Custom domains are mapped via CNAME or A records in your DNS provider</li>
+        <li>App Service can manage TLS certificates for you (App Service Managed Certificate — free for apex and subdomains)</li>
+        <li>You can also upload your own certificate or use a certificate stored in Azure Key Vault</li>
+        <li>HTTPS-only enforcement is a one-setting toggle on the app</li>
+      </ul>
+
+      <h2>Authentication and Authorization</h2>
+      <p>
+        App Service has a built-in authentication layer called <strong>Easy Auth</strong> (also referred to as the App Service Authentication feature).
+        It sits in front of your application code and handles token validation, session management, and identity provider federation.
+      </p>
+      <h3>Supported identity providers</h3>
+      <ul>
+        <li>Microsoft Entra ID (Azure AD)</li>
+        <li>Google, Facebook, Twitter</li>
+        <li>Any OpenID Connect-compliant provider</li>
+      </ul>
+      <p>
+        With Easy Auth enabled, incoming requests carry the validated identity in HTTP headers (<code>X-MS-CLIENT-PRINCIPAL</code>),
+        so your application code can read claims without handling token validation itself.
+      </p>
+
+      <h2>Networking</h2>
+      <h3>Inbound</h3>
+      <ul>
+        <li><strong>Access restrictions</strong> — IP allow/deny rules at the platform level</li>
+        <li><strong>Private endpoints</strong> — expose the app on a private IP inside a VNet (Premium and higher)</li>
+      </ul>
+      <h3>Outbound</h3>
+      <ul>
+        <li><strong>VNet Integration</strong> — lets the app make outbound calls to resources inside a VNet</li>
+        <li>Does not give the app a private inbound address, only outbound routing through the VNet</li>
+      </ul>
+
+      <h2>App Settings and Configuration</h2>
+      <ul>
+        <li>App settings are injected as environment variables at runtime</li>
+        <li>Connection strings follow the same pattern with type-prefixed variable names</li>
+        <li>Settings can reference <strong>Azure Key Vault</strong> using Key Vault references: <code>@Microsoft.KeyVault(SecretUri=...)</code></li>
+        <li>The app must have a managed identity with read access to the Key Vault secret</li>
+      </ul>
+
+      <h2>Deployment Options</h2>
+      <ul>
+        <li><strong>ZIP deploy</strong> — push a zip archive via the Kudu API or Azure CLI</li>
+        <li><strong>GitHub Actions / Azure DevOps</strong> — CI/CD pipelines with the Azure Web Apps deploy task</li>
+        <li><strong>Container registry</strong> — deploy a Docker image directly from ACR or Docker Hub</li>
+        <li><strong>Run from package</strong> — mount the deployment package directly without extracting; faster cold starts</li>
+      </ul>
+
+      <hr>
+
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-us/azure/app-service/overview">Azure App Service overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots">Set up staging environments — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/app-service/overview-authentication-authorization">Authentication and authorization in App Service — Microsoft Learn</a></li>
+      </ul>
+
+    </article>
+
+    <div class="post-footer">
+      Continue this learning path: <a href="/blog/">Azure Developer Associate Journey →</a>
+    </div>
+  </main>
+</div>
+
+<script src="/content.js"></script>
+<script src="/layout.js"></script>
+<script>
+  buildNav('/');
+  buildSidebar();
+</script>
+
+</body>
+</html>

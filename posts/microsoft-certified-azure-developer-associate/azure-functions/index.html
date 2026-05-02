@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azure Functions — Triggers, Bindings, and Hosting Plans | Dawit Mezemir Anelay</title>
+  <meta name="description" content="Study notes on Azure Functions: triggers, bindings, Durable Functions, and hosting plan differences for the Azure Developer Associate exam.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif; color: #333; background: #fff; line-height: 1.6; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    .site-nav { border-bottom: 1px solid #e5e7eb; background: #fff; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 2px; height: 50px; overflow-x: auto; scrollbar-width: none; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-home { font-weight: 600; font-size: 0.9rem; color: #111; margin-right: 10px; white-space: nowrap; flex-shrink: 0; }
+    .nav-home:hover { text-decoration: none; color: #2563eb; }
+    .nav-inner a { font-size: 0.82rem; color: #555; padding: 5px 10px; border-radius: 5px; transition: background 0.12s, color 0.12s; white-space: nowrap; flex-shrink: 0; }
+    .nav-inner a:hover { background: #f3f4f6; color: #111; text-decoration: none; }
+    .page { max-width: 1060px; margin: 0 auto; padding: 36px 24px 64px; display: flex; gap: 48px; align-items: flex-start; }
+    .sidebar { width: 210px; flex-shrink: 0; position: sticky; top: 66px; }
+    .sidebar-photo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
+    .sidebar-name { font-size: 0.97rem; font-weight: 600; color: #111; margin-bottom: 5px; line-height: 1.3; }
+    .sidebar-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 18px; line-height: 1.5; }
+    .sidebar-contacts { display: flex; flex-direction: column; gap: 8px; }
+    .sidebar-contacts li { display: flex; gap: 8px; align-items: flex-start; }
+    .contact-icon { display: flex; align-items: center; width: 20px; flex-shrink: 0; color: #9ca3af; margin-top: 1px; }
+    .contact-value { font-size: 0.78rem; color: #374151; overflow-wrap: anywhere; }
+    .contact-value a { color: #374151; }
+    .contact-value a:hover { color: #2563eb; text-decoration: none; }
+    .available-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 0.74rem; color: #15803d; border: 1px solid #bbf7d0; background: #f0fdf4; padding: 4px 10px; border-radius: 999px; }
+    .available-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+    .main { flex: 1; min-width: 0; }
+    .post-back { font-size: 0.82rem; margin-bottom: 20px; }
+    .post-back a { color: #6b7280; }
+    .post-back a:hover { color: #2563eb; text-decoration: none; }
+    .post-title { font-size: 1.35rem; font-weight: 600; color: #111; line-height: 1.35; margin-bottom: 10px; }
+    .post-meta { font-size: 0.8rem; color: #9ca3af; margin-bottom: 28px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .post-tag { font-size: 0.72rem; padding: 2px 8px; background: #eff6ff; color: #2563eb; border-radius: 999px; border: 1px solid #bfdbfe; }
+    .post-body { font-size: 0.9rem; line-height: 1.75; color: #374151; }
+    .post-body p { margin-bottom: 14px; }
+    .post-body h2 { font-size: 1.1rem; font-weight: 600; color: #111; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #f3f4f6; }
+    .post-body h3 { font-size: 0.95rem; font-weight: 600; color: #111; margin: 22px 0 8px; }
+    .post-body ul { padding-left: 18px; margin-bottom: 14px; }
+    .post-body ul li { list-style: disc; margin-bottom: 5px; color: #4b5563; }
+    .post-body strong { color: #111; font-weight: 600; }
+    .post-body hr { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+    .post-body a { color: #2563eb; }
+    .post-footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 0.85rem; color: #6b7280; }
+    @media (max-width: 720px) {
+      .page { flex-direction: column; gap: 28px; padding: 20px 16px 48px; }
+      .sidebar { width: 100%; position: static; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .sidebar-photo { margin-bottom: 0; }
+      .sidebar-info { flex: 1; min-width: 160px; }
+      .sidebar-contacts { margin-top: 14px; width: 100%; }
+      .post-title { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner" id="site-nav"></div>
+</nav>
+
+<div class="page">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+    <div class="post-back"><a href="/blog/">← Blog</a></div>
+
+    <h1 class="post-title">Azure Functions — Triggers, Bindings, and Hosting Plans</h1>
+
+    <div class="post-meta">
+      <span>2024-02-01</span>
+      <span class="post-tag">Azure</span>
+      <span class="post-tag">Serverless</span>
+      <span class="post-tag">Azure Developer Associate</span>
+    </div>
+
+    <article class="post-body">
+
+      <p>
+        Azure Functions is the serverless compute service in Azure. You write event-driven code and Azure manages the underlying infrastructure, scaling, and execution.
+        For the Developer Associate exam, the focus is on how triggers and bindings work, the differences between hosting plans, and when to use Durable Functions.
+      </p>
+
+      <h2>Triggers and Bindings</h2>
+      <p>
+        Every function has exactly <strong>one trigger</strong> — the event that causes it to run.
+        Bindings are optional connections to other services that allow the function to read input or write output without writing connection code manually.
+      </p>
+
+      <h3>Common triggers</h3>
+      <ul>
+        <li><strong>HTTP trigger</strong> — invoked by an HTTP request; used to build APIs and webhooks</li>
+        <li><strong>Timer trigger</strong> — runs on a CRON schedule; useful for recurring jobs</li>
+        <li><strong>Blob trigger</strong> — fires when a blob is added or updated in Azure Storage</li>
+        <li><strong>Queue trigger</strong> — fires when a message is added to an Azure Storage Queue</li>
+        <li><strong>Service Bus trigger</strong> — fires on messages in Service Bus queues or topics</li>
+        <li><strong>Event Hub trigger</strong> — fires on events in an Event Hub stream</li>
+        <li><strong>Cosmos DB trigger</strong> — fires on changes in a Cosmos DB change feed</li>
+      </ul>
+
+      <h3>Input and output bindings</h3>
+      <ul>
+        <li>Input bindings load data into the function (e.g. read a blob, read a Cosmos DB document)</li>
+        <li>Output bindings write results out (e.g. write to a queue, insert into Cosmos DB, send an email via SendGrid)</li>
+        <li>Bindings are declared in <code>function.json</code> (in-process model) or as attributes/decorators (isolated worker model)</li>
+      </ul>
+
+      <h2>Hosting Plans</h2>
+      <p>The hosting plan controls scaling behaviour, cold start characteristics, and cost.</p>
+
+      <h3>Consumption plan</h3>
+      <ul>
+        <li>Scales automatically based on incoming events</li>
+        <li>Scales to zero when idle — you pay only for executions</li>
+        <li>Subject to a <strong>cold start</strong> when scaled to zero</li>
+        <li>Execution timeout: 5 minutes default, 10 minutes maximum</li>
+      </ul>
+
+      <h3>Premium plan (Elastic Premium)</h3>
+      <ul>
+        <li>Pre-warmed instances eliminate cold starts</li>
+        <li>VNet integration supported</li>
+        <li>Longer execution timeouts (up to 60 minutes)</li>
+        <li>More powerful instance sizes available</li>
+        <li>Minimum one always-warm instance (billed continuously)</li>
+      </ul>
+
+      <h3>Dedicated (App Service) plan</h3>
+      <ul>
+        <li>Functions run on the same VMs as App Service apps</li>
+        <li>No cold starts — instances are always running</li>
+        <li>You manage scaling manually or with autoscale rules</li>
+        <li>Useful when you already pay for App Service capacity</li>
+      </ul>
+
+      <h2>Durable Functions</h2>
+      <p>
+        Durable Functions extend Azure Functions with <strong>stateful orchestration</strong>.
+        They allow you to write long-running workflows as code without managing state, checkpointing, or restarts.
+      </p>
+
+      <h3>Core patterns</h3>
+      <ul>
+        <li><strong>Function chaining</strong> — execute a sequence of functions in order, passing output to the next</li>
+        <li><strong>Fan-out / fan-in</strong> — execute multiple functions in parallel, then aggregate results</li>
+        <li><strong>Async HTTP APIs</strong> — start a long job, poll for status using a generated status URL</li>
+        <li><strong>Human interaction</strong> — pause the orchestration and wait for an external event (e.g. approval)</li>
+        <li><strong>Monitor</strong> — poll a condition at intervals until it becomes true</li>
+        <li><strong>Saga / compensating transactions</strong> — coordinate multi-step transactions with rollback on failure</li>
+      </ul>
+
+      <h3>Key components</h3>
+      <ul>
+        <li><strong>Orchestrator function</strong> — defines the workflow using <code>yield</code> / <code>await</code> patterns; must be deterministic</li>
+        <li><strong>Activity function</strong> — does the actual work; called by the orchestrator</li>
+        <li><strong>Entity function</strong> — manages small pieces of durable state (virtual actors pattern)</li>
+      </ul>
+
+      <h2>Function App Configuration</h2>
+      <ul>
+        <li>Functions are grouped inside a <strong>Function App</strong> — this is the deployment and management unit</li>
+        <li>All functions in a Function App share the same plan, storage account, and app settings</li>
+        <li>App settings are injected as environment variables, just like App Service</li>
+        <li>Key Vault references work the same way: <code>@Microsoft.KeyVault(SecretUri=...)</code></li>
+      </ul>
+
+      <h2>Security</h2>
+      <h3>HTTP trigger authorization levels</h3>
+      <ul>
+        <li><strong>Anonymous</strong> — no key required, anyone can call the endpoint</li>
+        <li><strong>Function</strong> — a per-function key must be included in the request</li>
+        <li><strong>Admin</strong> — the host master key is required</li>
+      </ul>
+      <p>
+        For production APIs, prefer placing the function behind API Management rather than relying on function keys for access control.
+      </p>
+
+      <hr>
+
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview">Azure Functions overview — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-triggers-bindings">Triggers and bindings concepts — Microsoft Learn</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview">Durable Functions overview — Microsoft Learn</a></li>
+      </ul>
+
+    </article>
+
+    <div class="post-footer">
+      Continue this learning path: <a href="/blog/">Azure Developer Associate Journey →</a>
+    </div>
+  </main>
+</div>
+
+<script src="/content.js"></script>
+<script src="/layout.js"></script>
+<script>
+  buildNav('/');
+  buildSidebar();
+</script>
+
+</body>
+</html>

@@ -1,1116 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dawit Mezemir Anelay | DevOps Engineer, Blog, and Activities</title>
-	<meta name="description" content="Dawit Mezemir Anelay home page: resume, thesis research, DevOps blog, and beyond-career activities like books and learning notes.">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-	<style>
-		:root {
-			--bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
-			--bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.25) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
-			--bg-gradient-yellow-1: linear-gradient(to bottom right, hsl(45, 100%, 71%) 0%, hsla(36, 100%, 69%, 0) 50%);
-			--bg-gradient-yellow-2: linear-gradient(135deg, hsla(45, 100%, 71%, 0.25) 0%, hsla(35, 100%, 68%, 0) 60%), hsl(240, 2%, 13%);
-			--border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 50%);
-			--text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 100%, 68%));
-			--jet: hsl(0, 0%, 22%);
-			--onyx: hsl(240, 1%, 17%);
-			--eerie-black-1: hsl(240, 2%, 13%);
-			--eerie-black-2: hsl(240, 2%, 12%);
-			--smoky-black: hsl(0, 0%, 7%);
-			--white-1: hsl(0, 0%, 100%);
-			--white-2: hsl(0, 0%, 98%);
-			--orange-yellow-crayola: hsl(45, 100%, 72%);
-			--light-gray: hsl(0, 0%, 84%);
-			--light-gray-70: hsla(0, 0%, 84%, 0.7);
-			--accent-blue: hsl(205, 88%, 65%);
-			--ff-poppins: "Poppins", sans-serif;
-			--fs-1: 24px;
-			--fs-2: 18px;
-			--fs-3: 17px;
-			--fs-4: 16px;
-			--fs-5: 15px;
-			--fs-6: 14px;
-			--fs-7: 13px;
-			--fs-8: 11px;
-			--fw-300: 300;
-			--fw-400: 400;
-			--fw-500: 500;
-			--fw-600: 600;
-			--shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
-			--shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
-			--transition-1: 0.25s ease;
-			--transition-2: 0.5s ease-in-out;
-		}
-
-		*, *::before, *::after {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-
-		html { font-family: var(--ff-poppins); }
-
-		body {
-			background:
-				radial-gradient(circle at 10% 0%, rgba(255, 211, 93, 0.12), transparent 24%),
-				radial-gradient(circle at 88% 12%, rgba(40, 147, 255, 0.1), transparent 20%),
-				var(--smoky-black);
-			color: var(--light-gray);
-			min-height: 100vh;
-		}
-
-		a { text-decoration: none; color: inherit; }
-		li { list-style: none; }
-		img, ion-icon, a, button, time, span { display: block; }
-		button {
-			font: inherit;
-			background: none;
-			border: none;
-			text-align: left;
-			cursor: pointer;
-		}
-
-		::selection {
-			background: var(--orange-yellow-crayola);
-			color: var(--smoky-black);
-		}
-
-		.sidebar,
-		article {
-			background: var(--eerie-black-2);
-			border: 1px solid var(--jet);
-			border-radius: 20px;
-			padding: 15px;
-			box-shadow: var(--shadow-1);
-			z-index: 1;
-		}
-
-		.separator {
-			width: 100%;
-			height: 1px;
-			background: var(--jet);
-			margin: 16px 0;
-		}
-
-		.icon-box {
-			position: relative;
-			background: var(--border-gradient-onyx);
-			width: 30px;
-			height: 30px;
-			border-radius: 8px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 16px;
-			color: var(--orange-yellow-crayola);
-			box-shadow: var(--shadow-1);
-			z-index: 1;
-			flex-shrink: 0;
-		}
-
-		.icon-box::before {
-			content: "";
-			position: absolute;
-			inset: 1px;
-			background: var(--eerie-black-1);
-			border-radius: inherit;
-			z-index: -1;
-		}
-
-		.icon-box ion-icon { --ionicon-stroke-width: 35px; }
-
-		.h2, .h3, .h4 {
-			color: var(--white-2);
-			text-transform: capitalize;
-		}
-
-		.h2 { font-size: var(--fs-1); }
-		.h3 { font-size: var(--fs-2); }
-		.h4 { font-size: var(--fs-4); }
-
-		.article-title {
-			position: relative;
-			padding-bottom: 7px;
-			margin-bottom: 20px;
-		}
-
-		.article-title::after {
-			content: "";
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 30px;
-			height: 3px;
-			background: var(--text-gradient-yellow);
-			border-radius: 3px;
-		}
-
-		.content-card {
-			position: relative;
-			background: var(--border-gradient-onyx);
-			padding: 18px;
-			border-radius: 14px;
-			box-shadow: var(--shadow-2);
-			z-index: 1;
-		}
-
-		.content-card::before {
-			content: "";
-			position: absolute;
-			inset: 1px;
-			background: var(--bg-gradient-jet);
-			border-radius: inherit;
-			z-index: -1;
-		}
-
-		main {
-			margin: 15px 12px;
-			margin-bottom: 32px;
-			min-width: 259px;
-		}
-
-		.sidebar {
-			margin-bottom: 15px;
-			max-height: 130px;
-			overflow: hidden;
-			transition: var(--transition-2);
-		}
-
-		.sidebar.active { max-height: 600px; }
-
-		.sidebar-info {
-			position: relative;
-			display: flex;
-			align-items: center;
-			gap: 15px;
-		}
-
-		.avatar-box {
-			width: 80px;
-			height: 80px;
-			border-radius: 20px;
-			background: var(--bg-gradient-onyx);
-			display: grid;
-			place-items: center;
-			color: var(--white-2);
-			font-size: 28px;
-			font-weight: var(--fw-600);
-			letter-spacing: 0.08em;
-			position: relative;
-			overflow: hidden;
-		}
-
-		.avatar-box img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			border-radius: inherit;
-		}
-
-		.avatar-box::after {
-			content: "";
-			position: absolute;
-			inset: 1px;
-			border-radius: inherit;
-			background:
-				radial-gradient(circle at top left, rgba(255, 215, 102, 0.22), transparent 38%),
-				linear-gradient(135deg, rgba(41, 90, 255, 0.24), rgba(255, 181, 64, 0.14)),
-				var(--eerie-black-1);
-			z-index: -1;
-		}
-
-		.info-content .name {
-			color: var(--white-2);
-			font-size: var(--fs-3);
-			font-weight: var(--fw-500);
-			letter-spacing: -0.25px;
-			margin-bottom: 10px;
-		}
-
-		.info-content .title {
-			color: var(--white-1);
-			background: var(--onyx);
-			font-size: var(--fs-8);
-			font-weight: var(--fw-300);
-			width: max-content;
-			padding: 5px 12px;
-			border-radius: 8px;
-			line-height: 1.5;
-		}
-
-		.info_more-btn {
-			position: absolute;
-			top: -15px;
-			right: -15px;
-			border-radius: 0 15px;
-			font-size: 13px;
-			color: var(--orange-yellow-crayola);
-			background: var(--border-gradient-onyx);
-			padding: 10px;
-			box-shadow: var(--shadow-2);
-			transition: var(--transition-1);
-			z-index: 1;
-		}
-
-		.info_more-btn::before {
-			content: "";
-			position: absolute;
-			inset: 1px;
-			border-radius: inherit;
-			background: var(--bg-gradient-jet);
-			z-index: -1;
-		}
-
-		.info_more-btn:hover { background: var(--bg-gradient-yellow-1); }
-		.info_more-btn:hover::before { background: var(--bg-gradient-yellow-2); }
-		.info_more-btn span { display: none; }
-
-		.sidebar-info_more {
-			opacity: 0;
-			visibility: hidden;
-			transition: var(--transition-2);
-		}
-
-		.sidebar.active .sidebar-info_more {
-			opacity: 1;
-			visibility: visible;
-		}
-
-		.contacts-list {
-			display: grid;
-			gap: 15px;
-		}
-
-		.contact-item {
-			min-width: 100%;
-			display: flex;
-			align-items: center;
-			gap: 16px;
-		}
-
-		.contact-info {
-			max-width: calc(100% - 46px);
-			width: calc(100% - 46px);
-		}
-
-		.contact-title {
-			color: var(--light-gray-70);
-			font-size: var(--fs-8);
-			text-transform: uppercase;
-			margin-bottom: 2px;
-		}
-
-		.contact-link,
-		.contact-info time,
-		.contact-info address {
-			color: var(--white-2);
-			font-size: var(--fs-7);
-			overflow-wrap: anywhere;
-			font-style: normal;
-			transition: var(--transition-1);
-		}
-
-		.contact-link:hover { color: var(--orange-yellow-crayola); }
-
-		.social-list {
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			gap: 12px;
-			padding-bottom: 4px;
-			padding-left: 8px;
-		}
-
-		.social-item .social-link {
-			color: var(--light-gray-70);
-			font-size: 18px;
-			transition: var(--transition-1);
-		}
-
-		.social-item .social-link:hover { color: var(--light-gray); }
-
-		.main-content {
-			position: relative;
-			width: 100%;
-		}
-
-		.navbar {
-			position: sticky;
-			top: 0;
-			background: rgba(22, 22, 25, 0.82);
-			backdrop-filter: blur(16px);
-			border: 1px solid var(--jet);
-			border-radius: 20px;
-			box-shadow: var(--shadow-1);
-			z-index: 5;
-			margin-bottom: 15px;
-		}
-
-		.navbar-list {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			align-items: center;
-			padding: 10px;
-			gap: 10px;
-		}
-
-		.navbar-link {
-			color: var(--light-gray);
-			font-size: var(--fs-8);
-			padding: 10px 14px;
-			border-radius: 12px;
-			transition: var(--transition-1);
-		}
-
-		.navbar-link:hover { color: var(--light-gray-70); background: rgba(255, 255, 255, 0.03); }
-		.navbar-link.active { color: var(--orange-yellow-crayola); background: rgba(255, 196, 72, 0.08); }
-
-		article { display: none; }
-		article.active { display: block; animation: fade 0.5s ease backwards; }
-
-		@keyframes fade {
-			0% { opacity: 0; }
-			100% { opacity: 1; }
-		}
-
-		.about-text {
-			color: var(--light-gray);
-			font-size: var(--fs-6);
-			line-height: 1.8;
-			margin-bottom: 30px;
-		}
-
-		.about-text p + p { margin-top: 14px; }
-
-		.service-list,
-		.skill-groups,
-		.project-list,
-		.contact-grid,
-		.metrics-grid {
-			display: grid;
-			gap: 18px;
-		}
-
-		.metric-card,
-		.service-item,
-		.skill-group,
-		.project-card,
-		.contact-card,
-		.callout {
-			position: relative;
-			background: var(--border-gradient-onyx);
-			border-radius: 16px;
-			padding: 18px;
-			box-shadow: var(--shadow-1);
-			z-index: 1;
-		}
-
-		.metric-card::before,
-		.service-item::before,
-		.skill-group::before,
-		.project-card::before,
-		.contact-card::before,
-		.callout::before {
-			content: "";
-			position: absolute;
-			inset: 1px;
-			border-radius: inherit;
-			background: var(--bg-gradient-jet);
-			z-index: -1;
-		}
-
-		.metric-card strong {
-			color: var(--white-2);
-			font-size: 26px;
-			display: block;
-			margin-bottom: 3px;
-		}
-
-		.metric-card span {
-			color: var(--light-gray-70);
-			text-transform: uppercase;
-			letter-spacing: 0.08em;
-			font-size: var(--fs-8);
-		}
-
-		.service-item { display: flex; gap: 14px; align-items: flex-start; }
-
-		.service-item-title,
-		.project-title,
-		.timeline-item-title,
-		.skill-group h4,
-		.contact-card h3 {
-			color: var(--white-2);
-			margin-bottom: 8px;
-		}
-
-		.service-item-text,
-		.project-copy,
-		.timeline-text,
-		.contact-card p,
-		.callout p,
-		.cert-list li {
-			color: var(--light-gray);
-			font-size: var(--fs-6);
-			line-height: 1.7;
-		}
-
-		.contact-intro {
-			margin-bottom: 14px;
-			color: var(--light-gray-70);
-			font-size: var(--fs-6);
-		}
-
-		.contact-map {
-			grid-column: 1 / -1;
-			padding: 0;
-			overflow: hidden;
-		}
-
-		.contact-map iframe {
-			width: 100%;
-			height: 280px;
-			border: 0;
-			display: block;
-			filter: saturate(0.95) contrast(1.05);
-		}
-
-		.section-title {
-			color: var(--white-2);
-			font-size: var(--fs-2);
-			margin-bottom: 16px;
-		}
-
-		.chip-list {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
-		}
-
-		.chip {
-			padding: 8px 12px;
-			border-radius: 999px;
-			background: rgba(255, 255, 255, 0.04);
-			border: 1px solid rgba(255, 255, 255, 0.08);
-			color: var(--white-2);
-			font-size: var(--fs-7);
-		}
-
-		.timeline { margin-bottom: 30px; }
-
-		.title-wrapper {
-			display: flex;
-			align-items: center;
-			gap: 16px;
-			margin-bottom: 25px;
-		}
-
-		.timeline-list {
-			font-size: var(--fs-6);
-			margin-left: 16px;
-		}
-
-		.timeline-item {
-			position: relative;
-			padding-left: 24px;
-			padding-bottom: 22px;
-		}
-
-		.timeline-item:last-child { padding-bottom: 0; }
-
-		.timeline-item:not(:last-child)::before {
-			content: "";
-			position: absolute;
-			top: 3px;
-			left: 0;
-			width: 1px;
-			height: calc(100% + 4px);
-			background: var(--jet);
-		}
-
-		.timeline-item::after {
-			content: "";
-			position: absolute;
-			top: 5px;
-			left: -4px;
-			width: 9px;
-			height: 9px;
-			background: var(--text-gradient-yellow);
-			border-radius: 50%;
-			box-shadow: 0 0 0 4px var(--jet);
-		}
-
-		.timeline-meta,
-		.project-tag,
-		.eyebrow {
-			color: var(--orange-yellow-crayola);
-			font-size: var(--fs-7);
-			line-height: 1.6;
-		}
-
-		.timeline-meta {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 8px 14px;
-			margin-bottom: 10px;
-		}
-
-		.timeline-text ul {
-			margin-top: 10px;
-			padding-left: 18px;
-		}
-
-		.timeline-text li,
-		.cert-list li {
-			list-style: disc;
-			margin-bottom: 6px;
-		}
-
-		.timeline-text li:last-child,
-		.cert-list li:last-child { margin-bottom: 0; }
-
-		.title-link {
-			color: var(--white-2);
-			display: inline;
-		}
-
-		.title-link:hover,
-		.inline-link:hover,
-		.contact-action:hover { color: var(--accent-blue); }
-
-		.inline-link,
-		.contact-action {
-			color: var(--accent-blue);
-			display: inline;
-		}
-
-		.project-tag {
-			text-transform: uppercase;
-			letter-spacing: 0.08em;
-			margin-bottom: 8px;
-		}
-
-		.callout { margin-top: 22px; }
-
-		.eyebrow {
-			text-transform: uppercase;
-			letter-spacing: 0.08em;
-			margin-bottom: 8px;
-		}
-
-		.availability {
-			display: inline-flex;
-			align-items: center;
-			gap: 8px;
-			width: fit-content;
-			padding: 8px 12px;
-			border-radius: 999px;
-			border: 1px solid rgba(255, 196, 72, 0.3);
-			background: rgba(255, 196, 72, 0.08);
-			color: var(--white-2);
-			margin-top: 14px;
-			font-size: var(--fs-7);
-		}
-
-		.availability::before {
-			content: "";
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: #57d48c;
-			box-shadow: 0 0 12px rgba(87, 212, 140, 0.6);
-		}
-
-		.resume-columns { display: grid; gap: 24px; }
-
-		@media (min-width: 580px) {
-			.metrics-grid,
-			.service-list,
-			.skill-groups,
-			.project-list,
-			.contact-grid {
-				grid-template-columns: 1fr 1fr;
-			}
-		}
-
-		@media (min-width: 768px) {
-			main { margin: 28px 24px; }
-			.timeline-list { margin-left: 28px; }
-			.timeline-item { padding-left: 32px; }
-			.timeline-item:not(:last-child)::before { left: 2px; }
-			.timeline-item::after { left: -3px; }
-			.navbar-link { font-size: var(--fs-6); }
-		}
-
-		@media (min-width: 1024px) {
-			main {
-				max-width: 1200px;
-				margin-inline: auto;
-				display: flex;
-				justify-content: center;
-				align-items: flex-start;
-				gap: 25px;
-			}
-
-			.sidebar {
-				position: sticky;
-				top: 30px;
-				max-height: max-content;
-				width: 300px;
-				margin-bottom: 0;
-				padding-top: 28px;
-			}
-
-			.sidebar-info {
-				flex-direction: column;
-				text-align: center;
-			}
-
-			.info-content .title { margin-inline: auto; }
-			.info_more-btn { display: none; }
-			.sidebar-info_more { opacity: 1; visibility: visible; }
-			.social-list { justify-content: center; padding-left: 0; }
-
-			.main-content {
-				min-width: 0;
-				width: calc(100% - 325px);
-			}
-
-			.resume-columns {
-				grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.9fr);
-			}
-		}
-	</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dawit Mezemir Anelay</title>
+  <meta name="description" content="DevOps Engineer, Cloud Engineer, MSc Computer Science (AI). Portfolio, blog, and reading notes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif;
+      color: #333;
+      background: #fff;
+      line-height: 1.6;
+    }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Nav ── */
+    .site-nav {
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 50px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-home {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #111;
+      margin-right: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-home:hover { text-decoration: none; color: #2563eb; }
+    .nav-inner a {
+      font-size: 0.82rem;
+      color: #555;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-inner a:hover { background: #f3f4f6; color: #111; text-decoration: none; }
+    .nav-inner a.nav-active { background: #eff6ff; color: #2563eb; font-weight: 500; }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 210px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 66px;
+    }
+    .sidebar-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+    .sidebar-name {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+    .sidebar-title {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    .sidebar-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar-contacts li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      display: flex;
+      align-items: center;
+      width: 20px;
+      flex-shrink: 0;
+      color: #9ca3af;
+      margin-top: 1px;
+    }
+    .contact-value {
+      font-size: 0.78rem;
+      color: #374151;
+      overflow-wrap: anywhere;
+    }
+    .contact-value a { color: #374151; }
+    .contact-value a:hover { color: #2563eb; text-decoration: none; }
+    .available-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 0.74rem;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .available-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+
+    /* ── Main ── */
+    .main { flex: 1; min-width: 0; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 52px; }
+    .section-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+    }
+    .subsection-heading {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin: 28px 0 14px;
+    }
+
+    /* ── About ── */
+    .about-text p { font-size: 0.9rem; line-height: 1.75; margin-bottom: 10px; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    /* ── Timeline ── */
+    .timeline-entry { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f3f4f6; }
+    .timeline-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .timeline-role { font-size: 0.9rem; font-weight: 600; color: #111; margin-bottom: 2px; }
+    .timeline-meta { font-size: 0.8rem; color: #6b7280; margin-bottom: 8px; }
+    .timeline-bullets { padding-left: 16px; }
+    .timeline-bullets li {
+      list-style: disc;
+      font-size: 0.85rem;
+      color: #444;
+      margin-bottom: 4px;
+      line-height: 1.55;
+    }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; gap: 14px; }
+    .skill-row-label { font-size: 0.8rem; font-weight: 500; color: #555; margin-bottom: 7px; }
+    .chip-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .edu-courses { margin-top: 6px; padding-left: 16px; display: none; }
+    .edu-courses li { list-style: disc; font-size: 0.84rem; color: #6b7280; margin-bottom: 3px; }
+    .courses-toggle {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #6b7280;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .courses-toggle:hover { color: #2563eb; }
+    .chip {
+      font-size: 0.76rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #f9fafb;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+    }
+
+    /* ── Certifications ── */
+    .cert-list { padding-left: 16px; }
+    .cert-list li {
+      list-style: disc;
+      font-size: 0.85rem;
+      color: #444;
+      margin-bottom: 5px;
+      line-height: 1.55;
+    }
+
+    /* ── Research ── */
+    .research-title { font-size: 0.92rem; font-weight: 600; color: #111; margin-bottom: 4px; line-height: 1.4; }
+    .research-meta { font-size: 0.8rem; color: #6b7280; margin-bottom: 12px; line-height: 1.5; }
+    .research-bullets { padding-left: 16px; margin-top: 10px; margin-bottom: 2px; }
+    .research-bullets li { list-style: disc; font-size: 0.86rem; color: #444; line-height: 1.65; margin-bottom: 5px; }
+    .research-links { display: flex; gap: 18px; margin-top: 12px; flex-wrap: wrap; }
+    .research-links a { font-size: 0.84rem; }
+
+    /* ── Projects ── */
+    .project-entry { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f3f4f6; }
+    .project-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .entry-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+    .entry-title { font-size: 0.9rem; font-weight: 600; color: #111; margin-bottom: 6px; }
+    .entry-bullets { padding-left: 16px; }
+    .entry-bullets li { list-style: disc; font-size: 0.85rem; color: #4b5563; line-height: 1.65; margin-bottom: 4px; }
+
+    /* ── Blog ── */
+    .blog-entry { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f3f4f6; }
+    .blog-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .blog-date { font-size: 0.75rem; color: #9ca3af; margin-bottom: 4px; }
+    .blog-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; }
+    .blog-excerpt { font-size: 0.85rem; color: #4b5563; line-height: 1.65; margin-bottom: 8px; }
+    .blog-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .blog-tag {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      background: #eff6ff;
+      color: #2563eb;
+      border-radius: 999px;
+      border: 1px solid #bfdbfe;
+    }
+    .empty-note { font-size: 0.85rem; color: #9ca3af; }
+    .series-card { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f3f4f6; }
+    .series-card:last-child { border-bottom: none; }
+    .series-card-name { font-size: 0.9rem; font-weight: 600; color: #111; }
+    .series-card-count { font-size: 0.78rem; color: #9ca3af; flex-shrink: 0; }
+    .blog-footer { margin-top: 20px; font-size: 0.85rem; }
+
+    /* ── Books ── */
+    .books-table { width: 100%; border-collapse: collapse; }
+    .books-table th {
+      text-align: left;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9ca3af;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 12px 8px 0;
+    }
+    .books-table td {
+      padding: 11px 12px 11px 0;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: top;
+    }
+    .books-table tbody tr:last-child td { border-bottom: none; }
+    .book-title { font-size: 0.86rem; font-weight: 500; color: #111; }
+    .book-author { font-size: 0.78rem; color: #9ca3af; margin-top: 2px; }
+    .book-notes { font-size: 0.8rem; color: #6b7280; }
+    .status-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .status-read     { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+    .status-reading  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .status-want     { background: #f9fafb; color: #6b7280; border: 1px solid #e5e7eb; }
+
+    /* ── Contact ── */
+    .contact-body { font-size: 0.9rem; }
+    .contact-body p { margin-bottom: 8px; line-height: 1.7; }
+    .contact-body p:first-child { color: #4b5563; margin-bottom: 18px; }
+
+    /* ── Mobile ── */
+    @media (max-width: 720px) {
+      .page { flex-direction: column; gap: 28px; padding: 20px 16px 48px; }
+      .sidebar { width: 100%; position: static; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .sidebar-photo { margin-bottom: 0; }
+      .sidebar-info { flex: 1; min-width: 160px; }
+      .sidebar-contacts { margin-top: 14px; width: 100%; }
+      .books-table td:nth-child(3),
+      .books-table th:nth-child(3) { display: none; }
+    }
+  </style>
 </head>
 <body>
-	<main>
-		<aside class="sidebar" data-sidebar>
-			<div class="sidebar-info">
-				<div class="avatar-box">
-					<img src="https://github.com/dawitanelay.png" alt="Dawit Mezemir Anelay profile photo" loading="lazy">
-				</div>
 
-				<div class="info-content">
-					<h1 class="name" title="Dawit Mezemir Anelay">Dawit Mezemir Anelay</h1>
-					<p class="title">DevOps Engineer, Cloud Engineer<br>MSc Computer Science (AI)</p>
-				</div>
+<nav class="site-nav">
+  <div class="nav-inner" id="site-nav"></div>
+</nav>
 
-				<button class="info_more-btn" data-sidebar-btn aria-label="Show contacts">
-					<span>Show Contacts</span>
-					<ion-icon name="chevron-down"></ion-icon>
-				</button>
-			</div>
+<div class="page">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main" id="main"></main>
+</div>
 
-			<div class="sidebar-info_more">
-				<div class="separator"></div>
+<script src="/content.js"></script>
+<script src="/layout.js"></script>
+<script>
+'use strict';
 
-				<ul class="contacts-list">
-					<li class="contact-item">
-						<div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-						<div class="contact-info">
-							<p class="contact-title">Email</p>
-							<a href="mailto:dawit12mezemir@gmail.com" class="contact-link">dawit12mezemir@gmail.com</a>
-						</div>
-					</li>
-					<li class="contact-item">
-						<div class="icon-box"><ion-icon name="phone-portrait-outline"></ion-icon></div>
-						<div class="contact-info">
-							<p class="contact-title">Phone</p>
-							<a href="tel:+393936787356" class="contact-link">+39 393 678 7356</a>
-						</div>
-					</li>
-					<li class="contact-item">
-						<div class="icon-box"><ion-icon name="logo-linkedin"></ion-icon></div>
-						<div class="contact-info">
-							<p class="contact-title">LinkedIn</p>
-							<a href="https://linkedin.com/in/dawit-anelay" class="contact-link" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a>
-						</div>
-					</li>
-					<li class="contact-item">
-						<div class="icon-box"><ion-icon name="logo-github"></ion-icon></div>
-						<div class="contact-info">
-							<p class="contact-title">GitHub</p>
-							<a href="https://github.com/dawitanelay" class="contact-link" target="_blank" rel="noreferrer">github.com/dawitanelay</a>
-						</div>
-					</li>
-					<li class="contact-item">
-						<div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
-						<div class="contact-info">
-							<p class="contact-title">Location</p>
-							<address>Pisa, Tuscany, Italy</address>
-						</div>
-					</li>
-				</ul>
+// ── tiny DOM helper ───────────────────────────────────────────────────────
+function h(tag, className, text) {
+  var e = document.createElement(tag);
+  if (className) e.className = className;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function a(href, text, cls, external) {
+  var e = document.createElement('a');
+  e.href = href;
+  if (cls) e.className = cls;
+  e.textContent = text;
+  if (external) { e.target = '_blank'; e.rel = 'noreferrer'; }
+  return e;
+}
+function section(id, label) {
+  var sec = document.createElement('section');
+  sec.id = id;
+  sec.className = 'section';
+  sec.appendChild(h('h2', 'section-heading', label));
+  return sec;
+}
 
-				<div class="separator"></div>
+// ── Nav + Sidebar (shared via layout.js) ─────────────────────────────────
+buildNav('');
+buildSidebar();
 
-				<ul class="social-list">
-					<li class="social-item"><a href="https://github.com/dawitanelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
-					<li class="social-item"><a href="https://linkedin.com/in/dawit-anelay" class="social-link" target="_blank" rel="noreferrer"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-					<li class="social-item"><a href="mailto:dawit12mezemir@gmail.com" class="social-link"><ion-icon name="mail-outline"></ion-icon></a></li>
-				</ul>
-			</div>
-		</aside>
+// ── Main ─────────────────────────────────────────────────────────────────
+var main = document.getElementById('main');
 
-		<div class="main-content">
-			<nav class="navbar" aria-label="Resume navigation">
-				<ul class="navbar-list">
-					<li class="navbar-item"><button class="navbar-link active" data-nav-link>About</button></li>
-					<li class="navbar-item"><button class="navbar-link" data-nav-link>Resume</button></li>
-					<li class="navbar-item"><button class="navbar-link" data-nav-link>Research</button></li>
-					<li class="navbar-item"><button class="navbar-link" data-nav-link>Blog</button></li>
-					<li class="navbar-item"><button class="navbar-link" data-nav-link>Projects</button></li>
-					<li class="navbar-item"><button class="navbar-link" data-nav-link>Activities</button></li>
-					<li class="navbar-item"><button class="navbar-link" data-nav-link>Contact</button></li>
-				</ul>
-			</nav>
+// — About —
+(function() {
+  var sec = section('about', 'About');
+  var wrap = h('div', 'about-text');
+  SITE.about.forEach(function(p) { wrap.appendChild(h('p', '', p)); });
+  sec.appendChild(wrap);
+  main.appendChild(sec);
+})();
 
-			<article class="about active" data-page="about">
-				<header><h2 class="h2 article-title">About me</h2></header>
+// — Resume —
+(function() {
+  var sec = section('resume', 'Resume');
 
-				<section class="about-text">
-					<p>DevOps Engineer with over 5 years of experience and a background in Computer Engineering. Proven track record of designing scalable infrastructure, automating CI/CD pipelines, and implementing cloud-native DevOps practices on Azure and AWS.</p>
-					<p>Strong focus on system reliability, security, and efficient delivery workflows across Kubernetes, IaC, and observability stacks in production environments.</p>
-				</section>
+  // Experience
+  sec.appendChild(h('h3', 'subsection-heading', 'Work Experience'));
+  SITE.experience.forEach(function(job) {
+    var entry = h('div', 'timeline-entry');
+    entry.appendChild(h('div', 'timeline-role', job.role));
+    var meta = [job.company, job.location, job.period].filter(Boolean).join(' · ');
+    entry.appendChild(h('div', 'timeline-meta', meta));
+    if (job.bullets.length) {
+      var ul = h('ul', 'timeline-bullets');
+      job.bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
+      entry.appendChild(ul);
+    }
+    sec.appendChild(entry);
+  });
 
-				<section class="metrics-grid" aria-label="Key metrics">
-					<div class="metric-card"><strong>5+</strong><span>Years Experience</span></div>
-					<div class="metric-card"><strong>90%</strong><span>Deployment Time Reduction</span></div>
-					<div class="metric-card"><strong>Azure + AWS</strong><span>Cloud Platforms</span></div>
-					<div class="metric-card"><strong>AKS / K8s</strong><span>Container Operations</span></div>
-				</section>
+  // Education
+  sec.appendChild(h('h3', 'subsection-heading', 'Education'));
+  SITE.education.forEach(function(edu) {
+    var entry = h('div', 'timeline-entry');
+    entry.appendChild(h('div', 'timeline-role', edu.degree));
+    entry.appendChild(h('div', 'timeline-meta', edu.institution + ' · ' + edu.period));
+    if (edu.courses && edu.courses.length) {
+      var ul = h('ul', 'edu-courses');
+      edu.courses.forEach(function(c) { ul.appendChild(h('li', '', c)); });
 
-				<section class="timeline" style="margin-top: 26px;">
-					<h3 class="section-title">Core focus</h3>
-					<div class="service-list">
-						<div class="service-item">
-							<div class="icon-box"><ion-icon name="git-branch-outline"></ion-icon></div>
-							<div>
-								<h4 class="service-item-title">CI/CD Engineering</h4>
-								<p class="service-item-text">Jenkins, GitHub Actions, GitLab, and ArgoCD pipelines with security gates and faster release cycles.</p>
-							</div>
-						</div>
-						<div class="service-item">
-							<div class="icon-box"><ion-icon name="cloud-outline"></ion-icon></div>
-							<div>
-								<h4 class="service-item-title">Cloud & IaC</h4>
-								<p class="service-item-text">Azure and AWS delivery with Terraform and Ansible for repeatable, consistent infrastructure.</p>
-							</div>
-						</div>
-						<div class="service-item">
-							<div class="icon-box"><ion-icon name="layers-outline"></ion-icon></div>
-							<div>
-								<h4 class="service-item-title">Kubernetes Operations</h4>
-								<p class="service-item-text">AKS management, Helm-based rollouts, secure networking, and production troubleshooting.</p>
-							</div>
-						</div>
-						<div class="service-item">
-							<div class="icon-box"><ion-icon name="pulse-outline"></ion-icon></div>
-							<div>
-								<h4 class="service-item-title">Monitoring & Security</h4>
-								<p class="service-item-text">ELK, Prometheus, Grafana, Kafka event pipelines, image signing, and vulnerability scanning.</p>
-							</div>
-						</div>
-					</div>
-				</section>
-			</article>
+      var btn = document.createElement('button');
+      btn.className = 'courses-toggle';
+      btn.innerHTML = 'Coursework (' + edu.courses.length + ') <span>▾</span>';
+      btn.addEventListener('click', function() {
+        var open = ul.style.display === 'block';
+        ul.style.display = open ? 'none' : 'block';
+        btn.innerHTML = 'Coursework (' + edu.courses.length + ') <span>' + (open ? '▾' : '▴') + '</span>';
+      });
 
-			<article class="resume" data-page="resume">
-				<header><h2 class="h2 article-title">Resume</h2></header>
+      entry.appendChild(btn);
+      entry.appendChild(ul);
+    }
+    sec.appendChild(entry);
+  });
 
-				<div class="resume-columns">
-					<div>
-						<section class="timeline">
-							<div class="title-wrapper">
-								<div class="icon-box"><ion-icon name="briefcase-outline"></ion-icon></div>
-								<h3 class="h3">Work experience</h3>
-							</div>
-							<ol class="timeline-list">
-								<li class="timeline-item">
-									<h4 class="h4 timeline-item-title">DevOps Engineer</h4>
-									<div class="timeline-meta"><span>IGT, Remote</span><span>Oct. 2022 - Present</span></div>
-									<div class="timeline-text">
-										<ul>
-											<li>Implemented container image signing with Cosign, Mend vulnerability scanning, and Azure Key Vault integration.</li>
-											<li>Built and maintained infrastructure as code with Terraform for consistent automated deployments.</li>
-											<li>Managed AKS clusters including rollouts, monitoring, and operations support.</li>
-											<li>Developed CI/CD pipelines with Jenkins and GitHub Actions, reducing deployment time by 90%.</li>
-											<li>Enforced security with image validation, private endpoints, and Azure NSG controls.</li>
-											<li>Built Kubernetes Event Exporter routing to ELK and resolved critical K8s, network, Jenkins, and Elasticsearch issues.</li>
-										</ul>
-									</div>
-								</li>
-								<li class="timeline-item">
-									<h4 class="h4 timeline-item-title">DevOps Engineer</h4>
-									<div class="timeline-meta"><span>GeoSolutions, Lucca, Italy</span><span>May. 2021 - Dec. 2021</span></div>
-									<div class="timeline-text">
-										<ul>
-											<li>Designed continuous delivery workflows using Jenkins, Docker, and Git.</li>
-											<li>Created Kibana dashboards and operated AppDynamics and Splunk monitoring tools.</li>
-										</ul>
-									</div>
-								</li>
-								<li class="timeline-item">
-									<h4 class="h4 timeline-item-title">System Administrator</h4>
-									<div class="timeline-meta"><span>Addis Ababa, Ethiopia</span><span>Mar. 2018 - Oct. 2019</span></div>
-									<div class="timeline-text">
-										<ul>
-											<li>Managed Linux systems with DB and dev teams to support 24/7 uptime targets.</li>
-											<li>Developed Bash scripts to automate recurring operational tasks.</li>
-										</ul>
-									</div>
-								</li>
-								<li class="timeline-item">
-									<h4 class="h4 timeline-item-title">Network Administrator</h4>
-									<div class="timeline-meta"><span>Addis Ababa, Ethiopia</span><span>Mar. 2016 - Aug. 2016</span></div>
-									<div class="timeline-text">
-										<ul>
-											<li>Installed and configured LAN/WAN and internet systems for organizational infrastructure.</li>
-										</ul>
-									</div>
-								</li>
-							</ol>
-						</section>
+  // Skills
+  sec.appendChild(h('h3', 'subsection-heading', 'Skills'));
+  var grid = h('div', 'skills-grid');
+  Object.entries(SITE.skills).forEach(function(entry) {
+    var group = entry[0], items = entry[1];
+    var row = document.createElement('div');
+    row.appendChild(h('div', 'skill-row-label', group));
+    var chips = h('div', 'chip-list');
+    items.forEach(function(s) { chips.appendChild(h('span', 'chip', s)); });
+    row.appendChild(chips);
+    grid.appendChild(row);
+  });
+  sec.appendChild(grid);
 
-						<section class="timeline">
-							<div class="title-wrapper">
-								<div class="icon-box"><ion-icon name="build-outline"></ion-icon></div>
-								<h3 class="h3">Skills</h3>
-							</div>
-							<div class="skill-groups">
-								<div class="skill-group">
-									<h4>DevOps tools</h4>
-									<div class="chip-list">
-										<span class="chip">GitHub</span><span class="chip">GitLab</span><span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">ArgoCD</span>
-									</div>
-								</div>
-								<div class="skill-group">
-									<h4>Cloud & IaC</h4>
-									<div class="chip-list">
-										<span class="chip">Azure</span><span class="chip">AWS</span><span class="chip">Terraform</span><span class="chip">Ansible</span>
-									</div>
-								</div>
-								<div class="skill-group">
-									<h4>Containers & observability</h4>
-									<div class="chip-list">
-										<span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Helm</span><span class="chip">ELK</span><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">Kafka</span>
-									</div>
-								</div>
-								<div class="skill-group">
-									<h4>Scripting & systems</h4>
-									<div class="chip-list">
-										<span class="chip">Bash</span><span class="chip">Python</span><span class="chip">Node.js</span><span class="chip">HTTP/TCP/UDP</span><span class="chip">MySQL</span><span class="chip">MongoDB</span>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
+  // Certifications
+  sec.appendChild(h('h3', 'subsection-heading', 'Certifications'));
+  var certList = h('ul', 'cert-list');
+  SITE.certifications.forEach(function(c) { certList.appendChild(h('li', '', c)); });
+  sec.appendChild(certList);
 
-					<div>
-						<section class="timeline">
-							<div class="title-wrapper">
-								<div class="icon-box"><ion-icon name="school-outline"></ion-icon></div>
-								<h3 class="h3">Education</h3>
-							</div>
-							<ol class="timeline-list">
-								<li class="timeline-item">
-									<h4 class="h4 timeline-item-title">M.Sc. Computer Science (Artificial Intelligence)</h4>
-									<div class="timeline-meta"><span>University of Pisa, Italy</span><span>Sept. 2019 - Aug. 2022</span></div>
-								</li>
-								<li class="timeline-item">
-									<h4 class="h4 timeline-item-title">B.Sc. Computer Engineering</h4>
-									<div class="timeline-meta"><span>Addis Ababa University, Ethiopia</span><span>Oct. 2012 - Jul. 2017</span></div>
-								</li>
-							</ol>
-						</section>
+  main.appendChild(sec);
+})();
 
-						<section class="timeline">
-							<div class="title-wrapper">
-								<div class="icon-box"><ion-icon name="ribbon-outline"></ion-icon></div>
-								<h3 class="h3">Trainings & certifications</h3>
-							</div>
-							<div class="content-card">
-								<p class="eyebrow">Featured</p>
-								<p class="timeline-text">Azure DevOps Engineer Nanodegree, Udacity (Jul. 2022 - Dec. 2022)</p>
-								<div class="separator"></div>
-								<ul class="cert-list">
-									<li>Azure DevOps Engineer (Udacity)</li>
-									<li>Elasticsearch Essential Training</li>
-									<li>Microservices Foundations</li>
-									<li>Linux Automation with Bash Scripting</li>
-									<li>Oracle Certified Associate: WebLogic Server 12c</li>
-									<li>Oracle Certified Associate: Oracle Linux 5/6 System Administrator</li>
-									<li>Oracle Certified Associate: Solaris 11 System Administrator</li>
-								</ul>
-							</div>
-						</section>
-					</div>
-				</div>
-			</article>
+// — Research —
+(function() {
+  var sec = section('research', 'Research');
+  var r = SITE.research;
 
-			<article class="research" data-page="research">
-				<header><h2 class="h2 article-title">Research</h2></header>
-				<section class="project-list">
-					<div class="project-card">
-						<p class="project-tag">MSc Thesis</p>
-						<h3 class="project-title"><a class="title-link" href="https://etd.adm.unipi.it/t/etd-09052022-171219/" target="_blank" rel="noreferrer">Artificial Intelligence techniques to support monitoring of infrastructures for Network Function Virtualization (NFV)</a></h3>
-						<p class="project-copy">This thesis project has been realized by Dawit Mezemir Anelay in partial fulfillment of the requirements for the MSc in Computing Science at University of Pisa, under the joint supervision of Tommaso Cucinotta (Scuola Superiore Sant'Anna) and Davide Bacciu (University of Pisa).</p>
-						<p class="project-copy">The work supports the transition from physical appliances to cloud-native virtual machines and containers through AI methods for performance monitoring, troubleshooting, and capacity planning in telecom NFV infrastructure.</p>
-					</div>
+  var card = h('div', 'research-card');
+  var titleEl = h('div', 'research-title');
+  titleEl.appendChild(a(r.url, r.title, '', true));
+  card.appendChild(titleEl);
+  card.appendChild(h('div', 'research-meta', r.degree));
+  card.appendChild(h('div', 'research-meta', 'Supervisors: ' + r.supervisors));
 
-					<div class="project-card">
-						<p class="project-tag">Public references</p>
-						<h3 class="project-title">Archive and project page</h3>
-						<p class="project-copy">University of Pisa archive: <a class="inline-link" href="https://etd.adm.unipi.it/t/etd-09052022-171219/" target="_blank" rel="noreferrer">etd.adm.unipi.it/t/etd-09052022-171219</a></p>
-						<p class="project-copy">RETIS page: <a class="inline-link" href="https://retis.santannapisa.it/~tommaso/eng/thesisprojects.html" target="_blank" rel="noreferrer">retis.santannapisa.it/~tommaso/eng/thesisprojects.html</a></p>
-					</div>
-				</section>
+  if (r.bullets && r.bullets.length) {
+    var ul = h('ul', 'research-bullets');
+    r.bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
+    card.appendChild(ul);
+  }
 
-				<div class="callout">
-					<p class="eyebrow">Requirements and benefits</p>
-					<p>Strong C/C++ and Python programming, fluent Linux command-line and Bash scripting, and good operating systems and virtualization knowledge were central to the work.</p>
-					<p>The project provided direct experience with real Vodafone operational data and innovative technologies for cloud and NFV operations.</p>
-				</div>
+  var links = h('div', 'research-links');
+  r.links.forEach(function(l) { links.appendChild(a(l.url, l.label, '', true)); });
+  card.appendChild(links);
 
-				<div class="callout">
-					<p class="eyebrow">Industrial collaboration</p>
-					<p>This thesis proposal is framed in an industrial collaboration with Vodafone involving RETIS, INRETE, PERCRO, and ICT-COISP labs of Scuola Sant'Anna plus international Vodafone capacity-management teams.</p>
-				</div>
-			</article>
+  sec.appendChild(card);
+  main.appendChild(sec);
+})();
 
-			<article class="blog" data-page="blog">
-				<header><h2 class="h2 article-title">Blog</h2></header>
-				<section class="project-list">
-					<div class="project-card">
-						<p class="project-tag">DevOps writing</p>
-						<h3 class="project-title">Engineering notes from production</h3>
-						<p class="project-copy">This section connects to my writing on CI/CD pipelines, Kubernetes operations, reliability engineering, observability, and security practices learned from real systems.</p>
-						<p class="project-copy"><a class="inline-link" href="/categories/azure-developer-associate/">Open the Azure journey</a>, read the latest Azure post, or subscribe via <a class="inline-link" href="/index.xml">RSS</a>.</p>
-					</div>
-					<div class="project-card">
-						<p class="project-tag"><a class="title-link" href="/categories/azure-developer-associate/">Azure developer</a></p>
-						<h3 class="project-title"><a class="title-link" href="/categories/azure-developer-associate/">Certification journey and study notes</a></h3>
-						<p class="project-copy">This panel tracks my Azure Developer Associate learning path with focused notes on Azure Container Apps, application architecture choices, identity, integration, and platform services.</p>
-						<p class="project-copy">Current category: <a class="inline-link" href="/categories/azure-developer-associate/">Azure Developer Associate Journey</a> (<a class="inline-link" href="/categories/azure-developer-associate/"><code>azure-developer-associate</code></a>).</p>
-						<p class="project-copy"><a class="inline-link" href="/categories/azure-developer-associate/">Open the Azure journey</a> or read the latest post on <a class="inline-link" href="/posts/microsoft-certified-azure-developer-associate/azure-container-apps-plans-and-environment-types/">Azure Container Apps plans and environment types</a>.</p>
-					</div>
-					<div class="project-card">
-						<p class="project-tag">Current topics</p>
-						<h3 class="project-title">What I am documenting</h3>
-						<p class="project-copy">GitOps rollout strategy, secure image supply chains, Azure and Kubernetes troubleshooting, and practical delivery standards for platform teams.</p>
-						<p class="project-copy">I use the blog as a public knowledge base so readers can apply these patterns quickly.</p>
-					</div>
-				</section>
-			</article>
+// — Projects —
+(function() {
+  var sec = section('projects', 'Projects');
+  SITE.projects.forEach(function(p) {
+    var entry = h('div', 'project-entry');
+    entry.appendChild(h('div', 'entry-tag', p.tag));
+    entry.appendChild(h('div', 'entry-title', p.title));
+    if (p.bullets && p.bullets.length) {
+      var ul = h('ul', 'entry-bullets');
+      p.bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
+      entry.appendChild(ul);
+    }
+    sec.appendChild(entry);
+  });
+  main.appendChild(sec);
+})();
 
-			<article class="projects" data-page="projects">
-				<header><h2 class="h2 article-title">Projects</h2></header>
-				<section class="project-list">
-					<div class="project-card">
-						<p class="project-tag">Database modernization</p>
-						<h3 class="project-title">PostgreSQL major version upgrade on Azure Flexible Server</h3>
-						<p class="project-copy">Led the upgrade from PostgreSQL 13 to 16 including cleanup, extension removal, replication slot management, PITR testing, and post-upgrade checks.</p>
-					</div>
-					<div class="project-card">
-						<p class="project-tag">Data security</p>
-						<h3 class="project-title">Customer Managed Key implementation in Azure</h3>
-						<p class="project-copy">Created and managed CMKs in Azure Key Vault and automated key lifecycle and permission configuration using Azure CLI and Terraform.</p>
-					</div>
-					<div class="project-card">
-						<p class="project-tag">Observability pipeline</p>
-						<h3 class="project-title">Kubernetes event monitoring with Elasticsearch and Kibana</h3>
-						<p class="project-copy">Configured Kubernetes Event Exporter with custom routing to Elasticsearch and tuned filtering/throttle policies to surface critical events.</p>
-					</div>
-					<div class="project-card">
-						<p class="project-tag">Secure platform networking</p>
-						<h3 class="project-title">AKS integration with Private Endpoints and NSGs</h3>
-						<p class="project-copy">Secured communication between Azure Key Vault, AKS, and Jenkins agents with Private Endpoints and Network Security Groups.</p>
-					</div>
-				</section>
-			</article>
+// — Blog —
+(function() {
+  var sec = section('blog', 'Blog');
+  if (!SITE.blog.length) {
+    sec.appendChild(h('p', 'empty-note', 'No posts yet.'));
+    main.appendChild(sec);
+    return;
+  }
 
-			<article class="activities" data-page="activities">
-				<header><h2 class="h2 article-title">Activities</h2></header>
-				<section class="project-list">
-					<div class="project-card">
-						<p class="project-tag">Books</p>
-						<h3 class="project-title">Reading outside daily delivery work</h3>
-						<p class="project-copy">I read books on systems thinking, communication, leadership, and long-term learning to improve technical judgment and collaboration quality.</p>
-						<p class="project-copy">This helps me make better operational decisions under uncertainty.</p>
-					</div>
-					<div class="project-card">
-						<p class="project-tag">Beyond-career learning</p>
-						<h3 class="project-title">Interests that shape my engineering</h3>
-						<p class="project-copy">Writing notes, exploring product thinking, reflecting on developer experience, and studying how teams work effectively under real constraints.</p>
-						<p class="project-copy">These activities directly influence how I design reliable systems and human-friendly workflows.</p>
-					</div>
-				</section>
+  // Auto-detect series: any tag on 3+ posts
+  var tagCount = {};
+  SITE.blog.forEach(function(post) {
+    (post.tags || []).forEach(function(t) { tagCount[t] = (tagCount[t] || 0) + 1; });
+  });
+  var seriesTags = Object.keys(tagCount).filter(function(t) { return tagCount[t] >= 3; });
 
-				<div class="callout">
-					<p class="eyebrow">Optional next step</p>
-					<p>I can add a dedicated books list page later, with reading status and short takeaways, and link it from this section.</p>
-				</div>
-			</article>
+  // Series rows
+  seriesTags.forEach(function(name) {
+    var card = h('div', 'series-card');
+    var nameEl = h('div', '');
+    var link = a('/blog/', name, 'series-card-name');
+    nameEl.appendChild(link);
+    card.appendChild(nameEl);
+    card.appendChild(h('span', 'series-card-count', tagCount[name] + ' posts'));
+    sec.appendChild(card);
+  });
 
-			<article class="contact" data-page="contact">
-				<header><h2 class="h2 article-title">Contact</h2></header>
-				<p class="contact-intro">Let us connect for DevOps, platform engineering, cloud automation, and reliability-focused delivery work.</p>
-				<section class="contact-grid">
-					<div class="contact-card">
-						<h3>Open to opportunities</h3>
-						<p>Available for DevOps, platform engineering, and cloud infrastructure roles with focus on secure delivery, production reliability, and operational excellence.</p>
-						<div class="availability">Open to remote and hybrid collaboration</div>
-					</div>
-					<div class="contact-card">
-						<h3>Reach me directly</h3>
-						<p><a class="contact-action" href="mailto:dawit12mezemir@gmail.com">dawit12mezemir@gmail.com</a></p>
-						<p><a class="contact-action" href="tel:+393936787356">+39 393 678 7356</a></p>
-						<p><a class="contact-action" href="https://github.com/dawitanelay" target="_blank" rel="noreferrer">github.com/dawitanelay</a></p>
-						<p><a class="contact-action" href="https://linkedin.com/in/dawit-anelay" target="_blank" rel="noreferrer">linkedin.com/in/dawit-anelay</a></p>
-					</div>
-					<div class="contact-card contact-map">
-						<iframe
-							title="Map of Pisa, Tuscany, Italy"
-							src="https://www.google.com/maps?q=Pisa%2C%20Tuscany%2C%20Italy&output=embed"
-							loading="lazy"
-							referrerpolicy="no-referrer-when-downgrade"></iframe>
-					</div>
-				</section>
-			</article>
-		</div>
-	</main>
+  // Standalone posts (title + date only)
+  var standalone = SITE.blog.filter(function(post) {
+    return !(post.tags || []).some(function(t) { return seriesTags.indexOf(t) !== -1; });
+  });
+  if (standalone.length) {
+    if (seriesTags.length) sec.appendChild(h('h3', 'subsection-heading', 'Recent'));
+    standalone.forEach(function(post) {
+      var entry = h('div', 'blog-entry');
+      entry.appendChild(h('div', 'blog-date', post.date));
+      var titleEl = h('div', 'blog-title');
+      titleEl.appendChild(a(post.url, post.title));
+      entry.appendChild(titleEl);
+      if (post.excerpt) entry.appendChild(h('div', 'blog-excerpt', post.excerpt));
+      sec.appendChild(entry);
+    });
+  }
 
-	<script>
-		'use strict';
+  var footer = h('div', 'blog-footer');
+  footer.appendChild(a('/blog/', 'Browse all posts →'));
+  sec.appendChild(footer);
 
-		var sidebar = document.querySelector('[data-sidebar]');
-		var sidebarBtn = document.querySelector('[data-sidebar-btn]');
-		var navigationLinks = document.querySelectorAll('[data-nav-link]');
-		var pages = document.querySelectorAll('[data-page]');
+  main.appendChild(sec);
+})();
 
-		if (sidebar && sidebarBtn) {
-			sidebarBtn.addEventListener('click', function () {
-				sidebar.classList.toggle('active');
-			});
-		}
+// — Books —
+(function() {
+  var sec = section('books', 'Books');
+  var statusMap = {
+    'read':         ['Read',         'status-read'],
+    'reading':      ['Reading',      'status-reading'],
+    'want to read': ['Want to read', 'status-want'],
+  };
 
-		for (var i = 0; i < navigationLinks.length; i += 1) {
-			navigationLinks[i].addEventListener('click', function () {
-				for (var j = 0; j < pages.length; j += 1) {
-					var isActive = this.textContent.toLowerCase() === pages[j].dataset.page;
-					pages[j].classList.toggle('active', isActive);
-					navigationLinks[j].classList.toggle('active', isActive);
-				}
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-			});
-		}
-	</script>
-	<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" crossorigin="anonymous"></script>
-	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  var table = document.createElement('table');
+  table.className = 'books-table';
+
+  var thead = document.createElement('thead');
+  var hrow = document.createElement('tr');
+  ['Title / Author', 'Status', 'Notes'].forEach(function(col) {
+    hrow.appendChild(h('th', '', col));
+  });
+  thead.appendChild(hrow);
+  table.appendChild(thead);
+
+  var tbody = document.createElement('tbody');
+  SITE.books.forEach(function(book) {
+    var row = document.createElement('tr');
+
+    var titleTd = document.createElement('td');
+    titleTd.appendChild(h('div', 'book-title', book.title));
+    titleTd.appendChild(h('div', 'book-author', book.author));
+    row.appendChild(titleTd);
+
+    var pair = statusMap[book.status] || ['—', 'status-want'];
+    var statusTd = document.createElement('td');
+    statusTd.appendChild(h('span', 'status-badge ' + pair[1], pair[0]));
+    row.appendChild(statusTd);
+
+    row.appendChild(h('td', 'book-notes', book.notes || ''));
+    tbody.appendChild(row);
+  });
+  table.appendChild(tbody);
+  sec.appendChild(table);
+  main.appendChild(sec);
+})();
+
+// — Contact —
+(function() {
+  var sec = section('contact', 'Contact');
+  var body = h('div', 'contact-body');
+
+  var intro = h('p', '', 'Open to DevOps, platform engineering, and cloud infrastructure roles. Focused on secure delivery, production reliability, and operational excellence.');
+  body.appendChild(intro);
+
+  [
+    ['mailto:' + SITE.contact.email,                        SITE.contact.email,                  false],
+    ['tel:' + SITE.contact.phone.replace(/\s/g,''),         SITE.contact.phone,                  false],
+    [SITE.contact.linkedin.url,                             SITE.contact.linkedin.label,          true],
+    [SITE.contact.github.url,                               SITE.contact.github.label,            true],
+  ].forEach(function(item) {
+    var p = document.createElement('p');
+    p.appendChild(a(item[0], item[1], '', item[2]));
+    body.appendChild(p);
+  });
+
+  sec.appendChild(body);
+  main.appendChild(sec);
+
+  document.title = SITE.profile.name;
+})();
+
+// — Scroll spy —
+(function() {
+  var navLinks = Array.from(document.querySelectorAll('.nav-inner a[href^="#"]'));
+
+  function setActive(id) {
+    navLinks.forEach(function(link) {
+      var matches = link.getAttribute('href') === '#' + id;
+      link.classList.toggle('nav-active', matches);
+    });
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  document.querySelectorAll('section[id]').forEach(function(s) { observer.observe(s); });
+})();
+</script>
+
 </body>
 </html>

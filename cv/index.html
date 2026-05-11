@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Dawit Mezemir Anelay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 14px; }
+    body {
+      font-family: "Inter", "Trebuchet MS", Helvetica, sans-serif;
+      color: #222;
+      background: #f3f4f6;
+      line-height: 1.5;
+    }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+
+    /* ── Top bar ── */
+    .top-bar {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-bar a { font-size: 0.82rem; color: #6b7280; }
+    .top-bar a:hover { color: #2563eb; text-decoration: none; }
+    .btn-download {
+      font-size: 0.82rem;
+      font-family: inherit;
+      font-weight: 500;
+      color: #fff;
+      background: #2563eb;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-download:hover { background: #1d4ed8; }
+
+    /* ── CV wrapper ── */
+    .cv-wrap {
+      max-width: 860px;
+      margin: 28px auto 48px;
+      background: #fff;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+      padding: 48px 52px;
+    }
+
+    /* ── Header ── */
+    .cv-header { margin-bottom: 24px; padding-bottom: 18px; border-bottom: 2px solid #111; }
+    .cv-name { font-size: 1.8rem; font-weight: 600; color: #111; letter-spacing: -0.3px; margin-bottom: 3px; }
+    .cv-title { font-size: 0.9rem; color: #555; margin-bottom: 12px; }
+    .cv-contacts { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 0.78rem; color: #555; }
+    .cv-contacts a { color: #555; }
+    .cv-contacts a:hover { color: #2563eb; text-decoration: none; }
+
+    /* ── Body grid ── */
+    .cv-body { display: grid; grid-template-columns: 1fr 248px; gap: 40px; }
+
+    /* ── Section ── */
+    .cv-section { margin-bottom: 22px; }
+    .cv-section:last-child { margin-bottom: 0; }
+    .cv-section-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #2563eb;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+    }
+
+    /* ── Experience ── */
+    .exp-entry { margin-bottom: 14px; }
+    .exp-entry:last-child { margin-bottom: 0; }
+    .exp-role { font-size: 0.86rem; font-weight: 600; color: #111; }
+    .exp-meta { font-size: 0.75rem; color: #6b7280; margin-bottom: 5px; }
+    .exp-bullets { padding-left: 14px; }
+    .exp-bullets li {
+      list-style: disc;
+      font-size: 0.77rem;
+      color: #374151;
+      margin-bottom: 3px;
+      line-height: 1.5;
+    }
+
+    /* ── Education ── */
+    .edu-entry { margin-bottom: 10px; }
+    .edu-entry:last-child { margin-bottom: 0; }
+    .edu-degree { font-size: 0.8rem; font-weight: 600; color: #111; line-height: 1.4; }
+    .edu-meta { font-size: 0.74rem; color: #6b7280; }
+
+    /* ── Skills ── */
+    .skill-row { margin-bottom: 8px; }
+    .skill-row:last-child { margin-bottom: 0; }
+    .skill-label { font-size: 0.72rem; font-weight: 600; color: #374151; margin-bottom: 4px; }
+    .chip-list { display: flex; flex-wrap: wrap; gap: 3px; }
+    .chip {
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+    }
+
+    /* ── Certifications ── */
+    .cert-list { padding-left: 14px; }
+    .cert-list li {
+      list-style: disc;
+      font-size: 0.75rem;
+      color: #374151;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    /* ── Research ── */
+    .research-title { font-size: 0.8rem; font-weight: 600; color: #111; margin-bottom: 3px; line-height: 1.4; }
+    .research-meta { font-size: 0.73rem; color: #6b7280; margin-bottom: 5px; line-height: 1.4; }
+    .research-bullets { padding-left: 14px; }
+    .research-bullets li {
+      list-style: disc;
+      font-size: 0.76rem;
+      color: #374151;
+      margin-bottom: 3px;
+      line-height: 1.45;
+    }
+
+    /* ── Print ── */
+    @media print {
+      .top-bar { display: none !important; }
+      body { background: #fff; }
+      .cv-wrap {
+        margin: 0;
+        padding: 16mm 16mm;
+        box-shadow: none;
+        max-width: 100%;
+      }
+      @page { size: A4; margin: 0; }
+      .exp-entry { page-break-inside: avoid; }
+      .cv-section { page-break-inside: avoid; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      .cv-wrap { margin: 0; padding: 24px 18px; box-shadow: none; }
+      .cv-body { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="/">← Back to site</a>
+  <button class="btn-download" onclick="window.print()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download PDF
+  </button>
+</div>
+
+<div class="cv-wrap" id="cv"></div>
+
+<script src="/content.js"></script>
+<script>
+'use strict';
+
+function h(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function lnk(href, text, external) {
+  var e = document.createElement('a');
+  e.href = href;
+  e.textContent = text;
+  if (external) { e.target = '_blank'; e.rel = 'noreferrer'; }
+  return e;
+}
+
+var cv = document.getElementById('cv');
+document.title = 'CV — ' + SITE.profile.name;
+
+// ── Header ──────────────────────────────────────────────────────────────────
+var header = h('div', 'cv-header');
+header.appendChild(h('div', 'cv-name', SITE.profile.name));
+header.appendChild(h('div', 'cv-title', SITE.profile.title + ' · ' + SITE.profile.subtitle));
+
+var contacts = h('div', 'cv-contacts');
+var c = SITE.contact;
+[
+  ['mailto:' + c.email,                   c.email,          false],
+  ['tel:' + c.phone.replace(/\s/g, ''),   c.phone,          false],
+  [c.linkedin.url,                         c.linkedin.label, true],
+  [c.github.url,                           c.github.label,   true],
+  [null,                                   c.location,       false],
+].forEach(function(item) {
+  var wrap = document.createElement('span');
+  if (item[0]) { wrap.appendChild(lnk(item[0], item[1], item[2])); }
+  else { wrap.textContent = item[1]; }
+  contacts.appendChild(wrap);
+});
+header.appendChild(contacts);
+cv.appendChild(header);
+
+// ── Body ─────────────────────────────────────────────────────────────────────
+var body = h('div', 'cv-body');
+var left  = h('div', '');
+var right = h('div', '');
+
+// — Experience —
+(function() {
+  var sec = h('div', 'cv-section');
+  sec.appendChild(h('div', 'cv-section-title', 'Experience'));
+  SITE.experience.forEach(function(job) {
+    var entry = h('div', 'exp-entry');
+    entry.appendChild(h('div', 'exp-role', job.role));
+    var meta = [job.company, job.location, job.period].filter(Boolean).join(' · ');
+    entry.appendChild(h('div', 'exp-meta', meta));
+    if (job.bullets && job.bullets.length) {
+      var ul = h('ul', 'exp-bullets');
+      job.bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
+      entry.appendChild(ul);
+    }
+    sec.appendChild(entry);
+  });
+  left.appendChild(sec);
+})();
+
+// — Research —
+(function() {
+  var sec = h('div', 'cv-section');
+  sec.appendChild(h('div', 'cv-section-title', 'Research'));
+  var r = SITE.research;
+  var titleEl = h('div', 'research-title');
+  titleEl.appendChild(lnk(r.url, r.title, true));
+  sec.appendChild(titleEl);
+  sec.appendChild(h('div', 'research-meta', r.degree));
+  sec.appendChild(h('div', 'research-meta', 'Supervisors: ' + r.supervisors));
+  if (r.bullets && r.bullets.length) {
+    var ul = h('ul', 'research-bullets');
+    r.bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
+    sec.appendChild(ul);
+  }
+  left.appendChild(sec);
+})();
+
+// — Education —
+(function() {
+  var sec = h('div', 'cv-section');
+  sec.appendChild(h('div', 'cv-section-title', 'Education'));
+  SITE.education.forEach(function(edu) {
+    var entry = h('div', 'edu-entry');
+    entry.appendChild(h('div', 'edu-degree', edu.degree));
+    entry.appendChild(h('div', 'edu-meta', edu.institution + ' · ' + edu.period));
+    sec.appendChild(entry);
+  });
+  right.appendChild(sec);
+})();
+
+// — Skills —
+(function() {
+  var sec = h('div', 'cv-section');
+  sec.appendChild(h('div', 'cv-section-title', 'Skills'));
+  Object.entries(SITE.skills).forEach(function(pair) {
+    var row = h('div', 'skill-row');
+    row.appendChild(h('div', 'skill-label', pair[0]));
+    var chips = h('div', 'chip-list');
+    pair[1].forEach(function(s) { chips.appendChild(h('span', 'chip', s)); });
+    row.appendChild(chips);
+    sec.appendChild(row);
+  });
+  right.appendChild(sec);
+})();
+
+// — Certifications —
+(function() {
+  var sec = h('div', 'cv-section');
+  sec.appendChild(h('div', 'cv-section-title', 'Certifications'));
+  var ul = h('ul', 'cert-list');
+  SITE.certifications.forEach(function(c) { ul.appendChild(h('li', '', c)); });
+  sec.appendChild(ul);
+  right.appendChild(sec);
+})();
+
+body.appendChild(left);
+body.appendChild(right);
+cv.appendChild(body);
+</script>
+
+</body>
+</html>

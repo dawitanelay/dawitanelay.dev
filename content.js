@@ -41,6 +41,7 @@ const SITE = {
         "Introduced Customer Managed Keys (CMK) for AKS disks, PostgreSQL, and Storage Accounts to meet encryption and compliance requirements.",
         "Improved Kubernetes reliability by adding liveness/readiness probes, fixing Zookeeper health checks, and enforcing pod distribution with anti-affinity and descheduler.",
         "Tuned AKS autoscaler and cluster behavior, including alerting for scaling limits and performance optimization.",
+        "Reduced operational incidents through proactive monitoring, alert tuning, and Kubernetes reliability improvements across production AKS workloads.",
         "Built centralized logging & monitoring (AKS → ELK), dashboards for certificate tracking, and enhanced observability with Prometheus/Grafana.",
         "Managed secrets lifecycle (rotation, Key Vault integration, sync tuning), including automation for certificate rotation and OAuth/Grafana credentials.",
         "Automated CI/CD workflows: Jenkins pipelines for infrastructure and deployments, production ACR image push automation, and GitHub Actions strategy for build/release/hotfix flows.",

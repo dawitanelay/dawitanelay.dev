@@ -143,25 +143,26 @@
     /* ── Print ── */
     @media print {
       .top-bar { display: none !important; }
-      html { font-size: 10px; }
-      body { background: #fff; line-height: 1.35; }
-      .cv-wrap { margin: 0; padding: 10mm 12mm; box-shadow: none; max-width: 100%; }
+      html { font-size: 9.5px; }
+      body { background: #fff; line-height: 1.3; }
+      .cv-wrap { margin: 0; padding: 8mm 11mm; box-shadow: none; max-width: 100%; }
       @page { size: A4; margin: 0; }
-      .cv-header { margin-bottom: 10px; padding-bottom: 10px; }
-      .cv-name { font-size: 1.55rem; margin-bottom: 2px; }
-      .cv-title { margin-bottom: 6px; }
-      .cv-body { gap: 22px; }
-      .cv-section { margin-bottom: 10px; }
-      .cv-section-title { margin-bottom: 6px; padding-bottom: 2px; }
-      .exp-entry { margin-bottom: 8px; page-break-inside: avoid; }
-      .exp-meta { margin-bottom: 3px; }
-      .exp-bullets li { margin-bottom: 1px; line-height: 1.35; }
+      .cv-header { margin-bottom: 8px; padding-bottom: 8px; }
+      .cv-name { font-size: 1.5rem; margin-bottom: 1px; }
+      .cv-title { margin-bottom: 4px; }
+      .cv-contacts { gap: 3px 14px; }
+      .cv-body { gap: 20px; }
+      .cv-section { margin-bottom: 9px; }
+      .cv-section-title { margin-bottom: 5px; padding-bottom: 2px; }
+      .exp-entry { margin-bottom: 7px; page-break-inside: avoid; }
+      .exp-meta { margin-bottom: 2px; }
+      .exp-bullets li { margin-bottom: 1px; line-height: 1.3; }
       .edu-entry { margin-bottom: 5px; }
       .skill-row { margin-bottom: 4px; }
       .skill-label { margin-bottom: 2px; }
-      .cert-list li { margin-bottom: 2px; line-height: 1.3; }
-      .research-meta { margin-bottom: 3px; }
-      .research-bullets li { margin-bottom: 1px; line-height: 1.35; }
+      .cert-list li { margin-bottom: 2px; line-height: 1.25; }
+      .research-title { margin-bottom: 2px; }
+      .research-meta { margin-bottom: 2px; }
     }
 
     /* ── Mobile ── */
@@ -231,18 +232,19 @@ var body = h('div', 'cv-body');
 var left  = h('div', '');
 var right = h('div', '');
 
-// — Experience —
+// — Experience — (first role capped at 9 bullets to keep CV to 2 pages)
 (function() {
   var sec = h('div', 'cv-section');
   sec.appendChild(h('div', 'cv-section-title', 'Experience'));
-  SITE.experience.forEach(function(job) {
+  SITE.experience.forEach(function(job, idx) {
     var entry = h('div', 'exp-entry');
     entry.appendChild(h('div', 'exp-role', job.role));
     var meta = [job.company, job.location, job.period].filter(Boolean).join(' · ');
     entry.appendChild(h('div', 'exp-meta', meta));
     if (job.bullets && job.bullets.length) {
+      var bullets = idx === 0 ? job.bullets.slice(0, 9) : job.bullets;
       var ul = h('ul', 'exp-bullets');
-      job.bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
+      bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
       entry.appendChild(ul);
     }
     sec.appendChild(entry);

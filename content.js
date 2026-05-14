@@ -26,7 +26,7 @@ const SITE = {
 
   about: [
     "Senior DevOps and Cloud Engineer with over 5 years of production experience on Azure, specializing in Kubernetes platform operations (AKS), infrastructure as code with Terraform, CI/CD automation, cloud security (NSG, CMK, DDoS protection, Key Vault), ELK-based observability, and cost optimization at scale.",
-    "MSc in Computer Science (Artificial Intelligence) from the University of Pisa, with coursework in Machine Learning, Data Mining, Parallel and Distributed Systems, Intelligent Systems for Pattern Recognition, and Advanced Software Engineering. Thesis applied AI and statistical models to performance monitoring and capacity planning in telecom NFV infrastructure, developed in collaboration with Vodafone.",
+    "MSc in Computer Science (Artificial Intelligence) from the University of Pisa, with coursework in Machine Learning, Data Mining, Parallel and Distributed Systems, Intelligent Systems for Pattern Recognition, and Advanced Software Engineering. Thesis focused on short-term forecasting and anomaly detection for virtualized network functions, developed in collaboration with Vodafone.",
   ],
 
   experience: [
@@ -132,12 +132,12 @@ const SITE = {
   ],
 
   research: {
-    title:       "Artificial Intelligence Techniques to Support Monitoring of Infrastructures for Network Function Virtualization (NFV)",
+    title:       "Short-term Operation Metrics Forecasting and Anomaly Detection for Virtualized Network Functions",
     url:         "https://etd.adm.unipi.it/t/etd-09052022-171219/",
     degree:      "MSc Thesis · University of Pisa · Sept. 2021 – Jul. 2022",
-    supervisors: "Tommaso Cucinotta (Scuola Superiore Sant'Anna) · Davide Bacciu (University of Pisa)",
+    supervisors: "Davide Bacciu (University of Pisa) · Tommaso Cucinotta (Scuola Superiore Sant'Anna)",
     bullets: [
-      "Designed AI-based tools for performance monitoring, troubleshooting, and capacity planning in NFV infrastructure.",
+      "Designed AI-based tools for short-term forecasting, anomaly detection, and clustering of operation metrics in virtualized network function (VNF) infrastructure.",
       "Applied deep learning and statistical models on real-world datasets from telecom environments.",
       "Developed systems using Python, C/C++, Bash, and virtualization platforms.",
       "Conducted industrial research in collaboration with Vodafone and academic labs (RETIS, INRETE, PERCRO, ICT-COISP).",
@@ -257,28 +257,10 @@ const SITE = {
 
   books: [
     {
-      title:  "The Phoenix Project",
-      author: "Gene Kim, Kevin Behr, George Spafford",
-      status: "read",
-      notes:  "Essential framing for DevOps culture and flow thinking.",
-    },
-    {
-      title:  "The Unicorn Project",
-      author: "Gene Kim",
-      status: "read",
-      notes:  "Developer-side view of the same transformation story.",
-    },
-    {
-      title:  "Accelerate",
-      author: "Nicole Forsgren, Jez Humble, Gene Kim",
+      title:  "Site Reliability Engineering: How Google Runs Production Systems",
+      author: "Betsy Beyer, Chris Jones, Jennifer Petoff, Niall Richard Murphy",
       status: "reading",
-      notes:  "Data-driven research on high-performing engineering teams.",
-    },
-    {
-      title:  "Team Topologies",
-      author: "Matthew Skelton, Manuel Pais",
-      status: "want to read",
-      notes:  "",
+      notes:  "Google's approach to running large-scale production systems — reliability, automation, and SLOs.",
     },
   ],
 

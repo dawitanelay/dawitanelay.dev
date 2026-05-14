@@ -250,24 +250,6 @@ var right = h('div', '');
   left.appendChild(sec);
 })();
 
-// — Research —
-(function() {
-  var sec = h('div', 'cv-section');
-  sec.appendChild(h('div', 'cv-section-title', 'Research'));
-  var r = SITE.research;
-  var titleEl = h('div', 'research-title');
-  titleEl.appendChild(lnk(r.url, r.title, true));
-  sec.appendChild(titleEl);
-  sec.appendChild(h('div', 'research-meta', r.degree));
-  sec.appendChild(h('div', 'research-meta', 'Supervisors: ' + r.supervisors));
-  if (r.bullets && r.bullets.length) {
-    var ul = h('ul', 'research-bullets');
-    r.bullets.forEach(function(b) { ul.appendChild(h('li', '', b)); });
-    sec.appendChild(ul);
-  }
-  left.appendChild(sec);
-})();
-
 // — Education —
 (function() {
   var sec = h('div', 'cv-section');
@@ -278,6 +260,19 @@ var right = h('div', '');
     entry.appendChild(h('div', 'edu-meta', edu.institution + ' · ' + edu.period));
     sec.appendChild(entry);
   });
+  right.appendChild(sec);
+})();
+
+// — Research —
+(function() {
+  var sec = h('div', 'cv-section');
+  sec.appendChild(h('div', 'cv-section-title', 'Research'));
+  var r = SITE.research;
+  var titleEl = h('div', 'research-title');
+  titleEl.appendChild(lnk(r.url, r.title, true));
+  sec.appendChild(titleEl);
+  sec.appendChild(h('div', 'research-meta', r.degree));
+  sec.appendChild(h('div', 'research-meta', 'Supervisors: ' + r.supervisors));
   right.appendChild(sec);
 })();
 

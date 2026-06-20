@@ -65,7 +65,7 @@ const SITE = {
     },
     {
       role:     "System Administrator",
-      company:  "",
+      company:  "EthSwitch",
       location: "Addis Ababa, Ethiopia",
       period:   "Mar. 2018 – Oct. 2019",
       bullets: [
@@ -75,7 +75,7 @@ const SITE = {
     },
     {
       role:     "Network Administrator",
-      company:  "",
+      company:  "USI",
       location: "Addis Ababa, Ethiopia",
       period:   "Mar. 2016 – Aug. 2016",
       bullets: [
